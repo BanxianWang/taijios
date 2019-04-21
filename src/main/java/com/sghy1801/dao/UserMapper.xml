@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sghy1801.dao.UserMapper">
+    <!--根据用户名判断是否存在用户-->
+    <select id="getUserExist" resultType="com.sghy1801.entity.User">
+            SELECT * FROM user WHERE username = #{username}
+    </select>
+    <!--根据用户名返回用户-->
+    <select id="getUser" resultType="com.sghy1801.entity.User">
+        SELECT * FROM user WHERE username = #{username}
+    </select>
+</mapper>

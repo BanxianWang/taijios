@@ -10,12 +10,19 @@ public class User {
     //用户名
     private String username;
     //用户密码
-    private String passwrod;
+    private String password;
     //用户手机号
-    private  String phone;
+    private String phone;
     //用户邮箱
     private String email;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getId() {
         return id;
@@ -31,14 +38,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPasswrod() {
-        return passwrod;
-    }
-
-    public void setPasswrod(String passwrod) {
-        this.passwrod = passwrod;
     }
 
     public String getPhone() {
@@ -62,7 +61,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", passwrod='" + passwrod + '\'' +
+                ", passwrod='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 '}';
