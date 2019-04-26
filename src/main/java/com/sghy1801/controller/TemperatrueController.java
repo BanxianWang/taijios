@@ -22,40 +22,56 @@ public class TemperatrueController {
     @Autowired
     private TemperatureService service;
 
-    @RequestMapping(value = "/getAllTemperature",method = RequestMethod.POST)
+    @RequestMapping(value = "/getHoursTemperature",method = RequestMethod.POST)
     public @ResponseBody
-    String getAllTemperature(String machineID,String oldtime,String newtime,String word) throws Exception {
+    String getHoursTemperature(String machineID,String oldtime,String newtime) throws Exception {
         Date date = new Date();
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        Date date1 = sdf.parse(oldtime);
-//        Date date2 = sdf.parse(newtime);
+
         //将获取的值放入map中
         Map<String,Object> map = new HashMap<String,Object>();
-//
+
         if (machineID=="") map.put("machineID",null);
         else  map.put("machineID",machineID);
-
-        if (word=="1"){
-                String a = AllUtil.dateMinusMonth(newtime, Integer.parseInt(word));
-
-            System.out.println(newtime+"   "+a);
-        }
 
         if (oldtime=="") map.put("oldtime",null);
         else  map.put("oldtime",oldtime);
 
-        if (newtime=="") map.put("newtime",date);
+        if (newtime=="") map.put("newtime",null);
         else  map.put("newtime",newtime);
 
         //获取温度列表
-        Map<String,Object> temperatures = service.getAllTemperature(map);
-
+        List<Map> temperatures = service.getHoursTemperature(map);
         //转换成json格式
         String j = JSON.toJSONString(temperatures);
 
         return j;
     }
 
+
+    @RequestMapping(value = "/getDaysTemperature",method = RequestMethod.POST)
+    public @ResponseBody
+    String getDaysTemperature(String machineID,String oldtime,String newtime) throws Exception {
+        Date date = new Date();
+
+        //将获取的值放入map中
+        Map<String,Object> map = new HashMap<String,Object>();
+
+        if (machineID=="") map.put("machineID",null);
+        else  map.put("machineID",machineID);
+
+        if (oldtime=="") map.put("oldtime",null);
+        else  map.put("oldtime",oldtime);
+
+        if (newtime=="") map.put("newtime",null);
+        else  map.put("newtime",newtime);
+
+        //获取温度列表
+        List<Map> temperatures = service.getDaysTemperature(map);
+        //转换成json格式
+        String j = JSON.toJSONString(temperatures);
+
+        return j;
+    }
 
 
 

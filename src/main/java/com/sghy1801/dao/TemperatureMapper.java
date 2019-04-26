@@ -7,11 +7,18 @@ import java.util.Map;
 
 public interface TemperatureMapper {
     /**
-     * 获取温度信息 （根据map中的条件查询）
+     * 获取逐小时温度信息 （根据map中的条件查询）
      * @param map
      * @return
      */
-    Map<String,Object> getAllTemperature(Map<String,Object> map);
+    List<Map> getHoursTemperature(Map<String,Object> map);
+
+    /**
+     * 获取逐天温度信息 （根据map中的条件查询）
+     * @param map
+     * @return
+     */
+    List<Map> getDaysTemperature(Map<String,Object> map);
 
     /**
      * 新增温度信息
