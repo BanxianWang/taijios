@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sghy1801.dao.TemperatureMapper">
+
+    <resultMap id="temmap" type="Temperature">
+        <result property="id" column="id"></result>
+        <result property="machineid" column="machineid"></result>
+        <result property="temperature" column="temperature"></result>
+        <result property="temtime" column="temtime"></result>
+    </resultMap>
+
+
+
+
+    <insert id="addTemperature">
+        INSERT INTO temperature(temperature,machineID) VALUES (#{temperature},#{machineID})
+    </insert>
+
+
+    <delete id="delTemperatureByTime">
+        DELETE FROM temperature WHERE temtime > #{temtime}
+    </delete>
+
+
+    <select id="getAllTemperature" resultType="java.util.Map" >
+        SELECT DATE_FORMAT(`temtime`,"%Y-%m-%d-%H")AS DAY,SUM(`temperature`)/COUNT(id) AS avg1
+        from temperature as t
+        WHERE 1=1
+        <if test="oldtime!=null and newtime!=null">
+            temtime BETWEEN #{oldtime} and #{newtime}
+        </if>
+        group by DATE_FORMAT(`temtime`,"%Y-%m-%d-%H")
+    </select>
+</mapper>

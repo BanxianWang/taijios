@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sghy1801.dao.TjmachineMapper">
+
+    <resultMap id="machineMap" type="Tjmachine">
+        <result property="id" column="id"></result>
+        <result property="city" column="city"></result>
+        <result property="temperature" column="temperature"></result>
+        <result property="usetime" column="usetime"></result>
+        <result property="runningstate" column="runningstate"></result>
+    </resultMap>
+
+    <insert id="addMachine">
+        INSERT INTO tjmachine(city) VALUES(#{city})
+    </insert>
+
+    <update id="updateMachineInfo">
+        UPDATE tjmachine
+          <set>
+              <if test="city!=null">
+                  city = #{city},
+              </if>
+              <if test="temperature!=null">
+                  temperature = #{temperature},
+              </if>
+              <if test="usetime!=null">
+                  usetime = #{usetime},
+              </if>
+              <if test="runningstate!=null">
+                  runningstate = #{runningstate},
+              </if>
+          </set>
+    </update>
+
+
+    <delete id="delMachine">
+        DELETE FROM tjmachine WHERE id = #{machineid}
+    </delete>
+
+    <select id="getAllMachines" resultType="com.sghy1801.entity.Tjmachine" resultMap="machineMap">
+      SELECT * FROM tjmachine WHERE 1=1
+        <if test="id!=null">
+            AND id = #{id}
+        </if>
+        <if test="city!=null">
+            AND city like concat('%',#{city},'%')
+        </if>
+    </select>
+
+
+</mapper>
