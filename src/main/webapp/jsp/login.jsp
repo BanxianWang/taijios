@@ -18,7 +18,7 @@
     <c:if test="${login==1}">
         登录失败，密码错误
     </c:if>
-<form method="post" action="userLogin">
+<form method="post" action="/jsp/userLogin">
     <input type="text" name="username">
     <input type="password" name="password">
     <input type="submit" name="登录">

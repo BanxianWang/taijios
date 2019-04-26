@@ -24,7 +24,7 @@
     <bean  id="SqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dateSource"/>
         <property name="typeAliasesPackage" value="com.sghy1801.entity"/>
-        <property name="mapperLocations" value="classpath:com/sghy1801/dao/*.xml"/>
+        <property name="mapperLocations" value="classpath:Mapper/*.xml"/>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.sghy1801.dao"/>
