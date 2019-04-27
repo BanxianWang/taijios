@@ -2,23 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sghy1801.dao.UserMapper">
 
-    <resultMap type="User" id="userList">
-        <result property="id" column="id"/>
-        <result property="username" column="username"/>
-        <result property="password" column="password"/>
-        <result property="phone" column="phone"/>
-        <result property="email" column="email"/>
-
-    </resultMap>
 
     <!--登录-->
     <select id="login" resultType="User">
         select * from USER where username=#{username} and password=#{password}
     </select>
     <!--查询所有用户-->
-    <select id="userList" resultMap="userList">
+    <select id="listUser" resultType="User">
         select * from USER
+        <if test="name!=null">
+            and username like concat('%',#{name},'%')
+        </if>
+        <if test="userorman!=null">
+            and userorman = #{userorman}
+        </if>
+        limit #{start},4
     </select>
+    <!--查询数量-->
+    <select id="countUser" resultType="int" parameterType="map">
+        select count(*) from USER
+        <if test="name!=null">
+            and username like concat('%',#{name},'%')
+        </if>
+        <if test="userorman!=null">
+            and userorman = #{userorman}
+        </if>
+    </select>
+
+    <!--添加用户-->
+    <insert id="addUser" parameterType="User">
+        insert into USER (username,password,gender,phone,email,address,userorman)
+        values(#{username},#{password},#{gender},#{phone},#{email},#{address},#{userorman})
+    </insert>
+    <!--删除用户-->
+    <delete id="deleteUser" parameterType="int">
+        delete from USER where id=#{id}
+    </delete>
+
+    <!--更新用户-->
+    <update id="updateUser" parameterType="User">
+        update USER set
+        username=#{username},
+        password=#{password},
+        gender=#{gender},
+        phone=#{phone},
+          email=#{email},
+        address=#{address},
+        userorman=#{userorman}
+        where id=#{id}
+    </update>
 
 
 </mapper>

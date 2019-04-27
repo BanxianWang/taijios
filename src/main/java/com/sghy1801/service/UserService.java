@@ -16,10 +16,45 @@ public interface UserService {
     public User login(String username,String password);
 
     /**
-     * 获取所有用户
+     * 查询用户列表页
+     * @param name
+     * @param userorman
+     * @param currentPage
      * @return
      */
-    public List<User> userList();
+    public List<User> listUser(String name, String userorman, int currentPage);
+
+    /**
+     * 查询用户记录数
+     * @param name
+     * @param userorman
+     * @return
+     */
+    public int countUser(String name, String userorman);
+
+
+
+    /**
+     * 添加用户
+     * @param u
+     * @return
+     */
+    public int addUser(User u);
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    public int deleteUser(int id);
+
+    /**
+     * 修改用户
+     * @param u
+     * @return
+     */
+    public int updateUser(User u);
+
 
 
 }

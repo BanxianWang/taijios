@@ -5,8 +5,13 @@ import com.sghy1801.entity.User;
 import com.sghy1801.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -14,18 +19,65 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public User login(String username, String password) {
-        User user =userMapper.login(username,password);
+        User user = userMapper.login(username, password);
         //匹配密码
-        if(null != user){
-            if(!user.getPassword().equals(password))
+        if (null != user) {
+            if (!user.getPassword().equals(password))
                 user = null;
         }
         return user;
     }
 
+    @Transactional(readOnly = true)
+    public List<User> listUser(String name, String userorman,
+                               int currentPage) {
+
+        Map<String, Object> param = new HashMap<String, Object>();
+        if (name != null && !"".equals(name)) {
+            param.put("name", name);
+        }
+        if (!"2".equals(userorman)) {
+            param.put("userorman", Integer.parseInt(userorman));
+        }
+
+        param.put("start", (currentPage - 1) * 4);
+
+        List<User> list = userMapper.listUser(param);
+
+        return list;
+    }
+
+
+    @Transactional(readOnly = true)
+    public int countUser(String name, String userorman) {
+        Map<String, Object> param = new HashMap<String, Object>();
+        if (name != null && !"".equals(name)) {
+            param.put("name", name);
+        }
+        if (!"2".equals(userorman)) {
+            param.put("userorman", Integer.parseInt(userorman));
+        }
+        int count = userMapper.countUser(param);
+        return count;
+    }
+
     @Override
-    public List<User> userList() {
-        return userMapper.userList();
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int addUser(User u) {
+        return userMapper.addUser(u);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int deleteUser(int id) {
+        return userMapper.deleteUser(id);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int updateUser(User u) {
+        return userMapper.updateUser(u);
     }
 }
