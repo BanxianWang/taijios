@@ -29,7 +29,7 @@
         <if test="oldtime!=null and newtime!=null">
             AND temtime BETWEEN #{oldtime} and #{newtime}
         </if>
-        group by DATE_FORMAT(`temtime`,"%Y-%m-%d-%H") desc
+        group by DATE_FORMAT(`temtime`,"%Y-%m-%d-%H") asc
     </select>
 
 
