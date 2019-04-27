@@ -1,132 +1,101 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wrm
-  Date: 2019/4/21
-  Time: 20:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>时光四人组管理系统</title>
+
+    <link rel="stylesheet" href="../../lib/css/pintuer.css">
+    <link rel="stylesheet" href="../../lib/css/admin.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-        $(function () {
-            $("#btn").click(function () {
-                    show();
-            })
-
-            $("#btn1").click(function () {
-                var oldtime = $("#oldtime").val()
-                var newtime = $("#newtime").val()
-                $.ajax({
-                    url: "/jsp/getAllTemperature",
-                    data: {machineID: 1, oldtime: oldtime,newtime:newtime,word:"1"},
-                    type: "POST",
-                    dataType: "json",
-                    success: function (result) {
-                        $("#machineTable tr").remove();
-
-                        $.each(result, function (index, item) {
-
-
-                        })
-
-                    }
-                })
-
-
-            })
-
-        })
-        
-        function show() {
-            var id = $("#id").val()
-            var city = $("#city").val()
-            $.ajax({
-                url: "/jsp/getAllMachines",
-                data: {id: id, city: city},
-                type: "POST",
-                dataType: "json",
-                success: function (result) {
-                    $("#machineTable tr").remove();
-                    var temperature = "已开启";
-                    var runningstate = "已开启";
-                    $.each(result, function (index, item) {
-                        if (item.temperature == 0) {
-                            temperature = "未开启"
-                        }
-                        if (item.runningstate == 0) {
-                            runningstate = "未开启"
-                        }
-                        var tr = "<tr>" +
-                            "<td>" + item.id + "</td>" +
-                            "<td>" + item.city + "</td>" +
-                            "<td>" + temperature + "</td>" +
-                            "<td>" + item.usetime + "秒</td>" +
-                            "<td>" + runningstate + "</td>" +
-                            "<td><a href='javascrip:void(0)' onclick='del(" + item.id + ")'>删除</a></td>"
-                        "</tr>"
-                        $("#machineTable").append(tr);
-                    })
-
-                }
-            })
-        }
-
-        function formatDate(time){
-            var date = new Date(time);
-            var str = date.getFullYear() + "-";
-            str += ((date.getMonth()+1)<10?("0"+(date.getMonth()+1)):(date.getMonth()+1)) +"-" ;
-            str += (date.getDate()<10?("0"+ date.getDate()): date.getDate()) +" ";
-            str += (date.getHours()<10?("0"+date.getHours()):date.getHours()) + ":";
-            str += (date.getMinutes()<10?("0"+date.getMinutes()):date.getMinutes()) + ":";
-            str += date.getSeconds()<10?("0"+date.getSeconds()):date.getSeconds();
-            return str;
-        }
-
-
-        
-        function del(id) {
-            if (confirm("确定要删除该条信息嘛？")){
-                $.ajax({
-                    url: "/jsp/delMachine",
-                    data: {id: id},
-                    type: "POST",
-                    dataType: "text",
-                    success: function (result) {
-                        if (result == "true") {
-                            alert("删除成功！")
-                            show()
-                        }else {
-                            alert("删除失败！")
-                        }
-                    }
-                })
-            }
-        }
-    </script>
+    <script src="../../lib/js/jquery.js"></script>
+    <script src="../../lib/js/pintuer.js"></script>
 </head>
-<body>
-    <input type="text" id="id">
-    <input type="text" id="city">
-    <input type="button" id="btn" value="登录">
-    <input type="text" id="oldtime">
-    <input type="text" id="newtime">
-    <input type="button" id="btn1" value="登录1">
-    <table id="machineTable"></table>
+<body style="background-color:#f2f9fd;">
+<div class="header bg-main">
+    <div class="logo margin-big-left fadein-top">
+        <h1><img src="../lib/images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />时光四人组管理系统</h1>
+    </div>
+    <div class="head-l"><a class="button button-little bg-green" href="personnew.html" >个人信息</a>  &nbsp;&nbsp;
+        <a class="button button-little bg-red" href="login.html" >
+            <span class="icon-power-off"></span> 退出登录</a> </div>
+</div>
+<div class="leftnav">
+    <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
+    <h2><span class="icon-user"></span>基本设置</h2>
+    <ul>
+        <li><a href="pass.html" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
+        <li><a href="personnew.html" target="right"><span class="icon-caret-right"></span>个人资料</a></li>
+    </ul>
 
 
+    <h2><span class="icon-pencil-square-o"></span>我的项目</h2>
+    <ul >
+        <li><a href="tableproject.html" target="right"><span class="icon-caret-right"></span>所有项目</a></li>
+        <li><a href="saveProject.html" target="right"><span class="icon-caret-right"></span>保存阶段</a></li>
+        <li><a href="setupProject.html" target="right"><span class="icon-caret-right"></span>立项阶段</a></li>
+        <li><a href="midStage.html" target="right"><span class="icon-caret-right"></span>中期阶段</a></li>
+        <li><a href="finishStage.html" target="right"><span class="icon-caret-right"></span>结题阶段</a></li>
+        <li><a href="Nopassed.html" target="right"><span class="icon-caret-right"></span>结题未通过</a></li>
+    </ul>
+    <h2><span class="icon-pencil-square-o"></span>我的成果</h2>
+    <ul>
+        <li><a href="table.html" target="right"><span class="icon-caret-right"></span>所有成果</a></li>
+
+        <li><a href="listreward.html" target="right"><span class="icon-caret-right"></span>防震减灾成果奖</a></li>
+        <li><a href="listpaper.html" target="right"><span class="icon-caret-right"></span>论文</a></li>
+        <li><a href="listbook.html" target="right"><span class="icon-caret-right"></span>著作</a></li>
+        <li><a href="liststandard.html" target="right"><span class="icon-caret-right"></span>标准</a></li>
+        <li><a href="listcopyright.html" target="right"><span class="icon-caret-right"></span>著作权</a></li>
+        <li><a href="listthings.html" target="right"><span class="icon-caret-right"></span>新产品</a></li>
+        <li><a href="listpatent.html" target="right"><span class="icon-caret-right"></span>专利</a></li>
 
 
+    </ul>
+    <h2><span class="icon-pencil-square-o"></span>常用下载</h2>
+    <ul>
+        <li><a href="download.html" target="right"><span class="icon-caret-right"></span>文件下载</a></li>
+    </ul>
+    <h2><span class="icon-pencil-square-o"></span>登陆日志</h2>
+    <ul>
+        <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>个人日志</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function(){
 
-    <form method="post" action="/jsp/addMachine">
-        是否有控件<input type="text" name="temperature">
-        使用时长<input type="text" name="usetime">
-        是否开启<input type="text" name="runningstate">
-        城市：<input type="text" name="city">
-        <input type="submit" value="aaa">
+        $(".leftnav h2").click(function(){
+            $(this).next().slideToggle(200);
+            $(this).toggleClass("on");
+        })
+        $(".leftnav ul li a").click(function(){
+            $("#a_leader_txt").text($(this).text());
+            $(".leftnav ul li a").removeClass("on");
+            $(this).addClass("on");
+        })
 
-    </form>
+        $(".icon-home").click(function(){
+            $("#a_leader_txt").text("所有公告");
+            $(".leftnav ul li a").removeClass("on");
+            $(this).addClass("on");
+        })
+
+    });
+
+
+</script>
+<ul class="bread">
+    <li><a href="info.html" target="right" class="icon-home"> 首页</a></li>
+    <li><a href="##" id="a_leader_txt">公告信息</a></li>
+</ul>
+<div class="admin">
+    <iframe scrolling="auto" rameborder="0" src="jsp/user/userlist.jsp" name="right" width="100%" height="100%"></iframe>
+    <%-- <h1 style="text-align: center">来了老弟</h1>--%>
+</div>
+<div style="text-align:center;">
+</div>
 </body>
 </html>
