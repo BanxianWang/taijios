@@ -33,4 +33,9 @@ public class TemperatureServiceImpl implements TemperatureService {
     public int delTemperatureByTime(Map<String, Object> map) {
         return temperatureMapper.delTemperatureByTime(map);
     }
+
+    @Override
+    public Temperature getLastTemperature(int machineID) {
+        return temperatureMapper.getLastTemperature(machineID);
+    }
 }

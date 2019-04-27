@@ -1,6 +1,7 @@
 package com.sghy1801.dao;
 
 import com.sghy1801.entity.Temperature;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,10 @@ public interface TemperatureMapper {
      * @return
      */
     int delTemperatureByTime(Map<String,Object> map);
+
+    /**
+     * 获取最新温度
+     * @return
+     */
+    Temperature getLastTemperature(@Param("machineID") int id);
 }

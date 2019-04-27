@@ -3,6 +3,7 @@ package com.sghy1801.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.sghy1801.entity.Temperature;
 import com.sghy1801.service.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,6 +118,17 @@ public class TemperatrueController {
 
         return j;
     }
+
+    @RequestMapping(value = "/getLastTemperature",method = RequestMethod.POST)
+    public @ResponseBody String getLastTemperature(String machineID) throws Exception {
+        Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
+
+        String j = JSON.toJSONString(temperature);
+        System.out.println(j);
+        return j;
+    }
+
+
 
 
 

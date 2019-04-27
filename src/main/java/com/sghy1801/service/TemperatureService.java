@@ -33,4 +33,10 @@ public interface TemperatureService {
      * @return
      */
     int delTemperatureByTime(Map<String,Object> map);
+
+    /**
+     * 获取最新温度
+     * @return
+     */
+    Temperature getLastTemperature(int id);
 }
