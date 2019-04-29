@@ -1,59 +1,58 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="zh-cn">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="renderer" content="webkit">
-    <title>登录</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="../lib/css/pintuer.css">
-    <link rel="stylesheet" href="../lib/css/admin.css">
-    <script src="../lib/js/jquery.js"></script>
-    <script src="../lib/js/pintuer.js"></script>
+    <meta charset="UTF-8">
+    <title>后台系统管理</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="statics/css/font.css">
+    <link rel="stylesheet" href="statics/css/xadmin.css">
 </head>
-<body>
-<div class="bg"></div>
-<div class="container">
-    <div class="line bouncein">
-        <div class="xs6 xm4 xs3-move xm4-move">
-            <div style="height:150px;"></div>
-            <div class="media media-y margin-big-bottom">
-            </div>
-            <form action="login" method="post">
-                <div class="panel loginbox">
-                    <div class="text-center margin-big padding-big-top"><h1>时光四人组后台管理系统</h1></div>
-                    <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
-                        <div class="form-group">
-                            <div class="field field-icon-right">
-                                <input type="text" class="input input-big" name="username" placeholder="登录账号" data-validate="required:请填写账号" />
-                                <span class="icon icon-user margin-small"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="field field-icon-right">
-                                <input type="password" class="input input-big" name="password" placeholder="登录密码" data-validate="required:请填写密码" />
-                                <span class="icon icon-key margin-small"></span>
-                            </div>
-                        </div>
+<c:if test="${requestScope.loginFlag != null }">
+    <script>
+        alert("登录名或密码不正确")
+    </script>
+</c:if>
+<body class="login-bg">
 
+<div class="login">
+    <div class="message">管理登录</div>
+    <div id="darkbannerwrap"></div>
 
-                        <div>${error}</div>
-                        <%--  <div class="form-group">
-                              <div class="field">
-                                  <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
-                                  <img src="lib/static/images/passcode.jpg" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+'?'">
-
-                              </div>
-                          </div>--%>
-                    </div>
-                    <div style="padding:30px;"><input type="submit" class="button button-block bg-main text-big input-big" value="登录"></div>
-                </div>
-            </form>
-        </div>
-    </div>
+    <form method="post" class="layui-form"  action="login">
+        <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <hr class="hr15">
+        <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <hr class="hr15">
+        <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+        <hr class="hr20" >
+    </form>
 </div>
 
+
+
+
+
+
+<!-- 底部结束 <script> $(function  () {
+        layui.use('form', function(){
+            var form = layui.form;
+            // layer.msg('玩命卖萌中', function(){
+            //   //关闭后的操作
+            //   });
+            //监听提交
+            form.on('submit(login)', function(data){
+                // alert(888)
+                layer.msg(JSON.stringify(data.field),function(){
+                    location.href='main.jsp'
+                });
+                return false;
+            });
+        });
+    })</script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="statics/lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="statics/js/xadmin.js"></script>
 </body>
 </html>

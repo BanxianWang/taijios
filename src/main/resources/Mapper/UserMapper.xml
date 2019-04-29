@@ -10,23 +10,13 @@
     <!--查询所有用户-->
     <select id="listUser" resultType="User">
         select * from USER
-        <if test="name!=null">
-            and username like concat('%',#{name},'%')
-        </if>
-        <if test="userorman!=null">
-            and userorman = #{userorman}
-        </if>
+
         limit #{start},4
     </select>
     <!--查询数量-->
     <select id="countUser" resultType="int" parameterType="map">
         select count(*) from USER
-        <if test="name!=null">
-            and username like concat('%',#{name},'%')
-        </if>
-        <if test="userorman!=null">
-            and userorman = #{userorman}
-        </if>
+
     </select>
 
     <!--添加用户-->
@@ -52,5 +42,7 @@
         where id=#{id}
     </update>
 
-
+    <select id="findById" parameterType="int" resultType="User">
+        SELECT  * FROM USER WHERE id = #{id}
+    </select>
 </mapper>
