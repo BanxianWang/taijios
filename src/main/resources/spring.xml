@@ -13,7 +13,7 @@
     <context:annotation-config></context:annotation-config>
     <context:component-scan base-package="com.sghy1801"/>
     <mvc:annotation-driven></mvc:annotation-driven>
-    <mvc:resources mapping="/lib/**" location="/lib/"/>
+    <mvc:resources mapping="/statics/**" location="/statics/"/>
     <context:property-placeholder location="classpath:datasource.properties"></context:property-placeholder>
     <bean id="dateSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${driver}"/>

@@ -50,5 +50,10 @@ public interface UserMapper {
      */
     public int updateUser(User u);
 
-
+    /**
+     * 根据id查询单个用户
+     * @param id
+     * @return
+     */
+    public User findById(int id);
 }

@@ -17,22 +17,16 @@ public interface UserService {
 
     /**
      * 查询用户列表页
-     * @param name
-     * @param userorman
      * @param currentPage
      * @return
      */
-    public List<User> listUser(String name, String userorman, int currentPage);
+    public List<User> listUser(int currentPage);
 
     /**
      * 查询用户记录数
-     * @param name
-     * @param userorman
      * @return
      */
-    public int countUser(String name, String userorman);
-
-
+    public int countUser();
 
     /**
      * 添加用户
@@ -55,6 +49,11 @@ public interface UserService {
      */
     public int updateUser(User u);
 
-
+    /**
+     * 根据id查询单个用户
+     * @param id
+     * @return
+     */
+    public User findById(int id);
 
 }
