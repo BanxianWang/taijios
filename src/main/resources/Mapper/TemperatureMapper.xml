@@ -23,12 +23,13 @@
 
 
     <select id="getHoursTemperature" resultType="java.util.HashMap" >
-        SELECT DATE_FORMAT(`temtime`,"%Y-%m-%d-%H")AS hours,SUM(`temperature`)/COUNT(id) AS hoursavg
+        SELECT DATE_FORMAT(`temtime`,"%Y-%m-%d-%H")AS hours,DATE_FORMAT(`temtime`,"%Y-%m-%d")AS days,SUM(`temperature`)/COUNT(id) AS hoursavg
         from temperature as t
-        WHERE 1=1
+        WHERE machineID = #{machineID}
         <if test="oldtime!=null and newtime!=null">
             AND temtime BETWEEN #{oldtime} and #{newtime}
         </if>
+
         group by DATE_FORMAT(`temtime`,"%Y-%m-%d-%H") asc
     </select>
 

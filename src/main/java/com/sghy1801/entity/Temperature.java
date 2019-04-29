@@ -1,12 +1,16 @@
 package com.sghy1801.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Temperature {
-    private int id;               //id
-    private Date temtime;            //时间
-    private int machineid; //机器id（外键）
-    private double temperature; //温度
+
+        private int id;               //id
+        private Date temtime;            //时间
+        private int machineid; //机器id（外键）
+        private double temperature; //温度
+
 
     public int getId() {
         return id;
