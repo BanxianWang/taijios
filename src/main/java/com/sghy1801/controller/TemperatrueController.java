@@ -101,6 +101,22 @@ public class TemperatrueController {
     }
 
 
+    //获取最新温度
+    @RequestMapping(value = "/getLastTemperature")
+    @ResponseBody
+    public String getLastTemperature(@RequestParam(value = "machineID",defaultValue = "1") String machineID,
+                                     HttpServletResponse response
+                                     ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("temperature",temperature);
+        String j = JSONObject.toJSONString(map);
+        System.out.println(j);
+        return "successCallback("+j+")";
+
+    }
+
 
 
 
