@@ -7,11 +7,11 @@ import java.util.Map;
 
 public interface TemperatureService {
     /**
-     * 获取逐小时温度信息 （根据map中的条件查询）
-     * @param map
+     * 获取逐小时温度信息
+     * @param machineID
      * @return
      */
-     List<Map> getHoursTemperature(Map<String,Object> map);
+     List<Map> getHoursTemperature(int machineID);
 
     /**
      * 获取逐天温度信息 （根据map中的条件查询）
