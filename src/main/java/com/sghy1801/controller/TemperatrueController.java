@@ -34,8 +34,7 @@ public class TemperatrueController {
      */
     @RequestMapping(value = "/getHoursTemperature",method = RequestMethod.POST)
     public @ResponseBody
-    String getHoursTemperature(String machineID,String oldtime,String newtime) throws Exception {
-        Date date = new Date();
+    String getHoursTemperature(String machineID,String oldtime,String newtime){
 
         //将获取的值放入map中
         Map<String,Object> map = new HashMap<String,Object>();
@@ -51,38 +50,18 @@ public class TemperatrueController {
 
         //获取温度列表
         List<Map> temperatures = service.getHoursTemperature(map);
+        String json = "";
         JSONObject jsonObject = new JSONObject();
-        String day = "";
-        //所需数组个数
-        int count = temperatures.size()%24==0?temperatures.size()/24:temperatures.size()/24+1;
-        for (int i = 0; i < count; i++) {
-            if (day==""){
-                day = temperatures.get(i).get("hours").toString().substring(8,13);
-                System.out.println(day);
-            }else {
-                if (!day.equals(temperatures.get(i).get("hours").toString().substring(8,13))){
-
-                }
-            }
-            jsonObject.put("hours",temperatures.get(i).get("hours"));
-
-            Object[] arr = new Object[24];
-            int size =temperatures.size();
-            for (int j = 0; j <= size ; j++) {
-                if (temperatures.get(j).get("hoursavg")==null){
-                    arr[j] = null;
-                }
-                arr[j]= temperatures.get(j).get("hoursavg");
-                jsonObject.put("hoursavg",arr);
-            }
+        int count = temperatures.size();
+        int num = 0;
+        Object[] arr = new Object[24];
+        for (Map temperature : temperatures) {
+            int hours = Integer.parseInt(temperature.get("hours").toString().substring(8,10));
+            arr[hours-1] = temperature.get("hoursavg");
         }
+        jsonObject.put("hoursavg",arr);
 
-
-        //转换成json格式
-
-        String j = JSON.toJSONString(jsonObject);
-        System.out.println(j);
-        return "";
+        return ""+jsonObject;
     }
 
     /**
@@ -95,7 +74,7 @@ public class TemperatrueController {
      */
     @RequestMapping(value = "/getDaysTemperature",method = RequestMethod.POST)
     public @ResponseBody
-    String getDaysTemperature(String machineID,String oldtime,String newtime) throws Exception {
+    String getDaysTemperature(String machineID,String oldtime,String newtime){
         Date date = new Date();
 
         //将获取的值放入map中
@@ -115,16 +94,22 @@ public class TemperatrueController {
 
         //转换成json格式
         String j = JSON.toJSONString(temperatures);
-
+        System.out.println(j);
         return j;
     }
 
+    /**
+     * 最新温度
+     * @param machineID 机器ID
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/getLastTemperature",method = RequestMethod.POST)
-    public @ResponseBody String getLastTemperature(String machineID) throws Exception {
+    public @ResponseBody String getLastTemperature(String machineID){
         Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
 
         String j = JSON.toJSONString(temperature);
-        System.out.println(j);
+
         return j;
     }
 

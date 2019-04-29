@@ -22,7 +22,7 @@
     </filter-mapping>
     <display-name>Archetype Created Web Application</display-name>
     <welcome-file-list>
-        <welcome-file>jsp/main.jsp</welcome-file>
+        <welcome-file>jsp/Test.jsp</welcome-file>
     </welcome-file-list>
     <context-param>
         <param-name>contextConfigLocation</param-name>
