@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.json.Json;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 
@@ -98,20 +100,6 @@ public class TemperatrueController {
         return j;
     }
 
-    /**
-     * 最新温度
-     * @param machineID 机器ID
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/getLastTemperature",method = RequestMethod.POST)
-    public @ResponseBody String getLastTemperature(String machineID){
-        Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
-
-        String j = JSON.toJSONString(temperature);
-
-        return j;
-    }
 
 
 

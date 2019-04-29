@@ -20,7 +20,7 @@
         <h1><img src="../lib/images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />时光四人组管理系统</h1>
     </div>
     <div class="head-l"><a class="button button-little bg-green" href="personnew.html" >个人信息</a>  &nbsp;&nbsp;
-        <a class="button button-little bg-red" href="login.html" >
+        <a class="button button-little bg-red" href="index.jsp" >
             <span class="icon-power-off"></span> 退出登录</a> </div>
 </div>
 <div class="leftnav">
