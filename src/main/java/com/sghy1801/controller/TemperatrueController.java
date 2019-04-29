@@ -28,27 +28,28 @@ public class TemperatrueController {
 
     /**
      * 逐小时的温度
+     *
      * @param machineID
      * @param oldtime
      * @param newtime
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/getHoursTemperature",method = RequestMethod.POST)
+    @RequestMapping(value = "/getHoursTemperature", method = RequestMethod.POST)
     public @ResponseBody
-    String getHoursTemperature(String machineID,String oldtime,String newtime){
+    String getHoursTemperature(String machineID, String oldtime, String newtime) {
 
         //将获取的值放入map中
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
 
-        if (machineID=="") map.put("machineID",null);
-        else  map.put("machineID",machineID);
+        if (machineID == "") map.put("machineID", null);
+        else map.put("machineID", machineID);
 
-        if (oldtime=="") map.put("oldtime",null);
-        else  map.put("oldtime",oldtime);
+        if (oldtime == "") map.put("oldtime", null);
+        else map.put("oldtime", oldtime);
 
-        if (newtime=="") map.put("newtime",null);
-        else  map.put("newtime",newtime);
+        if (newtime == "") map.put("newtime", null);
+        else map.put("newtime", newtime);
 
         //获取温度列表
         List<Map> temperatures = service.getHoursTemperature(map);
@@ -58,38 +59,39 @@ public class TemperatrueController {
         int num = 0;
         Object[] arr = new Object[24];
         for (Map temperature : temperatures) {
-            int hours = Integer.parseInt(temperature.get("hours").toString().substring(8,10));
-            arr[hours-1] = temperature.get("hoursavg");
+            int hours = Integer.parseInt(temperature.get("hours").toString().substring(8, 10));
+            arr[hours - 1] = temperature.get("hoursavg");
         }
-        jsonObject.put("hoursavg",arr);
+        jsonObject.put("hoursavg", arr);
 
-        return ""+jsonObject;
+        return "" + jsonObject;
     }
 
     /**
      * 逐天的温度
+     *
      * @param machineID
      * @param oldtime
      * @param newtime
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/getDaysTemperature",method = RequestMethod.POST)
+    @RequestMapping(value = "/getDaysTemperature", method = RequestMethod.POST)
     public @ResponseBody
-    String getDaysTemperature(String machineID,String oldtime,String newtime){
+    String getDaysTemperature(String machineID, String oldtime, String newtime) {
         Date date = new Date();
 
         //将获取的值放入map中
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
 
-        if (machineID=="") map.put("machineID",null);
-        else  map.put("machineID",machineID);
+        if (machineID == "") map.put("machineID", null);
+        else map.put("machineID", machineID);
 
-        if (oldtime=="") map.put("oldtime",null);
-        else  map.put("oldtime",oldtime);
+        if (oldtime == "") map.put("oldtime", null);
+        else map.put("oldtime", oldtime);
 
-        if (newtime=="") map.put("newtime",null);
-        else  map.put("newtime",newtime);
+        if (newtime == "") map.put("newtime", null);
+        else map.put("newtime", newtime);
 
         //获取温度列表
         List<Map> temperatures = service.getDaysTemperature(map);
@@ -104,23 +106,18 @@ public class TemperatrueController {
     //获取最新温度
     @RequestMapping(value = "/getLastTemperature")
     @ResponseBody
-    public String getLastTemperature(@RequestParam(value = "machineID",defaultValue = "1") String machineID,
+    public String getLastTemperature(@RequestParam(value = "machineID", defaultValue = "1") String machineID,
                                      HttpServletResponse response
-                                     ){
-        response.setHeader("Access-Control-Allow-Origin","*");
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("temperature",temperature);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("temperature", temperature);
         String j = JSONObject.toJSONString(map);
         System.out.println(j);
-        return "successCallback("+j+")";
+        return "successCallback(" + j + ")";
 
     }
-
-
-
-
-
 
 
 }
