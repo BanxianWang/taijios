@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.json.Json;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 
@@ -119,13 +121,19 @@ public class TemperatrueController {
         return j;
     }
 
-    @RequestMapping(value = "/getLastTemperature",method = RequestMethod.POST)
-    public @ResponseBody String getLastTemperature(String machineID) throws Exception {
+    //获取最新温度
+    @RequestMapping(value = "/getLastTemperature")
+    @ResponseBody
+    public String getLastTemperature(@RequestParam(value = "machineID",defaultValue = "1") String machineID,
+                                     HttpServletResponse response
+                                     ){
+        response.setHeader("Access-Control-Allow-Origin","*");
         Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
-
-        String j = JSON.toJSONString(temperature);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("temperature",temperature);
+        String j = JSONObject.toJSONString(map);
         System.out.println(j);
-        return j;
+        return "successCallback("+j+")";
     }
 
 
