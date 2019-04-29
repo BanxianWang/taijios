@@ -34,10 +34,10 @@ public class TemperatrueController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/getHoursTemperature", method = RequestMethod.POST)
+    @RequestMapping(value = "/getHoursTemperature")
     public @ResponseBody
-
-    String getHoursTemperature(String machineID){
+    String getHoursTemperature(String machineID, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Date date = new Date();
 
         //将获取的值放入map中
@@ -56,12 +56,12 @@ public class TemperatrueController {
 
         for (Map temperature : temperatures) {
 
-            int hours = Integer.parseInt(temperature.get("hours").toString().substring(11,13));
+            int hours = Integer.parseInt(temperature.get("hours").toString().substring(11, 13));
             arr[hours] = temperature.get("hoursavg");
         }
-        jsonObject.put("hoursavg",arr);
+        jsonObject.put("hoursavg", arr);
         System.out.println(jsonObject);
-        return  "successCallback("+jsonObject+")";
+        return "successCallback1(" + jsonObject.toJSONString() + ")";
 
     }
 
