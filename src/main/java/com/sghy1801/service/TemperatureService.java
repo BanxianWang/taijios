@@ -15,10 +15,10 @@ public interface TemperatureService {
 
     /**
      * 获取逐天温度信息 （根据map中的条件查询）
-     * @param map
+     * @param machineID
      * @return
      */
-    List<Map> getDaysTemperature(Map<String,Object> map);
+    List<Map> getDaysTemperature(int machineID);
 
     /**
      * 新增温度信息

@@ -40,4 +40,11 @@ public interface TemperatureMapper {
      * @return
      */
     Temperature getLastTemperature(@Param("machineID") int id);
+
+
+    /**
+     * 获取当日最高，最低，平均温度
+     * @return
+     */
+    List<Temperature> getSomeInfo(Map<String,Object> map);
 }

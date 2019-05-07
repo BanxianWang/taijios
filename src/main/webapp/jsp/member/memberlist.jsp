@@ -19,6 +19,92 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<script>
+    var currentPage = 1;
+    $(function(){
+        showList(currentPage)
+
+        $(".layui-btn").click(function(){
+            showList(currentPage);
+        })
+
+        setInterval(getsevenDay(),1000);
+    })
+
+    function getsevenDay(){
+        $.post("sevenday","data=0",function(rtndata){
+                if(rtndata=="true"){
+                    alert(1)
+                }
+        },"text");
+    }
+
+    function showList(currentPage){
+        $.ajax({
+            url: "/jsp/user/userlist",
+            data:{"currentPage":currentPage},
+            type: "POST",
+            dataType: "json",
+            success: function (result) {
+                var str = "";
+
+                $(result.list).each(function(i){
+                    var b = result.list[i]
+
+                    str += "<tr>"
+                    str += "<td>"
+                    str += "<div class='layui-unselect layui-form-checkbox' lay-skin='primary' data-id='2'><i class='layui-icon'>&#xe605;</i></div>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span>"+b.id+"</span>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span>"+b.username+"</span>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span>"+b.gender+"</span>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span>"+b.phone+"</span>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span>"+b.email+"</span>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span>"+b.address+"</span>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span>"+b.createDate+"</span>"
+                    str += "</td>"
+                    str += "<td>"
+                    str += "<span class='layui-btn layui-btn-normal layui-btn-mini'\">"
+                    str += b.state == 0 ? "未启用" : "已启用"
+                    str += "</span>"
+                    str += "</td>"
+                    str += "<td class='td-manage'>"
+                    str += "<a onclick='member_stop(this,\"10001\")' href='javascript:;'  title='启用'>"
+                    str += "<i class=\"layui-icon\">&#xe601;</i></a>"
+                    str += "<a title=\"编辑\"  onclick=\"x_admin_show('编辑','member-edit.html',600,400)\" href=\"javascript:;\">"
+                    str += "<i class=\"layui-icon\">&#xe642;</i></a>"
+                    str += " <a onclick=\"x_admin_show('修改密码','member-password.html',600,400)\" title=\"修改密码\" href=\"javascript:;\">"
+                    str += "<i class=\"layui-icon\">&#xe631;</i></a>"
+                    str += "<a title=\"删除\" onclick=\"member_del(this,'要删除的id')\" href=\"javascript:;\">"
+                    str += "<i class=\"layui-icon\">&#xe640;</i> </a>"
+                    str += "</td>"
+                    str += "</tr>"
+
+                })
+                $(".layui-table tr:not(:first)").remove();
+                $(".layui-table").append(str)
+                $("#count").html(msg.count);
+                $("#currentPage").html(currentPage);
+                $("#totalPage").html(msg.totalPage)
+            }
+        })
+    }
+
+</script>
+
 
 <body>
 <div class="x-nav">
@@ -34,14 +120,16 @@
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
+            <input class="layui-input" placeholder="性别" name="gender" id="gender">
             <input class="layui-input" placeholder="开始日" name="start" id="start">
             <input class="layui-input" placeholder="截止日" name="end" id="end">
+
             <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
     </div>
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量禁用</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
     </xblock>
@@ -62,73 +150,26 @@
             <th>操作</th></tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>1</td>
-            <td>小明</td>
-            <td>男</td>
-            <td>13000000000</td>
-            <td>admin@mail.com</td>
-            <td>北京市 海淀区</td>
-            <td>2017-01-01 11:11:42</td>
-            <td class="td-status">
-                <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-            <td class="td-manage">
-                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                    <i class="layui-icon">&#xe601;</i>
-                </a>
-                <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                    <i class="layui-icon">&#xe631;</i>
-                </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>1</td>
-            <td>小明</td>
-            <td>男</td>
-            <td>13000000000</td>
-            <td>admin@mail.com</td>
-            <td>北京市 海淀区</td>
-            <td>2017-01-01 11:11:42</td>
-            <td class="td-status">
-                <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-            <td class="td-manage">
-                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                    <i class="layui-icon">&#xe601;</i>
-                </a>
-                <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                    <i class="layui-icon">&#xe631;</i>
-                </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
+
         </tbody>
     </table>
     <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
+        <ul class="page-num-ul clearfix" style="display: inline-block">
+            <li style="display: inline-block;position: relative;left: -180px;">共<span id="count" style="border: none;"></span>条记录&nbsp;&nbsp; <span id="currentPage"style="border: none;"></span>/<span id="totalPage"style="border: none;"></span>页</li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0)" class="first"style="border: none;">首页</a>
+            <a href="javascript:void(0)" class="prev"style="border: none;">上一页</a>
+
+
+            <a href="javascript:void(0)" class="next"style="border: none;">下一页</a>
+            <a href="javascript:void(0)" class="last"style="border: none;">最后一页</a>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        </ul>
+        <span class="page-go-form"style="border: none;position: relative;left: 180px;"><label>跳转至</label>
+	     <input type="text" name="inputPage" id="inputPage" class="page-key" />页
+	     <button type="button" class="page-btn" onClick=''>GO</button>
+		</span>
     </div>
 
 </div>

@@ -51,4 +51,15 @@
         order by temtime desc
         limit 0,1
     </select>
+
+    <select id="getSomeInfo" resultType="com.sghy1801.entity.Temperature">
+        SELECT
+        from temperature as t
+        WHERE 1=1
+        <if test="oldtime!=null and newtime!=null">
+            AND temtime BETWEEN #{oldtime} and #{newtime}
+        </if>
+        group by DATE_FORMAT(`temtime`,"%Y-%m-%d") desc
+
+    </select>
 </mapper>
