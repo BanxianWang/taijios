@@ -70,4 +70,24 @@ public class TemperatureServiceImpl implements TemperatureService {
     public Temperature getLastTemperature(int machineID) {
         return temperatureMapper.getLastTemperature(machineID);
     }
+
+    @Override
+    public List<Temperature> getSomeInfo(int machineID) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        Date date = new Date();
+        map.put("machineID",machineID);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String newtime = sdf.format(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, -1);
+        String oldtiem = sdf.format(calendar.getTime());
+
+        map.put("oldtime","2019-4-14 00:00:00");
+        map.put("newtime","2019-4-15 00:00:00");
+//        map.put("oldtime",oldtiem+" 00:00:00");
+//        map.put("newtime",newtime+" 00:00:00");
+        return temperatureMapper.getSomeInfo(map);
+    }
 }

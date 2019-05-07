@@ -71,16 +71,27 @@ public class TemperatrueController {
      * @return3
      * @throws Exception
      */
-    @RequestMapping(value = "/getDaysTemperature", method = RequestMethod.POST)
+    @RequestMapping(value = "/getDaysTemperature")
     public @ResponseBody
-    String getDaysTemperature(String machineID,HttpServletResponse response) {
+    String getDaysTemperature(Integer machineID,HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         //获取温度列表
-        List<Map> temperatures = service.getDaysTemperature(Integer.parseInt(machineID));
+        List<Map> temperatures = service.getDaysTemperature(1);
+        Object[] arr = new Object[7];
+        int i = 0;
+        for (Map temperature : temperatures) {
 
+            int days = Integer.parseInt(temperature.get("days").toString().substring(8, 10));
+
+            arr[i] = temperature.get("daysavg");
+            i++;
+        }
         //转换成json格式
-        String j = JSON.toJSONString(temperatures);
-        return j;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("daysavg", arr);
+
+
+        return "successCallback2(" + jsonObject.toJSONString() + ")";
     }
 
 
@@ -95,9 +106,29 @@ public class TemperatrueController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("temperature", temperature);
         String j = JSONObject.toJSONString(map);
-        System.out.println(j);
         return "successCallback(" + j + ")";
 
+    }
+
+
+
+    /**
+     * 平均，最高，最低的温度
+     *
+     * @param machineID
+     * @return3
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getSomeInfo")
+    @ResponseBody
+    public String getSomeInfo(String machineID,HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        //获取温度列表
+        List<Map> temperatures = service.getDaysTemperature(Integer.parseInt(machineID));
+
+        //转换成json格式
+        String j = JSON.toJSONString(temperatures);
+        return "successCallback3(" + j + ")";
     }
 
 

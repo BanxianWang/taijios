@@ -19,7 +19,7 @@
 <div class="login">
     <div class="message">管理登录</div>
     <div id="darkbannerwrap"></div>
-    <a href="getsevenday">1111</a>
+    <a href="/jsp/getDaysTemperature">1111</a>
     <form method="post" class="layui-form"  action="login">
         <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
         <hr class="hr15">
