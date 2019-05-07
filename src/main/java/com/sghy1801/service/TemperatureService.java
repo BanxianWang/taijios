@@ -45,5 +45,5 @@ public interface TemperatureService {
      * 获取当日最高，最低，平均温度
      * @return
      */
-    List<Temperature> getSomeInfo(int machineID);
+    List<Map> getSomeInfo(int machineID);
 }

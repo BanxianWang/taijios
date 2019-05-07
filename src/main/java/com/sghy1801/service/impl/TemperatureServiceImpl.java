@@ -31,6 +31,7 @@ public class TemperatureServiceImpl implements TemperatureService {
         map.put("newtime","2019-4-15 00:00:00");
 //        map.put("oldtime",oldtiem+" 00:00:00");
 //        map.put("newtime",newtime+" 00:00:00");
+
         return temperatureMapper.getHoursTemperature(map);
     }
 
@@ -72,11 +73,10 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    public List<Temperature> getSomeInfo(int machineID) {
+    public List<Map> getSomeInfo(int machineID) {
         Map<String,Object> map = new HashMap<String,Object>();
         Date date = new Date();
         map.put("machineID",machineID);
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String newtime = sdf.format(date);
         Calendar calendar = Calendar.getInstance();
@@ -88,6 +88,7 @@ public class TemperatureServiceImpl implements TemperatureService {
         map.put("newtime","2019-4-15 00:00:00");
 //        map.put("oldtime",oldtiem+" 00:00:00");
 //        map.put("newtime",newtime+" 00:00:00");
+        System.out.println(temperatureMapper.getSomeInfo(map));
         return temperatureMapper.getSomeInfo(map);
     }
 }

@@ -52,13 +52,11 @@
         limit 0,1
     </select>
 
-    <select id="getSomeInfo" resultType="com.sghy1801.entity.Temperature">
+    <select id="getSomeInfo" resultType="java.util.Map">
         SELECT max(temperature),min(temperature),avg(temperature)
         from temperature
-        WHERE 1=1
-        <if test="oldtime!=null and newtime!=null">
-            AND temtime BETWEEN #{oldtime} and #{newtime}
-        </if>
+
+
 
 
     </select>

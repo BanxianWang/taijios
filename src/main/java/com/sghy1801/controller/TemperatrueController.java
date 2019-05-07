@@ -121,11 +121,10 @@ public class TemperatrueController {
      */
     @RequestMapping(value = "/getSomeInfo")
     @ResponseBody
-    public String getSomeInfo(String machineID,HttpServletResponse response) {
+    public String getSomeInfo(Integer machineID,HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        //获取温度列表
-        List<Map> temperatures = service.getDaysTemperature(Integer.parseInt(machineID));
 
+        List<Map> temperatures = service.getSomeInfo(1);
         //转换成json格式
         String j = JSON.toJSONString(temperatures);
         return "successCallback3(" + j + ")";
