@@ -15,8 +15,7 @@
             $("#btn").click(function () {
                 var id = $("#id").val();
                 $.ajax({
-                    url: "/jsp/getDaysTemperature",
-                    data: {machineID: 1,oldoldtime:"",newtime:""},
+                    url: "sevenday",
                     type: "POST",
                     dataType: "json",
                     success: function (result) {

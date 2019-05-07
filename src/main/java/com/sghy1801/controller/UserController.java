@@ -59,9 +59,14 @@ public class UserController {
      */
     @RequestMapping("/jsp/user/userlist")
     @ResponseBody
-    public Object userList(int currentPage) {
+    public Object userList(Integer currentPage) {
         //获取用户列表
         List<User> list = userService.listUser(currentPage);
+        
+        for (User user : list) {
+            System.out.println(user.getCreateDate());
+
+        }
         //获取用户记录数
         int count = userService.countUser();
         //总页数

@@ -14,7 +14,7 @@
         limit #{start},4
     </select>
     <!--查询数量-->
-    <select id="countUser" resultType="int" parameterType="map">
+    <select id="countUser" resultType="java.lang.Integer" parameterType="map">
         select count(*) from USER
 
     </select>

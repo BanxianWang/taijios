@@ -60,7 +60,6 @@ public class TemperatrueController {
             arr[hours] = temperature.get("hoursavg");
         }
         jsonObject.put("hoursavg", arr);
-        System.out.println(jsonObject);
         return "successCallback1(" + jsonObject.toJSONString() + ")";
 
     }
@@ -69,34 +68,18 @@ public class TemperatrueController {
      * 逐天的温度
      *
      * @param machineID
-     * @param oldtime
-     * @param newtime
-     * @return
+     * @return3
      * @throws Exception
      */
     @RequestMapping(value = "/getDaysTemperature", method = RequestMethod.POST)
     public @ResponseBody
-    String getDaysTemperature(String machineID, String oldtime, String newtime) {
-        Date date = new Date();
-
-        //将获取的值放入map中
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        if (machineID == "") map.put("machineID", null);
-        else map.put("machineID", machineID);
-
-        if (oldtime == "") map.put("oldtime", null);
-        else map.put("oldtime", oldtime);
-
-        if (newtime == "") map.put("newtime", null);
-        else map.put("newtime", newtime);
-
+    String getDaysTemperature(String machineID,HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         //获取温度列表
-        List<Map> temperatures = service.getDaysTemperature(map);
+        List<Map> temperatures = service.getDaysTemperature(Integer.parseInt(machineID));
 
         //转换成json格式
         String j = JSON.toJSONString(temperatures);
-        System.out.println(j);
         return j;
     }
 

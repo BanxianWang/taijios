@@ -1,5 +1,10 @@
 package com.sghy1801.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class User {
     //用户id
     private int id;
@@ -17,6 +22,12 @@ public class User {
     private String address;
     // 0管理员1普通用户
     private int userorman;
+    //创建时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date createDate;
+    //用户账户状态
+    private int state;
 
 
     public int getId() {
@@ -81,5 +92,21 @@ public class User {
 
     public void setUserorman(int userorman) {
         this.userorman = userorman;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
