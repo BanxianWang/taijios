@@ -73,7 +73,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    public List<Map> getSomeInfo(int machineID) {
+    public Map getSomeInfo(int machineID) {
         Map<String,Object> map = new HashMap<String,Object>();
         Date date = new Date();
         map.put("machineID",machineID);

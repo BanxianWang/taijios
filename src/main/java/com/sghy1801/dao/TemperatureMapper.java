@@ -46,5 +46,5 @@ public interface TemperatureMapper {
      * 获取当日最高，最低，平均温度
      * @return
      */
-    List<Map> getSomeInfo(Map<String,Object> map);
+    Map getSomeInfo(Map<String,Object> map);
 }
