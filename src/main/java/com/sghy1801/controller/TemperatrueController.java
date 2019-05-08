@@ -124,7 +124,7 @@ public class TemperatrueController {
     public String getSomeInfo(Integer machineID,HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
-        Map temperatures = service.getSomeInfo(1);
+        Map temperatures = service.getSomeInfo(machineID);
         //转换成json格式
         String j = JSON.toJSONString(temperatures);
         return "successCallback3(" + j + ")";
