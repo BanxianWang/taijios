@@ -24,14 +24,12 @@
         showList(currentPage);
         bindEvent();
 
-        $(".layui-btn").click(function () {
-            showList(currentPage);
-        })
-
-
         $("#btn").click(function () {
             showList(currentPage);
         })
+
+
+
 
 
 
@@ -176,7 +174,7 @@
                    class="layui-input">
             <input class="layui-input" placeholder="手机号" name="phone" id="phone">
 
-            <button class="layui-btn" lay-submit="" id="btn" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+            <input type="button" value="查找" id="btn">
         </form>
     </div>
 

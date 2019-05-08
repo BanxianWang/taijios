@@ -64,10 +64,12 @@ public class UserController {
     @RequestMapping("/jsp/user/userlist")
     @ResponseBody
     public Object userList(Integer currentPage, String username, String phone) {
+
         //获取用户列表
-
         List<User> list = userService.listUser(currentPage, username, phone);
-
+        for (User user : list) {
+            System.out.println(user.getUsername());
+        }
         //获取用户记录数
         int count = userService.countUser(username, phone);
         //总页数
