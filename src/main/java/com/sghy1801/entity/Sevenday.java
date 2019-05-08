@@ -6,9 +6,7 @@ import java.util.Date;
 
 public class Sevenday {
     private int id;
-    @JSONField(format = "utf-8")
     private String date;  //时间
-    @JSONField(format = "utf-8")
     private String wd;  //温度
     private String fl;  //风力
     private String tq;  //天气

@@ -37,7 +37,7 @@
     <select id="getDaysTemperature" resultType="java.util.HashMap">
         SELECT DATE_FORMAT(`temtime`,"%Y-%m-%d")AS days,SUM(`temperature`)/COUNT(id) AS daysavg
         from temperature as t
-        WHERE 1=1
+        WHERE machineID = #{machineID}
         <if test="oldtime!=null and newtime!=null">
             AND temtime BETWEEN #{oldtime} and #{newtime}
         </if>
@@ -56,8 +56,10 @@
         SELECT max(temperature) max,min(temperature) min,avg(temperature) avg
         from temperature
 
-
-
+        WHERE machineID = #{machineID}
+        <if test="oldtime!=null and newtime!=null">
+            AND temtime BETWEEN #{oldtime} and #{newtime}
+        </if>
 
     </select>
 </mapper>

@@ -56,4 +56,7 @@ public interface UserMapper {
      * @return
      */
     public User findById(int id);
+
+
+    public Map getDate();
 }

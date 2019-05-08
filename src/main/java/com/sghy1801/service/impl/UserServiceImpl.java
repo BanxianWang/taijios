@@ -80,4 +80,11 @@ public class UserServiceImpl implements UserService {
     public User findById(int id) {
         return userMapper.findById(id);
     }
+
+    @Override
+    public Map getDate() {
+        System.out.println(1);
+        System.out.println(userMapper.getDate());
+        return userMapper.getDate();
+    }
 }
