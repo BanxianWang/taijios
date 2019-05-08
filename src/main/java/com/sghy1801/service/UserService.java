@@ -4,6 +4,7 @@ import com.sghy1801.entity.User;
 
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface UserService {
@@ -56,4 +57,6 @@ public interface UserService {
      */
     public User findById(int id);
 
+
+    public Map getDate();
 }

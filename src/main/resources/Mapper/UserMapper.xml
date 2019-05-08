@@ -45,4 +45,10 @@
     <select id="findById" parameterType="int" resultType="User">
         SELECT  * FROM USER WHERE id = #{id}
     </select>
+
+    <select id="getDate" resultType="java.util.Map">
+        select count(createdate) num,createdate from user
+        group by DATE_FORMAT(createdate,"%Y-%m")
+
+    </select>
 </mapper>

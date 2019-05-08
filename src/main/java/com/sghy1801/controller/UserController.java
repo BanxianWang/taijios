@@ -2,6 +2,7 @@ package com.sghy1801.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sghy1801.entity.User;
 import com.sghy1801.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,7 @@ public class UserController {
     public Object userList(Integer currentPage) {
         //获取用户列表
         List<User> list = userService.listUser(currentPage);
-        
-        for (User user : list) {
-            System.out.println(user.getCreateDate());
 
-        }
         //获取用户记录数
         int count = userService.countUser();
         //总页数
@@ -95,5 +92,14 @@ public class UserController {
         User u = userService.findById(id);
         model.addAttribute("user",u);
         return "user/updateuser";
+    }
+
+    @RequestMapping("jsp/getDate")
+    @ResponseBody
+    public String getDate(){
+        Map map = userService.getDate();
+
+        System.out.println(map);
+        return JSONObject.toJSONString(map);
     }
 }
