@@ -55,9 +55,5 @@
     <select id="getSomeInfo" resultType="java.util.Map">
         SELECT max(temperature) max,min(temperature) min,avg(temperature) avg
         from temperature
-
-
-
-
     </select>
 </mapper>
