@@ -8,27 +8,28 @@ import java.util.Date;
 public class User {
     //用户id
     private int id;
+    //身份证号
+    private String IDnumber;
     //用户名
     private String username;
     //用户密码
     private String password;
-    //用户性别
-    private String gender;
-    //用户手机号
-    private String phone;
-    //用户邮箱
-    private String email;
-    //用户地址
-    private String address;
-    // 0管理员1普通用户
-    private int userorman;
-    //创建时间
+    //注册日期
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date createDate;
-    //用户账户状态
+    private Date registerDate;
+    //用户地址
+    private String address;
+    //用户邮箱
+    private String email;
+    //用户手机号
+    private String phone;
+    //用户性别0男1女
+    private int gender;
+    // 0管理员1普通用户
+    private int userorman;
+    //用户状态0已启用1禁用
     private int state;
-
 
     public int getId() {
         return id;
@@ -36,6 +37,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getIDnumber() {
+        return IDnumber;
+    }
+
+    public void setIDnumber(String IDnumber) {
+        this.IDnumber = IDnumber;
     }
 
     public String getUsername() {
@@ -54,28 +63,12 @@ public class User {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public Date getRegisterDate() {
+        return registerDate;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 
     public String getAddress() {
@@ -86,20 +79,36 @@ public class User {
         this.address = address;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
     public int getUserorman() {
         return userorman;
     }
 
     public void setUserorman(int userorman) {
         this.userorman = userorman;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
     }
 
     public int getState() {

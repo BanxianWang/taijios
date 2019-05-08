@@ -31,8 +31,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<User> listUser(int currentPage) {
+    public List<User> listUser(int currentPage,String username,String phone) {
         Map<String, Object> param = new HashMap<String, Object>();
+        if (username != null && !"".equals(username)) {
+            param.put("username", username);
+        }
+        if (phone != null && !"".equals(phone)) {
+            param.put("phone", phone);
+        }
         param.put("start", (currentPage - 1) * 4);
         List<User> list = userMapper.listUser(param);
         return list;
@@ -40,8 +46,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Transactional(readOnly = true)
-    public int countUser() {
+    public int countUser(String username,String phone) {
         Map<String, Object> param = new HashMap<String, Object>();
+        if (username != null && !"".equals(username)) {
+            param.put("username", username);
+        }
+        if (phone != null && !"".equals(phone)) {
+            param.put("phone", phone);
+        }
         int count = userMapper.countUser(param);
         return count;
     }

@@ -30,7 +30,7 @@
     </ul>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">${loginUser.username}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('个人信息','jsp/admin/adminedit.jsp')">个人信息</a></dd>
                 <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
@@ -50,57 +50,31 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>会员管理</cite>
+                    <cite>用户管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
                         <a _href="jsp/member/memberlist.jsp">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
+                            <cite>用户列表</cite>
 
                         </a>
                     </li >
                     <li>
                         <a _href="jsp/member/memberdel.jsp">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员删除</cite>
+                            <cite>账号管理</cite>
 
                         </a>
                     </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe70b;</i>
-                            <cite>会员管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="xxx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员列表</cite>
 
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="xx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员删除</cite>
-
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="xx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>等级管理</cite>
-
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
                 </ul>
             </li>
+
+
+
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
@@ -116,39 +90,7 @@
                     </li >
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="jsp/admin/adminlist.jsp">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="jsp/admin/adminrole.jsp">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>角色管理</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="jsp/admin/admincate.jsp">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="jsp/admin/adminrule.jsp">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ce;</i>

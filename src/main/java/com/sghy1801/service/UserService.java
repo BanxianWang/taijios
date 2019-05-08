@@ -20,13 +20,13 @@ public interface UserService {
      * @param currentPage
      * @return
      */
-    public List<User> listUser(int currentPage);
+    public List<User> listUser(int currentPage,String username,String phone);
 
     /**
      * 查询用户记录数
      * @return
      */
-    public int countUser();
+    public int countUser(String username,String phone);
 
     /**
      * 添加用户

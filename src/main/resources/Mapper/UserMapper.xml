@@ -10,13 +10,23 @@
     <!--查询所有用户-->
     <select id="listUser" resultType="User">
         select * from USER
-
+        <if test="username!=null">
+            and username like concat('%',#{username},'%')
+        </if>
+        <if test="phone!=null">
+            and phone= #{phone}
+        </if>
         limit #{start},4
     </select>
     <!--查询数量-->
     <select id="countUser" resultType="java.lang.Integer" parameterType="map">
         select count(*) from USER
-
+        <if test="username!=null">
+            and username like concat('%',#{username},'%')
+        </if>
+        <if test="phone!=null">
+            and phone= #{phone}
+        </if>
     </select>
 
     <!--添加用户-->

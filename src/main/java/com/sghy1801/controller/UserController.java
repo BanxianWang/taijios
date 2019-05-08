@@ -25,20 +25,19 @@ public class UserController {
     /**
      * 登录
      *
-     * @param session
      * @param username
      * @param password
      * @param model
      * @return
      */
     @RequestMapping("login")
-    public String login(HttpSession session, String username,
+    public String login(String username,
                         String password, Model model) {
         User loginUser = userService.login(username, password);
         String result = "";
         if (loginUser != null) {
             // 登录成功
-            session.setAttribute("loginUser", loginUser);
+            model.addAttribute("loginUser", loginUser);
             result = "main";
         } else {
             model.addAttribute("loginFlag", "error");
@@ -46,33 +45,32 @@ public class UserController {
         }
         return result;
     }
+
     // 登出
     @RequestMapping("loginOut")
     public String loginOut(HttpSession session) {
         session.removeAttribute("loginUser");
         return "redirect:index.jsp";
     }
+
     /**
      * 查询用户列表
      * @param currentPage
+     * @param username
+     * @param phone
      * @return
      */
     @RequestMapping("/jsp/user/userlist")
     @ResponseBody
-    public Object userList(Integer currentPage) {
+    public Object userList(Integer currentPage, String username, String phone) {
         //获取用户列表
-        List<User> list = userService.listUser(currentPage);
-        
-        for (User user : list) {
-            System.out.println(user.getCreateDate());
-
-        }
+        List<User> list = userService.listUser(currentPage, username, phone);
         //获取用户记录数
-        int count = userService.countUser();
+        int count = userService.countUser(username, phone);
         //总页数
         int totalPage = count % 4 == 0 ? count / 4 : count / 4 + 1;
         //包装数据
-        Map<String,Object> param = new HashMap<String,Object>();
+        Map<String, Object> param = new HashMap<String, Object>();
         param.put("list", list);
         param.put("count", count);
         param.put("totalPage", totalPage);
@@ -80,20 +78,20 @@ public class UserController {
     }
 
     @RequestMapping("/deleteUser")
-    public String deleteUser(int id,Model model){
+    public String deleteUser(int id, Model model) {
         int count = userService.deleteUser(id);
-        if(count > 0){
+        if (count > 0) {
             model.addAttribute("deleteFlag", "ok");
-        }else{
+        } else {
             model.addAttribute("deleteFlag", "error");
         }
         return "userlist";
     }
 
     @RequestMapping("/toupdateuser")
-    public String toupdateuser(int id,Model model){
+    public String toupdateuser(int id, Model model) {
         User u = userService.findById(id);
-        model.addAttribute("user",u);
+        model.addAttribute("user", u);
         return "user/updateuser";
     }
 }
