@@ -52,12 +52,5 @@
         limit 0,1
     </select>
 
-    <select id="getSomeInfo" resultType="java.util.Map">
-        SELECT max(temperature) max,min(temperature) min,avg(temperature) avg
-        from temperature
-        WHERE machineID = #{machineID}
-        <if test="oldtime!=null and newtime!=null">
-            AND temtime BETWEEN #{oldtime} and #{newtime}
-        </if>
-    </select>
+   
 </mapper>
