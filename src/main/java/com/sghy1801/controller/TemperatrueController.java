@@ -1,22 +1,17 @@
 package com.sghy1801.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sghy1801.entity.Temperature;
 import com.sghy1801.service.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import javax.json.Json;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.HEAD;
 import java.util.*;
 
 
@@ -106,7 +101,7 @@ public class TemperatrueController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("temperature", temperature);
         String j = JSONObject.toJSONString(map);
-        return "successCallback(" + j + ")";
+        return  "successCallback("+ j + ")";
 
     }
 
