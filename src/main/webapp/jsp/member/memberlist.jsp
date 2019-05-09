@@ -99,11 +99,9 @@
     }
 
     function bindEvent() {
+
         $("#btn").click(function () {
-            showList(currentPage);
-        })
-        $("#btn").click(function () {
-            showList(currentPage);
+            showList(1);
         })
 
         $(".next").click(function () {
@@ -124,8 +122,7 @@
         })
 
         $(".first").click(function () {
-            currentPage = 1;
-            showList(currentPage);
+            showList(1);
         })
 
 
@@ -145,13 +142,10 @@
                 alert("请正确输入页面数")
                 return;
             }
-
             currentPage = inputPage;
             showList(currentPage);
 
         })
-
-
     }
 </script>
 
