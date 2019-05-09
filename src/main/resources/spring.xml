@@ -37,7 +37,4 @@
         <property name="prefix" value="/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <bean id="txmanager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dateSource"/>
-    </bean>
 </beans>
