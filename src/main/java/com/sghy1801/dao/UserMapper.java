@@ -8,11 +8,11 @@ import java.util.Map;
 public interface UserMapper {
     /**
      * 登录
-     * @param username
+     * @param phone
      * @param password
      * @return
      */
-    public User login(@Param("username")String username,@Param("password")String password);
+    public User login(@Param("phone")String phone,@Param("password")String password);
 
     /**
      * 查询用户列表页

@@ -5,7 +5,7 @@
 
     <!--登录-->
     <select id="login" resultType="User">
-        select * from USER where username=#{username} and password=#{password}
+        select * from USER where phone=#{phone} and password=#{password}
     </select>
     <!--查询所有用户-->
     <select id="listUser" resultType="User">

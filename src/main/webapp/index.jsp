@@ -19,9 +19,8 @@
 <div class="login">
     <div class="message">管理登录</div>
     <div id="darkbannerwrap"></div>
-    <a href="/jsp/getDaysTemperature">1111</a>
     <form method="post" class="layui-form"  action="login">
-        <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <input name="phone" placeholder="手机号"  type="text" lay-verify="required" class="layui-input" >
         <hr class="hr15">
         <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
         <hr class="hr15">

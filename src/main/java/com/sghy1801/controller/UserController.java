@@ -26,15 +26,15 @@ public class UserController {
     /**
      * 登录
      *
-     * @param username
+     * @param phone
      * @param password
      * @param model
      * @return
      */
     @RequestMapping("login")
-    public String login(String username,
+    public String login(String phone,
                         String password, Model model) {
-        User loginUser = userService.login(username, password);
+        User loginUser = userService.login(phone, password);
         String result = "";
         if (loginUser != null) {
             // 登录成功
