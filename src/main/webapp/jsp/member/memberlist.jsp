@@ -24,15 +24,6 @@
         showList(currentPage);
         bindEvent();
 
-        $("#btn").click(function () {
-            showList(currentPage);
-        })
-
-
-
-
-
-
         /*setInterval(getsevenDay(), 1000);*/
     })
 
@@ -149,6 +140,11 @@
             currentPage = inputPage;
             showList(currentPage);
 
+        })
+
+
+        $("#btn").click(function () {
+            showList(currentPage);
         })
 
     }

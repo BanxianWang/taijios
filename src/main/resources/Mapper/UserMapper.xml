@@ -48,11 +48,10 @@
         update USER set
         username=#{username},
         password=#{password},
-        gender=#{gender},
         phone=#{phone},
-          email=#{email},
+        email=#{email},
         address=#{address},
-        userorman=#{userorman}
+        state=#{state}
         where id=#{id}
     </update>
 
