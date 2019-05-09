@@ -29,12 +29,12 @@ function getDate(){
         dataType: "json",
 
         success: function(data) {
-            alert(data);
+            bindInfo(document.getElementById('main'),data);
         }
     });
 }
 
-    function bindInfo(dm){
+    function bindInfo(dm,num){
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(dm);
 
@@ -66,14 +66,18 @@ function getDate(){
                 data: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                minInterval : 1,
+                boundaryGap : [ 0, 0.1 ],
+                inverse:false
+
             },
             series: [
                 {
                     name:'注册人数',
                     type:'line',
                     stack: '总量',
-                    data:[820, 932, 901, 934, 1290, 1330, 1320,345,2342,3443,456,456]
+                    data:num
                 }
             ]
         };

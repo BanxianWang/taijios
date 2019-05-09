@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="statics/css/font.css">
     <link rel="stylesheet" href="statics/css/xadmin.css">
+
 </head>
 <c:if test="${requestScope.loginFlag != null }">
     <script>
@@ -53,5 +54,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="statics/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="statics/js/xadmin.js"></script>
+<script type="text/javascript" src="statics/js/tooljs.js"></script>
 </body>
 </html>

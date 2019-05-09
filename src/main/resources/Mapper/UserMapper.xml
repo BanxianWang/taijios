@@ -60,8 +60,8 @@
     </select>
 
     <select id="getDate" resultType="java.util.Map">
-        select count(createdate) num,createdate from user
-        group by DATE_FORMAT(createdate,"%Y-%m")
-
+        select count(registerDate) num,DATE_FORMAT(registerDate,"%Y-%m") registerDate from user
+        group by DATE_FORMAT(registerDate,"%Y-%m")
     </select>
+
 </mapper>

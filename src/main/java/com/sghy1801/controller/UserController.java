@@ -100,9 +100,13 @@ public class UserController {
     @RequestMapping("jsp/getDate")
     @ResponseBody
     public String getDate(){
-        Map map = userService.getDate();
-
-        System.out.println(map);
-        return JSONObject.toJSONString(map);
+        List<Map> list = userService.getDate();
+        JSONObject jsonObject = new JSONObject();
+        Object[] arr = new Object[12];
+        for (Map map : list) {
+            int month = Integer.parseInt(map.get("registerDate").toString().substring(5,7));
+            arr[month-1] = map.get("num");
+        }
+        return JSONObject.toJSONString(arr);
     }
 }

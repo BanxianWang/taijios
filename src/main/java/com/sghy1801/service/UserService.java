@@ -58,5 +58,5 @@ public interface UserService {
     public User findById(int id);
 
 
-    public Map getDate();
+    public List<Map> getDate();
 }

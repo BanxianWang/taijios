@@ -82,8 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map getDate() {
-        System.out.println(userMapper.getDate());
+    public List<Map> getDate() {
         return userMapper.getDate();
     }
 }
