@@ -12,12 +12,12 @@ public class ToolController {
 
     @RequestMapping("sevenday")
     @ResponseBody
-    public String get(){
+    public String get(String path){
         Process res;//此类用于创建操作系统进程
         try {
 
             //数组第2位开始放入参数 0，1，》2，3.。。。。
-            String[] pyargs = new String[] { "python", "F:/paTest1.py","南京"};
+            String[] pyargs = new String[] { "python", path};
 
             Process proc = Runtime.getRuntime().exec(pyargs);// 执行python脚本文件
             //通过输入流 获取python的返回值

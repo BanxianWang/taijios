@@ -27,13 +27,13 @@
         /*setInterval(getsevenDay(), 1000);*/
     })
 
-  /*  function getsevenDay() {
-        $.post("sevenday", "data=0", function (rtndata) {
-            if (rtndata == "true") {
-                alert(1)
-            }
-        }, "text");
-    }*/
+    /*  function getsevenDay() {
+          $.post("sevenday", "data=0", function (rtndata) {
+              if (rtndata == "true") {
+                  alert(1)
+              }
+          }, "text");
+      }*/
 
     function showList(currentPage) {
         var username = $("#username").val();
@@ -55,7 +55,9 @@
                     str += "<span>" + b.username + "</span>"
                     str += "</td>"
                     str += "<td>"
-                    str += "<span>" + b.gender + "</span>"
+                    str += "<span>"
+                    str += b.gender == 0 ? "男" : "女"
+                    str+="</span>"
                     str += "</td>"
                     str += "<td>"
                     str += "<span>" + b.phone + "</span>"
@@ -86,19 +88,24 @@
                     str += "</td>"
                     str += "</tr>"
 
-                })
+                });
                 $(".layui-table tr:not(:first)").remove();
-                $(".layui-table").append(str)
+                $(".layui-table").append(str);
                 $("#count").html(msg.count);
                 $("#currentPage").html(currentPage);
-                $("#totalPage").html(msg.totalPage)
+                $("#totalPage").html(msg.totalPage);
             }
         })
     }
 
     function bindEvent() {
-        $(".next").click(function(){
-            if(currentPage == parseInt($("#totalPage").html())){
+
+        $("#btn").click(function () {
+            showList(1);
+        })
+
+        $(".next").click(function () {
+            if (currentPage == parseInt($("#totalPage").html())) {
                 return;
             }
             currentPage++;
@@ -106,47 +113,39 @@
         })
 
 
-        $(".prev").click(function(){
-            if(currentPage == 1){
+        $(".prev").click(function () {
+            if (currentPage == 1) {
                 return;
             }
             currentPage--;
             showList(currentPage);
         })
 
-        $(".first").click(function(){
-            currentPage = 1;
-            showList(currentPage);
+        $(".first").click(function () {
+            showList(1);
         })
 
 
-        $(".last").click(function(){
+        $(".last").click(function () {
             currentPage = parseInt($("#totalPage").html())
             showList(currentPage);
         })
 
-        $(".page-btn").click(function(){
+        $(".page-btn").click(function () {
             var inputPage = $("#inputPage").val();
-            if(inputPage < 1){
+            if (inputPage < 1) {
                 alert("请正确输入页面数")
                 return;
             }
 
-            if(inputPage > parseInt($("#totalPage").html())){
+            if (inputPage > parseInt($("#totalPage").html())) {
                 alert("请正确输入页面数")
                 return;
             }
-
             currentPage = inputPage;
             showList(currentPage);
 
         })
-
-
-        $("#btn").click(function () {
-            showList(currentPage);
-        })
-
     }
 </script>
 
@@ -170,7 +169,7 @@
                    class="layui-input">
             <input class="layui-input" placeholder="手机号" name="phone" id="phone">
 
-            <input type="button" value="查找" id="btn">
+            <input type="button" value="查找" id="btn" class="layui-btn">
         </form>
     </div>
 
@@ -183,7 +182,7 @@
             <th>手机</th>
             <th>邮箱</th>
             <th>地址</th>
-            <th>加入时间</th>
+            <th>创建时间</th>
             <th>状态</th>
             <th>操作</th>
         </tr>

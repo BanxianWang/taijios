@@ -26,15 +26,15 @@ public class UserController {
     /**
      * 登录
      *
-     * @param username
+     * @param phone
      * @param password
      * @param model
      * @return
      */
     @RequestMapping("login")
-    public String login(String username,
+    public String login(String phone,
                         String password, Model model) {
-        User loginUser = userService.login(username, password);
+        User loginUser = userService.login(phone, password);
         String result = "";
         if (loginUser != null) {
             // 登录成功
@@ -100,9 +100,13 @@ public class UserController {
     @RequestMapping("jsp/getDate")
     @ResponseBody
     public String getDate(){
-        Map map = userService.getDate();
-
-        System.out.println(map);
-        return JSONObject.toJSONString(map);
+        List<Map> list = userService.getDate();
+        JSONObject jsonObject = new JSONObject();
+        Object[] arr = new Object[12];
+        for (Map map : list) {
+            int month = Integer.parseInt(map.get("registerDate").toString().substring(5,7));
+            arr[month-1] = map.get("num");
+        }
+        return JSONObject.toJSONString(arr);
     }
 }

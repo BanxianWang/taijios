@@ -20,10 +20,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User login(String username, String password) {
-        User user = userMapper.login(username, password);
+    public User login(String phone, String password) {
+        User user = userMapper.login(phone, password);
         //匹配密码
-        if (null != user) {
+        if (null != phone) {
             if (!user.getPassword().equals(password))
                 user = null;
         }
@@ -82,8 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map getDate() {
-        System.out.println(userMapper.getDate());
+    public List<Map> getDate() {
         return userMapper.getDate();
     }
 }

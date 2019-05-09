@@ -10,11 +10,11 @@ import java.util.Map;
 public interface UserService {
     /**
      * 登录
-     * @param username
+     * @param phone
      * @param password
      * @return
      */
-    public User login(String username,String password);
+    public User login(String phone,String password);
 
     /**
      * 查询用户列表页
@@ -58,5 +58,5 @@ public interface UserService {
     public User findById(int id);
 
 
-    public Map getDate();
+    public List<Map> getDate();
 }
