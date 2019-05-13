@@ -23,6 +23,7 @@ public interface UserMapper {
 
     /**
      * 查询用户记录数
+     *
      * @param param
      * @return
      */
@@ -30,6 +31,7 @@ public interface UserMapper {
 
     /**
      * 添加用户
+     *
      * @param u
      * @return
      */
@@ -38,6 +40,7 @@ public interface UserMapper {
 
     /**
      * 删除用户
+     *
      * @param id
      * @return
      */
@@ -45,6 +48,7 @@ public interface UserMapper {
 
     /**
      * 修改用户
+     *
      * @param u
      * @return
      */
@@ -52,6 +56,7 @@ public interface UserMapper {
 
     /**
      * 根据id查询单个用户
+     *
      * @param id
      * @return
      */

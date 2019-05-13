@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
-
     @Transactional(readOnly = true)
     public int countUser(String username,String phone) {
         Map<String, Object> param = new HashMap<String, Object>();

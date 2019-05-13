@@ -57,7 +57,7 @@
                     str += "<td>"
                     str += "<span>"
                     str += b.gender == 0 ? "男" : "女"
-                    str+="</span>"
+                    str += "</span>"
                     str += "</td>"
                     str += "<td>"
                     str += "<span>" + b.phone + "</span>"
@@ -101,15 +101,18 @@
     function bindEvent() {
 
         $("#btn").click(function () {
-            showList(1);
+            currentPage = 1;
+            showList(currentPage);
         })
 
         $(".next").click(function () {
-            if (currentPage == parseInt($("#totalPage").html())) {
+
+            if (currentPage >= parseInt($("#totalPage").html())) {
                 return;
             }
             currentPage++;
             showList(currentPage);
+
         })
 
 

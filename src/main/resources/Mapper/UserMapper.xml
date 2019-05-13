@@ -11,12 +11,12 @@
     <select id="listUser" resultType="User">
         select * from USER
         <where>
-        <if test="username!=null">
-            and username like concat('%',#{username},'%')
-        </if>
-        <if test="phone!=null">
-            and phone= #{phone}
-        </if>
+            <if test="username!=null">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="phone!=null">
+                and phone= #{phone}
+            </if>
         </where>
         limit #{start},4
     </select>
@@ -24,12 +24,12 @@
     <select id="countUser" parameterType="map" resultType="java.lang.Integer">
         select count(*) from USER
         <where>
-        <if test="username!=null">
-            and username like concat('%',#{username},'%')
-        </if>
-        <if test="phone!=null">
-            and phone= #{phone}
-        </if>
+            <if test="username!=null">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="phone!=null">
+                and phone= #{phone}
+            </if>
         </where>
     </select>
 
