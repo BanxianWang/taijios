@@ -22,6 +22,9 @@ public class NewsController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         List<News> list = service.getAllNews();
 
-        return "successCallback1(" + JSONObject.toJSONString(list) + ")";
+        return "successCallback(" + JSONObject.toJSONString(list) + ")";
     }
 }
+
+
+
