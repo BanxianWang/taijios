@@ -88,7 +88,6 @@ public class TemperatureServiceImpl implements TemperatureService {
         map.put("newtime","2019-4-15 00:00:00");
 //        map.put("oldtime",oldtiem+" 00:00:00");
 //        map.put("newtime",newtime+" 00:00:00");
-        System.out.println(temperatureMapper.getSomeInfo(map));
         return temperatureMapper.getSomeInfo(map);
     }
 }

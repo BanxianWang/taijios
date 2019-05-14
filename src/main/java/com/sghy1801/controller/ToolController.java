@@ -46,16 +46,13 @@ public class ToolController {
 
         String filePath = request.getServletContext().getRealPath(File.separator);
         filePath += File.separator + "statics" + File.separator + "voice";
-        System.out.println(filePath);
         File file = new File(filePath);
         if (!file.exists()) {
             file.mkdir();
         }
         AA.setPath(filePath);
 
-        System.out.println("问题是：=" + str);
         String ans = getans(str);//机器回答
-        System.out.println("回答是：=" + ans);
         File filedelete = new File(AA.getPath() + File.separator + "tts" + AA.getOut() + ".wav");
         if (filedelete.exists()) {
             filedelete.delete();
@@ -70,7 +67,6 @@ public class ToolController {
             filename = AA.getOut();
             param.put("result", "http://192.168.1.13:8080/statics/voice/tts" + filename + ".wav");
             json = JSONObject.toJSONString(param);
-            System.out.println(json);
             return "successCallback5(" + json + ")";
         } catch (Exception e) {
         }
