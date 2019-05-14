@@ -130,5 +130,21 @@ public class TemperatrueController {
         return "successCallback3(" + j + ")";
     }
 
+    /**
+     * 新增
+     * @param temperature
+     * @return
+     */
+    public String addTemperature(double temperature){
+        Temperature temperature1 = new Temperature();
+        temperature1.setMachineid(1);
+        temperature1.setTemperature(temperature);
+        int count = service.addTemperature(temperature1);
+        if (count==1){
+            return "true";
+        }else{
+            return "false";
+        }
+    }
 
 }
