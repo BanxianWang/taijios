@@ -21,16 +21,12 @@ public class TemperatureServiceImpl implements TemperatureService {
         Map<String, Object> map = new HashMap<String, Object>();
         Date date = new Date();
         map.put("machineID", machineID);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String newtime = sdf.format(date);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DATE, -1);
-        String oldtiem = sdf.format(calendar.getTime());
-        map.put("oldtime", "2019-4-14 00:00:00");
-        map.put("newtime", "2019-4-15 00:00:00");
-        // map.put("oldtime", oldtiem + " 00:00:00");
-        //   map.put("newtime", newtime + " 00:00:00");
+        String oldtiem = sdf1.format(date);
+        map.put("oldtime", oldtiem + " 00:00:00");
+        map.put("newtime", newtime);
 
         return temperatureMapper.getHoursTemperature(map);
     }
@@ -45,15 +41,14 @@ public class TemperatureServiceImpl implements TemperatureService {
         calendar.setTime(date);
         //当前日期前一天
         calendar.add(Calendar.DATE, -1);
-        String newtiem = sdf.format(calendar.getTime());
+        String newtime = sdf.format(calendar.getTime());
         //当前日期前七天
         calendar.add(Calendar.DATE, -7);
         String oldtime = sdf.format(calendar.getTime());
-        map.put("oldtime", "2019-4-10 00:00:00");
-        map.put("newtime", "2019-4-16 00:00:00");
+
         map.put("machineID", machineID);
-//        map.put("oldtime",oldtiem+" 00:00:00");
-//        map.put("newtime",newtime+" 00:00:00");
+        map.put("oldtime",oldtime+" 00:00:00");
+        map.put("newtime",newtime+" 00:00:00");
         return temperatureMapper.getDaysTemperature(map);
     }
 
