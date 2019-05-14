@@ -73,7 +73,7 @@
                     str += "</td>"
                     str += "<td>"
                     str += "<span class='layui-btn layui-btn-normal layui-btn-mini'\">"
-                    str += b.state == 0 ? "未启用" : "已启用"
+                    str += b.state == 0 ? "已启用" : "已禁用"
                     str += "</span>"
                     str += "</td>"
                     str += "<td class='td-manage'>"

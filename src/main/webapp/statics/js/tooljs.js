@@ -1,4 +1,4 @@
-setInterval(seven(),3600000)
+//setInterval(seven(),3600000)
 
 function seven(){
     $.ajax({
