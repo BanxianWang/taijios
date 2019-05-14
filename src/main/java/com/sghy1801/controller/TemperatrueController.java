@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sghy1801.entity.Temperature;
 import com.sghy1801.service.TemperatureService;
+import com.sghy1801.util.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,6 +100,7 @@ public class TemperatrueController {
     ) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
+        JedisUtil.setTemperature(temperature.getTemperature()+"");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("temperature", temperature);
         String j = JSONObject.toJSONString(map);
