@@ -98,10 +98,12 @@ public class TemperatrueController {
     public String getLastTemperature(@RequestParam(value = "machineID", defaultValue = "1") String machineID,
                                      HttpServletResponse response
     ) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
-        JedisUtil.setTemperature(temperature.getTemperature()+"");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
+//        Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
+//        JedisUtil.setTemperature(temperature.getTemperature()+"");
         Map<String, Object> map = new HashMap<String, Object>();
+        Temperature temperature = new Temperature();
+        temperature.setTemperature(Double.parseDouble(JedisUtil.getTemperature()));
         map.put("temperature", temperature);
         String j = JSONObject.toJSONString(map);
         return  "successCallback("+ j + ")";
