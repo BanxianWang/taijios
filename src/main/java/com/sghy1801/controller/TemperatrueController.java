@@ -56,7 +56,7 @@ public class TemperatrueController {
             arr[hours] = temperature.get("hoursavg");
         }
         jsonObject.put("hoursavg", arr);
-        System.out.println( jsonObject.toJSONString());
+        System.out.println(jsonObject.toJSONString());
         return "successCallback1(" + jsonObject.toJSONString() + ")";
 
     }
@@ -65,12 +65,12 @@ public class TemperatrueController {
      * 逐天的温度
      *
      * @param machineID
-     * @return3
      * @throws Exception
+     * @return3
      */
     @RequestMapping(value = "/getDaysTemperature")
     public @ResponseBody
-    String getDaysTemperature(Integer machineID,HttpServletResponse response) {
+    String getDaysTemperature(Integer machineID, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         //获取温度列表
         List<Map> temperatures = service.getDaysTemperature(1);
@@ -98,30 +98,35 @@ public class TemperatrueController {
     public String getLastTemperature(@RequestParam(value = "machineID", defaultValue = "1") String machineID,
                                      HttpServletResponse response
     ) {
-//        response.setHeader("Access-Control-Allow-Origin", "*");
-//        Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
-//        JedisUtil.setTemperature(temperature.getTemperature()+"");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, Object> map = new HashMap<String, Object>();
-        Temperature temperature = new Temperature();
-        temperature.setTemperature(Double.parseDouble(JedisUtil.getTemperature()));
-        map.put("temperature", temperature);
+        String temperatureStr = JedisUtil.getTemperature();
+        if (temperatureStr == null || temperatureStr.equals("")) {
+            Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
+            map.put("temperature", temperature);
+        } else {
+            Temperature temperature = new Temperature();
+            temperature.setTemperature(Double.parseDouble(JedisUtil.getTemperature()));
+            temperature.setMachineid(1);
+            map.put("temperature", temperature);
+            service.addTemperature(temperature);
+        }
         String j = JSONObject.toJSONString(map);
-        return  "successCallback("+ j + ")";
-
+        System.out.println(JedisUtil.getTemperature());
+        return "successCallback(" + j + ")";
     }
-
 
 
     /**
      * 平均，最高，最低的温度
      *
      * @param machineID
-     * @return3
      * @throws Exception
+     * @return3
      */
     @RequestMapping(value = "/getSomeInfo")
     @ResponseBody
-    public String getSomeInfo(Integer machineID,HttpServletResponse response) {
+    public String getSomeInfo(Integer machineID, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         Map temperatures = service.getSomeInfo(machineID);
@@ -132,17 +137,18 @@ public class TemperatrueController {
 
     /**
      * 新增
+     *
      * @param temperature
      * @return
      */
-    public String addTemperature(double temperature){
+    public String addTemperature(double temperature) {
         Temperature temperature1 = new Temperature();
         temperature1.setMachineid(1);
         temperature1.setTemperature(temperature);
         int count = service.addTemperature(temperature1);
-        if (count==1){
+        if (count == 1) {
             return "true";
-        }else{
+        } else {
             return "false";
         }
     }

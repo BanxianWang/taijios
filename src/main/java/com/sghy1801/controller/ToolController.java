@@ -9,6 +9,7 @@ import com.sghy1801.service.impl.TemperatureServiceImpl;
 import com.sghy1801.util.AA;
 import com.sghy1801.util.JedisUtil;
 import com.sghy1801.util.TTS;
+import com.sghy1801.util.TcpUtil;
 import org.apache.log4j.FileAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -43,7 +44,6 @@ public class ToolController {
     @ResponseBody
     public String getTTS(String str, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
         response.setHeader("Access-Control-Allow-Origin", "*");
-
         String filePath = request.getServletContext().getRealPath(File.separator);
         filePath += File.separator + "statics" + File.separator + "voice";
         File file = new File(filePath);

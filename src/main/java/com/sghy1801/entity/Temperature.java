@@ -43,4 +43,14 @@ public class Temperature {
     public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
+
+    @Override
+    public String toString() {
+        return "Temperature{" +
+                "id=" + id +
+                ", temtime=" + temtime +
+                ", machineid=" + machineid +
+                ", temperature=" + temperature +
+                '}';
+    }
 }

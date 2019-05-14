@@ -12,8 +12,8 @@
 
 
 
-    <insert id="addTemperature">
-        INSERT INTO temperature(temperature,machineID) VALUES (#{temperature},#{machineID})
+    <insert id="addTemperature" parameterType="Temperature">
+        INSERT INTO temperature(temperature,machineID) VALUE (#{temperature},#{machineid})
     </insert>
 
 

@@ -1,6 +1,11 @@
 package com.sghy1801.util;
 
 
+import com.sghy1801.entity.Temperature;
+import com.sghy1801.service.TemperatureService;
+import com.sghy1801.service.impl.TemperatureServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -12,7 +17,8 @@ import java.net.Socket;
  */
 public class TcpUtil {
 
-    public static void test(){
+
+    public  void test(){
         ServerSocket listener = null;
         try {
             listener = new ServerSocket(9000);
@@ -29,7 +35,7 @@ public class TcpUtil {
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             System.out.println(123123);
-            TcpUtil.test();
+            this.test();
         }
 
 
@@ -60,8 +66,16 @@ public class TcpUtil {
             if(len > 0)
             {
                 str=new String(buff, 0, len);
+                //接到的温度
                 double temperature = Double.valueOf(str);
+                //放入缓存
                 JedisUtil.setTemperature(temperature+"");
+                //放入数据库
+                Temperature temperature1 = new Temperature();
+                temperature1.setTemperature(temperature);
+                temperature1.setMachineid(1);
+                System.out.println(temperature1);
+                //service.addTemperature(temperature1);
                 System.out.println(str);
             }
         }

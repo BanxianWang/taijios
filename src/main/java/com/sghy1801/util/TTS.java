@@ -23,6 +23,7 @@ import java.nio.ByteBuffer;
         }
 
         static{
+           // TcpUtil.test();
             client= new NlsClient("5cdb8f8dd6da491ca308902e22887cc8");
         }
         public static SpeechSynthesizerListener getSynthesizerListener() {
