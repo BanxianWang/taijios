@@ -30,7 +30,7 @@
             AND temtime BETWEEN #{oldtime} and #{newtime}
         </if>
 
-        group by DATE_FORMAT(`temtime`,"%Y-%m-%d-%H") asc
+        group by hours,days asc
     </select>
 
 

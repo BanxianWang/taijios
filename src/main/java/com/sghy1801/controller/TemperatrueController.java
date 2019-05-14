@@ -34,7 +34,7 @@ public class TemperatrueController {
     String getHoursTemperature(String machineID, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Date date = new Date();
-
+        System.out.println(11111111);
         //将获取的值放入map中
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -55,6 +55,7 @@ public class TemperatrueController {
             arr[hours] = temperature.get("hoursavg");
         }
         jsonObject.put("hoursavg", arr);
+        System.out.println( jsonObject.toJSONString());
         return "successCallback1(" + jsonObject.toJSONString() + ")";
 
     }

@@ -5,10 +5,8 @@ function seven(){
         url: "sevenday",
         type: "post",
         dataType: "json",
-        data:{"path":"F:\\pcTest2.py"},
-
+        data:{"path":"D:\\pcTest2.py"},
         success: function(data) {
-            alert(1)
         }
     });
 
