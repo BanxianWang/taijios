@@ -36,13 +36,19 @@ public class UserController {
                         String password, Model model) {
         User loginUser = userService.login(phone, password);
         String result = "";
-        if (loginUser != null) {
-            // 登录成功
-            model.addAttribute("loginUser", loginUser);
-            result = "main";
+        if (loginUser.getState() == 1) {
+            model.addAttribute("loginNo", "no");
+            result = "forward:index.jsp";
         } else {
-            model.addAttribute("loginFlag", "error");
-            result = "forward:index.jsp"; // 破坏视图解析器的跳转
+            if (loginUser != null) {
+                // 登录成功
+                model.addAttribute("loginUser", loginUser);
+                result = "main";
+            } else {
+                model.addAttribute("loginFlag", "error");
+                result = "forward:index.jsp"; // 破坏视图解析器的跳转
+            }
+
         }
         return result;
     }
@@ -56,6 +62,7 @@ public class UserController {
 
     /**
      * 查询用户列表
+     *
      * @param currentPage
      * @param username
      * @param phone
@@ -99,13 +106,13 @@ public class UserController {
 
     @RequestMapping("jsp/getDate")
     @ResponseBody
-    public String getDate(){
+    public String getDate() {
         List<Map> list = userService.getDate();
         JSONObject jsonObject = new JSONObject();
         Object[] arr = new Object[12];
         for (Map map : list) {
-            int month = Integer.parseInt(map.get("registerDate").toString().substring(5,7));
-            arr[month-1] = map.get("num");
+            int month = Integer.parseInt(map.get("registerDate").toString().substring(5, 7));
+            arr[month - 1] = map.get("num");
         }
         return JSONObject.toJSONString(arr);
     }

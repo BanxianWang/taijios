@@ -15,6 +15,11 @@
         alert("登录名或密码不正确")
     </script>
 </c:if>
+<c:if test="${requestScope.loginNo == 'no' }">
+    <script>
+        alert("该用户被禁用，请联系客服")
+    </script>
+</c:if>
 <body class="login-bg">
 
 <div class="login">
