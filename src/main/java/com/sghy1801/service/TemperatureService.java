@@ -46,4 +46,5 @@ public interface TemperatureService {
      * @return
      */
     Map getSomeInfo(int machineID);
+
 }
