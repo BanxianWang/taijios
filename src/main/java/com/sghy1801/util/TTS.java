@@ -5,6 +5,7 @@ import com.alibaba.nls.client.protocol.SampleRateEnum;
 import com.alibaba.nls.client.protocol.tts.SpeechSynthesizer;
 import com.alibaba.nls.client.protocol.tts.SpeechSynthesizerListener;
 import com.alibaba.nls.client.protocol.tts.SpeechSynthesizerResponse;
+import sun.net.www.content.audio.wav;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -13,23 +14,23 @@ import java.nio.ByteBuffer;
      * 语音合成（TTS）Demo
      */
     public class TTS {
-
         private String appKey;
         static NlsClient  client;
+
 
         public TTS(String appKey) {
             this.appKey = appKey;
         }
+
         static{
-            client= new NlsClient("40a0a741bd2140c99704aeb4e141c384");
+            client= new NlsClient("5cdb8f8dd6da491ca308902e22887cc8");
         }
         public static SpeechSynthesizerListener getSynthesizerListener() {
             SpeechSynthesizerListener listener = null;//语音合成监听类，监听返回结果。非线程安全
             try {
                 listener = new SpeechSynthesizerListener() {
-
                     String rom = (int)(Math.random()*1000)+"";
-                    String path ="F:\\TomCat\\apache-tomcat-9.0.14\\webapps\\statics\\tts"+rom+".wav";
+                    String path =AA.getPath()+File.separator+"tts"+rom+".wav";
                     AA aa =new AA(rom);
                     File f =new File(path);
                     FileOutputStream fout = new FileOutputStream(f);
@@ -39,7 +40,6 @@ import java.nio.ByteBuffer;
                     public void onComplete(SpeechSynthesizerResponse response) {
 
                         try {
-                            System.out.println(f.delete());
                             fout.close();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -92,9 +92,9 @@ import java.nio.ByteBuffer;
                 synthesizer.setSampleRate(SampleRateEnum.SAMPLE_RATE_16K);
                 // 设置用于语音合成的文本
                 System.err.println(text);
-                String s= new String(text.getBytes("gbk"),"UTF-8");
+              //  String s= new String(text.getBytes("gbk"),"UTF-8");
                 // System.out.println(s);
-                synthesizer.setText(s);
+                synthesizer.setText(text);
 
                 // Step2 此方法将以上参数设置序列化为json发送给服务端,并等待服务端确认
                 synthesizer.start();
