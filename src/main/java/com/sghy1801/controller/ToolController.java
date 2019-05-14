@@ -65,7 +65,7 @@ public class ToolController {
             TTS a = new TTS("X9PvsnlQsXI1oPkj");
             a.process(ans);
             filename = AA.getOut();
-            param.put("result", "http://192.168.1.13:8080/statics/voice/tts" + filename + ".wav");
+            param.put("result", "http://106.14.208.219:8080/taijios/statics/voice/tts" + filename + ".wav");
             json = JSONObject.toJSONString(param);
             return "successCallback5(" + json + ")";
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class ToolController {
     }
 
 
-    public String getans(String str) {
+    public String getans(String str) throws UnsupportedEncodingException {
 
         String ans = "";
         if (Pattern.compile("温度").matcher(str).find()) {//Str字符串中出现字符串“温度”五个字符中的任何一个，那么则返回true
