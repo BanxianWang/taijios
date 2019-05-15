@@ -101,6 +101,7 @@ public class TemperatrueController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, Object> map = new HashMap<String, Object>();
         String temperatureStr = JedisUtil.getTemperature();
+
         if (temperatureStr == null || temperatureStr.equals("")) {
             Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
             map.put("temperature", temperature);
@@ -109,7 +110,6 @@ public class TemperatrueController {
             temperature.setTemperature(Double.parseDouble(JedisUtil.getTemperature()));
             temperature.setMachineid(1);
             map.put("temperature", temperature);
-            service.addTemperature(temperature);
         }
         String j = JSONObject.toJSONString(map);
         System.out.println(JedisUtil.getTemperature());

@@ -21,7 +21,7 @@ public class TemperatureServiceImpl implements TemperatureService {
         Map<String, Object> map = new HashMap<String, Object>();
         Date date = new Date();
         map.put("machineID", machineID);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String newtime = sdf.format(date);
         String oldtiem = sdf1.format(date);
@@ -40,8 +40,8 @@ public class TemperatureServiceImpl implements TemperatureService {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         //当前日期前一天
-        calendar.add(Calendar.DATE, -1);
-        String newtime = sdf.format(calendar.getTime());
+        //calendar.add(Calendar.DATE, -1);
+        String newtime = sdf.format(date);
         //当前日期前七天
         calendar.add(Calendar.DATE, -7);
         String oldtime = sdf.format(calendar.getTime());

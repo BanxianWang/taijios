@@ -5,6 +5,8 @@ import com.sghy1801.entity.Temperature;
 import com.sghy1801.service.TemperatureService;
 import com.sghy1801.service.impl.TemperatureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,10 +17,12 @@ import java.net.Socket;
  * @author wrm
  * @create 2019-05-14 17:02
  */
+@Component
 public class TcpUtil {
+    @Autowired
+    private TemperatureService service;
 
-
-    public  void test(){
+    public void test() {
         ServerSocket listener = null;
         try {
             listener = new ServerSocket(9000);
@@ -39,9 +43,7 @@ public class TcpUtil {
         }
 
 
-
         System.out.println("a client is connected: " + socket.getRemoteSocketAddress());
-
 
 
         //读取客户端数据
@@ -54,8 +56,7 @@ public class TcpUtil {
         }
         byte[] buff = new byte[1024];
         String str = "";
-        while(true)
-        {
+        while (true) {
             int len = 0;
             try {
                 len = input.read(buff);
@@ -63,20 +64,18 @@ public class TcpUtil {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            if(len > 0)
-            {
-                str=new String(buff, 0, len);
+            if (len > 0) {
+                str = new String(buff, 0, len);
                 //接到的温度
                 double temperature = Double.valueOf(str);
                 //放入缓存
-                JedisUtil.setTemperature(temperature+"");
+                JedisUtil.setTemperature(temperature + "");
                 //放入数据库
                 Temperature temperature1 = new Temperature();
                 temperature1.setTemperature(temperature);
                 temperature1.setMachineid(1);
-                System.out.println(temperature1);
-                //service.addTemperature(temperature1);
-                System.out.println(str);
+                if (service != null)
+                    service.addTemperature(temperature1);
             }
         }
     }
