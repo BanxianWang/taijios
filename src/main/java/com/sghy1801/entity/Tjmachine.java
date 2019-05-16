@@ -6,6 +6,7 @@ public class Tjmachine {
     private int temperature;//是否有温度控件 1有0无 默认为0
     private int  usetime;//使用时间
     private int runningstate;//运行状态
+    private User userid;  //用户外键
 
     public int getId() {
         return id;
@@ -47,5 +48,11 @@ public class Tjmachine {
         this.usetime = usetime;
     }
 
+    public User getUserid() {
+        return userid;
+    }
 
+    public void setUserid(User userid) {
+        this.userid = userid;
+    }
 }

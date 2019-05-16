@@ -146,7 +146,6 @@
             }
             currentPage = inputPage;
             showList(currentPage);
-
         })
     }
 

@@ -36,4 +36,12 @@ public interface TjmachineMapper {
      * @return
      */
     int delMachine(@Param("machineid") int id);
+
+
+    /**
+     * 根据用户查机器
+     * @param userid
+     * @return
+     */
+    Tjmachine getOneByUserId(@Param("userid") int userid);
 }

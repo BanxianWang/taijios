@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 /**
  * @author wrm
@@ -22,7 +24,10 @@ public class TcpUtil {
     @Autowired
     private TemperatureService service;
 
-    public void test() {
+    public static void main(String[] args) {
+        test();
+    }
+    public static void test() {
         ServerSocket listener = null;
         try {
             listener = new ServerSocket(9000);
@@ -36,14 +41,18 @@ public class TcpUtil {
         //服务端等待客户端连接，默认超时时间: 60 seconds
         try {
             socket = listener.accept();
+            System.out.println(socket.getRemoteSocketAddress());
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             System.out.println(123123);
-            this.test();
+            test();
+        }catch (Exception e){
+            test();
         }
 
 
         System.out.println("a client is connected: " + socket.getRemoteSocketAddress());
+
 
 
         //读取客户端数据
@@ -68,15 +77,23 @@ public class TcpUtil {
                 str = new String(buff, 0, len);
                 //接到的温度
                 double temperature = Double.valueOf(str);
-                //放入缓存
-                JedisUtil.setTemperature(temperature + "");
-                //放入数据库
-                Temperature temperature1 = new Temperature();
-                temperature1.setTemperature(temperature);
-                temperature1.setMachineid(1);
-                if (service != null)
-                    service.addTemperature(temperature1);
+                System.out.println(temperature);
+
             }
+
+
+            try {
+                //发送数据到客户端
+                OutputStream out = socket.getOutputStream() ;
+
+                out.write(LedStr.getLedStr().getStr().getBytes());
+                System.out.println(LedStr.getLedStr().getStr());
+                System.out.println("发送数据到机器");
+                out.flush();
+            }catch (Exception e){
+
+            }
+
         }
     }
 }

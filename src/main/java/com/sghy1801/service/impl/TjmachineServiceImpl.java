@@ -40,4 +40,9 @@ public class TjmachineServiceImpl implements TjmachineService {
 
         return tjmachineMapper.delMachine(id);
     }
+
+    @Override
+    public Tjmachine getOneByUserId(int userid) {
+        return tjmachineMapper.getOneByUserId(userid);
+    }
 }

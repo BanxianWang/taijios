@@ -48,4 +48,10 @@
     </select>
 
 
+    <select id="getOneByUserId" resultType="com.sghy1801.entity.Tjmachine">
+        select * from tjmachine where userid = #{userid}
+
+    </select>
+
+
 </mapper>
