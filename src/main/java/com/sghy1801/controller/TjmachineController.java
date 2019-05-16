@@ -1,6 +1,7 @@
 package com.sghy1801.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sghy1801.entity.Tjmachine;
 import com.sghy1801.service.TjmachineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,7 @@ public class TjmachineController {
 
     Tjmachine tjmachine = new Tjmachine();
 
-    @RequestMapping(value = "/getAllMachines",method = RequestMethod.POST)
+    @RequestMapping(value = "/getAllMachines")
     public @ResponseBody String getAllMachines(String id,String city){
         //将获取的值放入map
         Map<String,Object> map = new HashMap<String,Object>();
@@ -46,7 +48,7 @@ public class TjmachineController {
         return j;
     }
 
-    @RequestMapping(value = "/updateMachineInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateMachineInfo")
     public @ResponseBody String updateMachineInfo(String city,int temperature,int usetime,int runningstate){
         //将获取的值放入tjmachine对象中
         tjmachine.setCity(city);
@@ -61,7 +63,7 @@ public class TjmachineController {
         return "false";
     }
 
-    @RequestMapping(value = "/addMachine",method = RequestMethod.POST)
+    @RequestMapping(value = "/addMachine")
     public @ResponseBody String addMachine(String city){
 
         tjmachine.setCity(city);
@@ -73,11 +75,22 @@ public class TjmachineController {
     }
 
 
-    @RequestMapping(value = "/delMachine",method = RequestMethod.POST)
+    @RequestMapping(value = "/delMachine")
     public @ResponseBody String delMachine(String id){
         //根据ID值进行删除操作
         int count = service.delMachine(Integer.parseInt(id));
         if (count==1)return "true";
         return "false";
+    }
+
+
+    @RequestMapping(value = "/getOneByUserId")
+    @ResponseBody
+    public String getOneByUserId(Integer userid,HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        JSONObject jsonObject = new JSONObject();
+        Tjmachine tj = service.getOneByUserId(userid);
+        jsonObject.put("temperature",tj.getTemperature());
+        return "successCallback1(" + jsonObject.toJSONString() + ")";
     }
 }
