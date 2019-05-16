@@ -2,20 +2,23 @@ package com.sghy1801.dao;
 
 import com.sghy1801.entity.User;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
     /**
      * 登录
+     *
      * @param phone
      * @param password
      * @return
      */
-    public User login(@Param("phone")String phone,@Param("password")String password);
+    public User login(@Param("phone") String phone, @Param("password") String password);
 
     /**
      * 查询用户列表页
+     *
      * @param param
      * @return
      */
@@ -64,4 +67,7 @@ public interface UserMapper {
 
 
     public List<Map> getDate();
+
+
+    public int updateChanges(@Param("userId") int userId, @Param("changestate") int changestate);
 }

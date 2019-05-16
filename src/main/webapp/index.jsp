@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>后台系统管理</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="statics/css/font.css">
     <link rel="stylesheet" href="statics/css/xadmin.css">
 
@@ -20,24 +20,27 @@
         alert("该用户被禁用，请联系客服")
     </script>
 </c:if>
+<c:if test="${requestScope.loginss == 'no' }">
+    <script>
+        alert("请用管理员账户登录")
+    </script>
+</c:if>
+
+
 <body class="login-bg">
 
 <div class="login">
     <div class="message">管理登录</div>
     <div id="darkbannerwrap"></div>
-    <form method="post" class="layui-form"  action="login">
-        <input name="phone" placeholder="手机号"  type="text" lay-verify="required" class="layui-input" >
+    <form method="post" class="layui-form" action="login">
+        <input name="phone" placeholder="手机号" type="text" lay-verify="required" class="layui-input">
         <hr class="hr15">
-        <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
         <hr class="hr15">
         <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
-        <hr class="hr20" >
+        <hr class="hr20">
     </form>
 </div>
-
-
-
-
 
 
 <!-- 底部结束 <script> $(function  () {

@@ -59,4 +59,7 @@ public interface UserService {
 
 
     public List<Map> getDate();
+
+
+    public int updateChanges(int userId,int changestate);
 }

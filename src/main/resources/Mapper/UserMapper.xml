@@ -9,7 +9,7 @@
     </select>
     <!--查询所有用户-->
     <select id="listUser" resultType="User">
-        select * from  `user`
+        select * from `user`
         <where>
             <if test="username!=null">
                 and username like concat('%',#{username},'%')
@@ -22,7 +22,7 @@
     </select>
     <!--查询数量-->
     <select id="countUser" parameterType="map" resultType="java.lang.Integer">
-        select count(*) from  `user`
+        select count(*) from `user`
         <where>
             <if test="username!=null">
                 and username like concat('%',#{username},'%')
@@ -63,5 +63,12 @@
         select count(registerDate) num,DATE_FORMAT(registerDate,"%Y-%m") registerDate from user
         group by DATE_FORMAT(registerDate,"%Y-%m")
     </select>
+
+
+    <update id="updateChanges" parameterType="int">
+      update  `user` set
+        state=#{changestate}
+        where id=#{userId}
+    </update>
 
 </mapper>

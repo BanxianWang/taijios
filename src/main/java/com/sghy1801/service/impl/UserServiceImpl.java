@@ -85,4 +85,11 @@ public class UserServiceImpl implements UserService {
     public List<Map> getDate() {
         return userMapper.getDate();
     }
+
+    @Override
+    public int updateChanges(int userId, int changestate) {
+        System.out.println(userId);
+        System.out.println(changestate);
+        return userMapper.updateChanges(userId,changestate);
+    }
 }

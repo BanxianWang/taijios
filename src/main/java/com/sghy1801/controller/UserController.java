@@ -36,20 +36,27 @@ public class UserController {
                         String password, Model model) {
         User loginUser = userService.login(phone, password);
         String result = "";
-        if (loginUser.getState() == 1) {
-            model.addAttribute("loginNo", "no");
+        if (loginUser.getUserorman() == 1) {
+            model.addAttribute("loginss", "no");
             result = "forward:index.jsp";
-        } else {
-            if (loginUser != null) {
-                // 登录成功
-                model.addAttribute("loginUser", loginUser);
-                result = "main";
-            } else {
-                model.addAttribute("loginFlag", "error");
-                result = "forward:index.jsp"; // 破坏视图解析器的跳转
-            }
 
+        } else {
+            if (loginUser.getState() == 1) {
+                model.addAttribute("loginNo", "no");
+                result = "forward:index.jsp";
+            } else {
+                if (loginUser != null) {
+                    // 登录成功
+                    model.addAttribute("loginUser", loginUser);
+                    result = "main";
+                } else {
+                    model.addAttribute("loginFlag", "error");
+                    result = "forward:index.jsp"; // 破坏视图解析器的跳转
+                }
+
+            }
         }
+
         return result;
     }
 
@@ -116,4 +123,15 @@ public class UserController {
         }
         return JSONObject.toJSONString(arr);
     }
+
+    //更新状态
+    @RequestMapping("/jsp/user/changes")
+    @ResponseBody
+    public String changes(int userId, int changestate) {
+        int count = userService.updateChanges(userId, changestate);
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("count", count);
+        return JSONObject.toJSONString(param);
+    }
+
 }

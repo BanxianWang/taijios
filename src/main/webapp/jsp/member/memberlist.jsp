@@ -46,7 +46,8 @@
             success: function (msg) {
                 var str = "";
                 $(msg.list).each(function (i) {
-                    var b = msg.list[i]
+                    var b = msg.list[i];
+                    var state = b.state == 0 ? "已启用" : "已停用";
                     str += "<tr>"
                     str += "<td>"
                     str += "<span>" + b.id + "</span>"
@@ -72,19 +73,17 @@
                     str += "<span>" + b.registerDate + "</span>"
                     str += "</td>"
                     str += "<td>"
-                    str += "<span class='layui-btn layui-btn-normal layui-btn-mini'\">"
-                    str += b.state == 0 ? "已启用" : "已禁用"
-                    str += "</span>"
+                    str += "<span id='sss' class='layui-btn layui-btn-normal layui-btn-mini'\">" + state + "</span>"
                     str += "</td>"
                     str += "<td class='td-manage'>"
-                    str += "<a onclick='member_stop(this,\"10001\")' href='javascript:;'  title='启用'>"
-                    str += "<i class=\"layui-icon\">&#xe601;</i></a>"
-                    str += "<a title=\"编辑\"  onclick=\"x_admin_show('编辑','member-edit.html',600,400)\" href=\"javascript:void(0);\">"
-                    str += "<i class=\"layui-icon\">&#xe642;</i></a>"
-                    str += " <a onclick=\"x_admin_show('修改密码','member-password.html',600,400)\" title=\"修改密码\" href=\"javascript:void(0);\">"
-                    str += "<i class=\"layui-icon\">&#xe631;</i></a>"
-                    str += "<a title=\"删除\" onclick=\"member_del(this,'要删除的id')\" href=\"javascript:void(0);\">"
-                    str += "<i class=\"layui-icon\">&#xe640;</i> </a>"
+                    str += "<a onclick='member_stop(this,10001)' userId='" + b.id + "' id='changestate' href='javascript:void(0);'  title='" + state + "'>"
+                    str += "<i class='layui-icon'>&#xe601;</i></a>"
+                    str += "<a title='编辑'  onclick='x_admin_show('编辑','member-edit.html',600,400)' href='javascript:void(0);'>"
+                    str += "<i class='layui-icon'>&#xe642;</i></a>"
+                    str += " <a onclick='x_admin_show('修改密码','member-password.html',600,400)'title='修改密码' href='javascript:void(0);'>"
+                    str += "<i class='layui-icon'>&#xe631;</i></a>"
+                    str += "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:void(0);'>"
+                    str += "<i class='layui-icon'>&#xe640;</i> </a>"
                     str += "</td>"
                     str += "</tr>"
 
@@ -150,6 +149,69 @@
 
         })
     }
+
+    /*用户-停用*/
+    function member_stop(obj, id) {
+
+        if ($(obj).attr('title') == '已启用') {
+            layer.confirm('确认要停用吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                //发异步把用户状态进行更改
+
+                var changestate = $(obj).attr('title') == "已启用" ? 1 : 0;
+                var userId = $(obj).attr('userId');
+                $.ajax({
+                    url: "/jsp/user/changes",
+                    dataType: "json",
+                    data: {"changestate": changestate, "userId": userId},
+                    type: "post",
+                    success: function (msg) {
+                        if (msg.count == 1) {
+                            $("#sss").html("已停用");
+                            $(obj).attr('title', '已停用')
+                            $(obj).find('i').html('&#xe62f;');
+                            $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                            layer.msg('已停用!', {icon: 5, time: 1000});
+                        }
+                    }
+                })
+
+            })
+
+        } else if ($(obj).attr('title') == '已停用') {
+            layer.confirm('确认要启用吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+
+                var changestate = $(obj).attr('title') == "已启用" ? 1: 0;
+                var userId = $(obj).attr('userId');
+                $.ajax({
+                    url: "/jsp/user/changes",
+                    dataType: "json",
+                    data: {"changestate": changestate, "userId": userId},
+                    type: "post",
+                    success: function (msg) {
+                        if (msg.count == 1) {
+                            $("#sss").html("已启用");
+                            $(obj).attr('title', '已启用')
+                            $(obj).find('i').html('&#xe601;');
+                            $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                            layer.msg('已启用!', {icon: 6, time: 1000});
+                        }
+                    }
+                })
+
+
+            })
+
+
+        }
+
+
+    }
+
+
 </script>
 
 
@@ -232,29 +294,6 @@
         });
     });
 
-    /*用户-停用*/
-    function member_stop(obj, id) {
-        layer.confirm('确认要停用吗？', function (index) {
-
-            if ($(obj).attr('title') == '启用') {
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title', '停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!', {icon: 5, time: 1000});
-
-            } else {
-                $(obj).attr('title', '启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!', {icon: 5, time: 1000});
-            }
-
-        });
-    }
 
     /*用户-删除*/
     function member_del(obj, id) {

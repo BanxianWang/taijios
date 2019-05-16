@@ -18,7 +18,7 @@
     <div class="left_open">
         <i title="展开左侧栏" class="iconfont">&#xe699;</i>
     </div>
-    <ul class="layui-nav left fast-add" lay-filter="">
+  <%--  <ul class="layui-nav left fast-add" lay-filter="">
         <li class="layui-nav-item">
             <a href="javascript:;">+新增</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
@@ -27,13 +27,13 @@
                 <dd><a onclick="x_admin_show('用户','jsp/admin/adminadd.jsp')"><i class="iconfont">&#xe6b8;</i>用户</a></dd>
             </dl>
         </li>
-    </ul>
+    </ul>--%>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
             <a href="javascript:;">${loginUser.username}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('个人信息','jsp/admin/adminedit.jsp')">个人信息</a></dd>
-                <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                <dd><a onclick="x_admin_show('个人信息','jsp/member/memberedit.jsp')">个人信息</a></dd>
+                <dd><a onclick="x_admin_show('切换帐号','index.jsp')">切换帐号</a></dd>
                 <dd><a href="/loginOut">退出</a></dd>
             </dl>
         </li>
@@ -62,9 +62,9 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="jsp/member/memberdel.jsp">
+                        <a _href="jsp/member/memberedit.jsp">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>账号管理</cite>
+                            <cite>用户信息</cite>
 
                         </a>
                     </li>
