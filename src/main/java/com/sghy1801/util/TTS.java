@@ -24,7 +24,7 @@ import java.nio.ByteBuffer;
 
         static{
            // TcpUtil.test();
-            client= new NlsClient("5cdb8f8dd6da491ca308902e22887cc8");
+            client= new NlsClient("42f51fa33e744f98913b25f86254fcee");
         }
         public static SpeechSynthesizerListener getSynthesizerListener() {
             SpeechSynthesizerListener listener = null;//语音合成监听类，监听返回结果。非线程安全
