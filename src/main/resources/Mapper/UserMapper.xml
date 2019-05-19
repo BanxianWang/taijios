@@ -9,7 +9,7 @@
     </select>
     <!--查询所有用户-->
     <select id="listUser" resultType="User">
-        select * from `user`
+        select * from `user` where  userorMan =1
         <where>
             <if test="username!=null">
                 and username like concat('%',#{username},'%')
@@ -22,7 +22,7 @@
     </select>
     <!--查询数量-->
     <select id="countUser" parameterType="map" resultType="java.lang.Integer">
-        select count(*) from `user`
+        select count(*) from `user` where  userorMan =1
         <where>
             <if test="username!=null">
                 and username like concat('%',#{username},'%')
@@ -40,7 +40,7 @@
     </insert>
     <!--删除用户-->
     <delete id="deleteUser" parameterType="int">
-        delete from  `user` where id=#{id}
+        delete from  `user` where id=#{userId}
     </delete>
 
     <!--更新用户-->

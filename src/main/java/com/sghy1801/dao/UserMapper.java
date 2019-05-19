@@ -47,7 +47,7 @@ public interface UserMapper {
      * @param id
      * @return
      */
-    public int deleteUser(int id);
+    public int deleteUser(@Param("userId") int id);
 
     /**
      * 修改用户
