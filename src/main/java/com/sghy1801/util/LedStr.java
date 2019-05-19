@@ -7,9 +7,10 @@ import java.util.List;
  * @author wrm
  * @create 2019-05-16 16:14
  */
-public class LedStr {
-    private static LedStr  ledStr = new LedStr();
-    private String str = "0,0,0,500";
+public class  LedStr {
+
+    private static  LedStr  ledStr = new LedStr();
+    private  String str = "255,255,255,1000";
 
     private LedStr() {
     }

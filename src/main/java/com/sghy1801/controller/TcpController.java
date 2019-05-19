@@ -23,20 +23,24 @@ import java.net.Socket;
 @RequestMapping("tcptcp")
 public class TcpController {
     @Autowired
-    private TemperatureService service;
+    private  TemperatureService service;
 
     @RequestMapping("tcp")
     public void Tcp() {
-        while (true) {
+        try {
+            test();
+        }catch (Exception e){
             try {
-                test();
-            } catch (Exception e) {
-                test();
+                Thread.sleep(1000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
             }
+            test();
         }
+
     }
 
-    public void test() {
+    public  void test() {
         ServerSocket listener = null;
         try {
             listener = new ServerSocket(9000);
@@ -47,66 +51,55 @@ public class TcpController {
 
         Socket socket = null;
 
+
         //服务端等待客户端连接，默认超时时间: 60 seconds
         try {
             socket = listener.accept();
             System.out.println(socket.getRemoteSocketAddress());
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            System.out.println(123123);
+            System.out.println("a client is connected: " + socket.getRemoteSocketAddress());
         } catch (Exception e) {
+
         }
-
-
-        System.out.println("a client is connected: " + socket.getRemoteSocketAddress());
-
-
         //读取客户端数据
         InputStream input = null;
+        OutputStream out = null;
         try {
             input = socket.getInputStream();
+            out = socket.getOutputStream();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         byte[] buff = new byte[1024];
         String str = "";
         while (true) {
-            int len = 0;
             try {
+                int len = 0;
+
                 len = input.read(buff);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            if (len > 0) {
-                str = new String(buff, 0, len);
-                //接到的温度
-                double temperature = Double.valueOf(str);
-                System.out.println(temperature);
-                JedisUtil.setTemperature(temperature + "");
-                //放入数据库
-                Temperature temperature1 = new Temperature();
-                temperature1.setTemperature(temperature);
-                temperature1.setMachineid(1);
-                if (service != null) {
-                    service.addTemperature(temperature1);
+                if (len > 0) {
+                    str = new String(buff, 0, len);
+                    //接到的温度
+                    double temperature = Double.valueOf(str);
+                    System.out.println(temperature);
+                    JedisUtil.setTemperature(temperature + "");
+                    //放入数据库
+                    Temperature temperature1 = new Temperature();
+                    temperature1.setTemperature(temperature);
+                    temperature1.setMachineid(1);
+                   if (service != null) {
+                       service.addTemperature(temperature1);
+                   }
+                } else {
+                    Thread.sleep(1000);
+                    test();
                 }
-            }
-
-
-            try {
+                String ledStr = LedStr.getLedStr().getStr();
                 //发送数据到客户端
-                OutputStream out = socket.getOutputStream();
-
-                out.write(LedStr.getLedStr().getStr().getBytes());
-                System.out.println(LedStr.getLedStr().getStr());
-                System.out.println("发送数据到机器");
+                out.write(ledStr.getBytes());
                 out.flush();
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
-
         }
     }
 }

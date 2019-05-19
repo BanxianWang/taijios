@@ -1,10 +1,12 @@
 package com.sghy1801.util;
+import com.alibaba.nls.client.AccessToken;
 import com.alibaba.nls.client.protocol.NlsClient;
 import com.alibaba.nls.client.protocol.OutputFormatEnum;
 import com.alibaba.nls.client.protocol.SampleRateEnum;
 import com.alibaba.nls.client.protocol.tts.SpeechSynthesizer;
 import com.alibaba.nls.client.protocol.tts.SpeechSynthesizerListener;
 import com.alibaba.nls.client.protocol.tts.SpeechSynthesizerResponse;
+import com.aliyuncs.exceptions.ClientException;
 import sun.net.www.content.audio.wav;
 
 import java.io.*;
@@ -24,7 +26,15 @@ import java.nio.ByteBuffer;
 
         static{
            // TcpUtil.test();
-            client= new NlsClient("42f51fa33e744f98913b25f86254fcee");
+            AccessToken accessToken = null;
+            try {
+                accessToken = AccessToken.apply("LTAIx1XH55MMvmnc","UDXSVy3fQHs9o7jfi9llBrSmHP70of");
+            } catch (ClientException e) {
+                e.printStackTrace();
+            }
+            String token = accessToken.getToken();
+            long expireTime = accessToken.getExpireTime();
+            client= new NlsClient(token);
         }
         public static SpeechSynthesizerListener getSynthesizerListener() {
             SpeechSynthesizerListener listener = null;//语音合成监听类，监听返回结果。非线程安全
