@@ -565,7 +565,7 @@ html #layuicss-layer {
 
 .layui-layer-iframe iframe {
     display: block;
-    width: 70%
+    width: 100%
 }
 
 .layui-layer-loading {

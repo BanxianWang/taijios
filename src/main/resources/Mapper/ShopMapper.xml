@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sghy1801.dao.ShopMapper">
+    <select id="getAlllist" resultType="com.sghy1801.entity.meituan.Shop">
+        SELECT * from shop
+    </select>
+</mapper>

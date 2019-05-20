@@ -6,10 +6,7 @@ import com.sghy1801.entity.Sevenday;
 import com.sghy1801.service.impl.NewsServiceImpl;
 import com.sghy1801.service.impl.SevendayServiceImpl;
 import com.sghy1801.service.impl.TemperatureServiceImpl;
-import com.sghy1801.util.AA;
-import com.sghy1801.util.JedisUtil;
-import com.sghy1801.util.TTS;
-import com.sghy1801.util.TcpUtil;
+import com.sghy1801.util.*;
 import org.apache.log4j.FileAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 @Controller
@@ -39,6 +37,10 @@ public class ToolController {
     @Autowired
     NewsServiceImpl NewsServiceImpl;//获取新闻集合 getAllNews()
 
+    @Autowired
+    AnsUtil ansUtil;
+
+    String type="";//y，s，z，x，q 衣,食,住,行，其他
 
     @RequestMapping(value = "getTTS", produces = {"application/json;charset=utf-8"})
     @ResponseBody
@@ -66,42 +68,88 @@ public class ToolController {
             a.process(ans);
             filename = AA.getOut();
             param.put("result", "http://106.14.208.219:8080/taijios/statics/voice/tts" + filename + ".wav");
+            //param.put("result", "http://106.14.208.219:8080/taijios/statics/voice/tts" + filename + ".wav");
             json = JSONObject.toJSONString(param);
             return "successCallback5(" + json + ")";
         } catch (Exception e) {
+
         }
         return "successCallback5(" + json + ")";
     }
 
 
-    public String getans(String str) throws UnsupportedEncodingException {
-
+    public String getans(String str) {
         String ans = "";
-        if (Pattern.compile("温度").matcher(str).find()) {//Str字符串中出现字符串“温度”五个字符中的任何一个，那么则返回true
-           // ans = "当前实时温度是" + TemperatureServiceImpl.getLastTemperature(1).getTemperature() + "摄氏度";
-            ans = "当前实时温度是" + JedisUtil.getTemperature() + "摄氏度";
-        } else if (Pattern.compile("天气").matcher(str).find()) {
-            List<Sevenday> sevendayList = SevendayServiceImpl.getSevenDay();
-            ans = "今天的天气是" + sevendayList.get(0).getTq() + "";
-        } else if (Pattern.compile("天气预报").matcher(str).find()) {
-            List<Sevenday> sevendayList = SevendayServiceImpl.getSevenDay();
-            ans = "明天" + sevendayList.get(1).getDate() + "天气" + sevendayList.get(1).getTq() + "，温度" + sevendayList.get(1).getWd() + ",风力" + sevendayList.get(1).getFl() + "";
-        } else if (Pattern.compile("后天").matcher(str).find()) {
-            List<Sevenday> sevendayList = SevendayServiceImpl.getSevenDay();
-            ans = "后天" + sevendayList.get(2).getDate() + "天气" + sevendayList.get(2).getTq() + "，温度" + sevendayList.get(2).getWd() + ",风力" + sevendayList.get(2).getFl() + "";
-        } else if (Pattern.compile("体育").matcher(str).find()) {
-            List<News> news = NewsServiceImpl.getAllNews();
-            ans = "来自" + news.get(8).getAnthor() + "的" + news.get(8).getType() + "新闻：" + news.get(8).getContext() + "";
-            System.out.println(news);
-        } else if (Pattern.compile("娱乐").matcher(str).find()) {
-            List<News> news = NewsServiceImpl.getAllNews();
-            ans = "来自" + news.get(12).getAnthor() + "的" + news.get(12).getType() + "新闻：" + news.get(12).getContext() + "";
-        } else if (Pattern.compile("新闻").matcher(str).find()) {
-            List<News> news = NewsServiceImpl.getAllNews();
-            ans = "来自" + news.get(0).getAnthor() + "的" + news.get(0).getType() + "新闻：" + news.get(0).getContext() + "";
-            System.out.println(news.get(0).getContext());
-        } else {
-            ans = "不知道你说的是什么？再试一次吧！";
+        //天气类语音
+        if (str.indexOf("温度") >= 0||str.indexOf("天气") >= 0){
+            ansUtil.putmapwendu();//获取到天气新数据
+            ansUtil.putmapseven();//获取到天气预报
+            if (str.indexOf("温度") >= 0 ) {
+                ans= ansUtil .getanswer("温度");//当前实时温度
+            }else if(str.indexOf("天气")>=0){
+                ans= ansUtil .getanswer("天气");//今天的天气
+            }else if(str.indexOf("预报") >= 0){
+                ans= ansUtil .getanswer("预报");//明天的天气
+            }else if(str.indexOf("后天") >= 0){
+                ans= ansUtil .getanswer("后天");//后天的天气
+            }else if(str.indexOf("大后天") >= 0){
+                ans= ansUtil .getanswer("大后天");//大后天的天气
+            }
+        }
+
+        //新闻类语音
+        if (str.indexOf("新闻") >= 0){
+            ansUtil.putmapxinwen();//获取到新的新闻
+            if(str.indexOf("体育") >= 0){
+                ans= ansUtil .getanswer("体育");
+            }else if(str.indexOf("娱乐") >= 0){
+                ans= ansUtil .getanswer("娱乐");
+            }else if(str.indexOf("新闻") >= 0){
+                ans= ansUtil .getanswer("新闻");
+            }
+        }
+        if (str.indexOf("新闻") >= 0 && str.indexOf("随便") >= 0){//随机新闻类
+            ansUtil.putmapxinwensj();//获取到新的新闻
+            Random r3 = new Random();
+            int r = Math.abs(r3.nextInt() % 10);
+            ans= ansUtil .getanswer("随机"+r);
+        }
+
+
+        //美团类语音
+        if(str.indexOf("来一个") >= 0||str.indexOf("饭") >= 0||str.indexOf("吃") >= 0){
+            ansUtil.putmapsdian();//重新获取商店
+            if(str.indexOf("距离") >= 0||str.indexOf("近") >= 0){
+                ans= ansUtil .getanswer("距离近");
+            }else if(str.indexOf("距离") >= 0||str.indexOf("远") >= 0){
+                ans= ansUtil .getanswer("距离远");
+            }else if(str.indexOf("消费") >= 0||str.indexOf("高") >= 0){
+                ans= ansUtil .getanswer("消费高");
+            }else if(str.indexOf("消费") >= 0||str.indexOf("低") >= 0){
+                ans= ansUtil .getanswer("消费低");
+            }else if(str.indexOf("评分") >= 0||str.indexOf("高") >= 0){
+                ans= ansUtil .getanswer("评分高");
+            }else if(str.indexOf("评分") >= 0||str.indexOf("低") >= 0){
+                ans= ansUtil .getanswer("评分低");
+            }
+        }
+        if(str.indexOf("灯") >= 0){
+            if(str.indexOf("蓝") >= 0){
+                    LedStr.getLedStr().setStr("0,0,255,1000");
+                    ans= "好的，没问题！蓝色";
+            }else if(str.indexOf("红") >= 0){
+                LedStr.getLedStr().setStr("255,0,0,1000");
+                ans= "好的，没问题！调成红色了";
+            }else if(str.indexOf("绿") >= 0){
+                LedStr.getLedStr().setStr("0,255,0,1000");
+                ans= "好的，没问题！";
+            }else if(str.indexOf("粉") >= 0){
+                LedStr.getLedStr().setStr("237,17,185,1000");
+                ans= "好的，没问题！粉色";
+            }else if(str.indexOf("黄") >= 0){
+                LedStr.getLedStr().setStr("255,255,0,1000");
+                ans= "好的，没问题！yellow";
+            }
         }
         return ans;
     }

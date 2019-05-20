@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -130,6 +131,8 @@ public class TemperatrueController {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         Map temperatures = service.getSomeInfo(machineID);
+        DecimalFormat df = new DecimalFormat("0.00");
+        temperatures.put("avg",df.format(temperatures.get("avg")));
         //转换成json格式
         String j = JSON.toJSONString(temperatures);
         return "successCallback3(" + j + ")";

@@ -8,6 +8,7 @@ import com.sghy1801.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -78,7 +79,6 @@ public class UserController {
     @RequestMapping("/jsp/user/userlist")
     @ResponseBody
     public String userList(Integer currentPage, String username, String phone) {
-
         //获取用户列表
         List<User> list = userService.listUser(currentPage, username, phone);
         //获取用户记录数
@@ -93,16 +93,24 @@ public class UserController {
         return JSON.toJSONString(param);
     }
 
-    @RequestMapping("/deleteUser")
-    public String deleteUser(int id, Model model) {
-        int count = userService.deleteUser(id);
-        if (count > 0) {
+    //删除用户
+    @RequestMapping("/jsp/user/deleteUser")
+    @ResponseBody
+    public String deleteUser(Integer userId, Model model) {
+        System.out.println(userId);
+        int count = userService.deleteUser(userId);
+       /* if (count > 0) {
             model.addAttribute("deleteFlag", "ok");
         } else {
             model.addAttribute("deleteFlag", "error");
         }
-        return "userlist";
+        return "userlist";*/
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("count", count);
+        System.out.println(count);
+        return JSONObject.toJSONString(param);
     }
+
 
     @RequestMapping("/toupdateuser")
     public String toupdateuser(int id, Model model) {
@@ -127,7 +135,16 @@ public class UserController {
     //更新状态
     @RequestMapping("/jsp/user/changes")
     @ResponseBody
-    public String changes(int userId, int changestate) {
+    public String changes(int userId, int changestate, HttpSession session) {
+       /* int count;
+        Map<String, Object> param = new HashMap<String, Object>();
+        if (((User) session.getAttribute("loginUser")).getUserorman() == 0) {
+             count = 0;
+        } else {
+             count = userService.updateChanges(userId, changestate);
+        }
+        param.put("count", count);
+        return JSONObject.toJSONString(param);*/
         int count = userService.updateChanges(userId, changestate);
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("count", count);

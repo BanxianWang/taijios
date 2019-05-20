@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService {
             if (!user.getPassword().equals(password))
                 user = null;
         }
-        
+
         return user;
     }
 
     @Transactional(readOnly = true)
-    public List<User> listUser(int currentPage,String username,String phone) {
+    public List<User> listUser(int currentPage, String username, String phone) {
         Map<String, Object> param = new HashMap<String, Object>();
         if (username != null && !"".equals(username)) {
             param.put("username", username);
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public int countUser(String username,String phone) {
+    public int countUser(String username, String phone) {
         Map<String, Object> param = new HashMap<String, Object>();
         if (username != null && !"".equals(username)) {
             param.put("username", username);
@@ -88,8 +88,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateChanges(int userId, int changestate) {
-        System.out.println(userId);
-        System.out.println(changestate);
-        return userMapper.updateChanges(userId,changestate);
+        return userMapper.updateChanges(userId, changestate);
     }
 }

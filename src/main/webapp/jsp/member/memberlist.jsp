@@ -78,12 +78,15 @@
                     str += "<td class='td-manage'>"
                     str += "<a onclick='member_stop(this,10001)' userId='" + b.id + "' id='changestate' href='javascript:void(0);'  title='" + state + "'>"
                     str += "<i class='layui-icon'>&#xe601;</i></a>"
-                    str += "<a title='编辑'  onclick='x_admin_show('编辑','member-edit.html',600,400)' href='javascript:void(0);'>"
-                    str += "<i class='layui-icon'>&#xe642;</i></a>"
-                    str += " <a onclick='x_admin_show('修改密码','member-password.html',600,400)'title='修改密码' href='javascript:void(0);'>"
-                    str += "<i class='layui-icon'>&#xe631;</i></a>"
-                    str += "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:void(0);'>"
-                    str += "<i class='layui-icon'>&#xe640;</i> </a>"
+                    str += " <a title=\"编辑\"  onclick=\"x_admin_show('编辑','memberpassword.jsp',600,400)\" href=\"javascript:void(0);\">\n" +
+                        "<i class=\"layui-icon\">&#xe642;</i>\n" +
+                        "</a>"
+                    str += "<a onclick=\"x_admin_show('修改密码','memberpassword.jsp',600,400)\" title=\"修改密码\"  userId='\" + b.id + \"' href=\"javascript:void(0);\">\n" +
+                        "<i class=\"layui-icon\">&#xe631;</i>\n" +
+                        " </a>"
+                    str += "  <a    userId='" + b.id + "' title=\"删除\" onclick=\"member_del(this,'要删除的id')\"    href=\"javascript:void(0);\">\n" +
+                        " <i class=\"layui-icon\">&#xe640;</i>\n" +
+                        "  </a>"
                     str += "</td>"
                     str += "</tr>"
 
@@ -124,7 +127,8 @@
         })
 
         $(".first").click(function () {
-            showList(1);
+            currentPage=1;
+            showList(currentPage);
         })
 
 
@@ -183,7 +187,7 @@
                 btn: ['确定', '取消'] //按钮
             }, function () {
 
-                var changestate = $(obj).attr('title') == "已启用" ? 1: 0;
+                var changestate = $(obj).attr('title') == "已启用" ? 1 : 0;
                 var userId = $(obj).attr('userId');
                 $.ajax({
                     url: "/jsp/user/changes",
@@ -296,10 +300,26 @@
 
     /*用户-删除*/
     function member_del(obj, id) {
-        layer.confirm('确认要删除吗？', function (index) {
+
+        layer.confirm('确认要删除吗？', function () {
             //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {icon: 1, time: 1000});
+            var userId = $(obj).attr('userId');
+            $.ajax({
+                url: "/jsp/user/deleteUser",
+                dataType: "json",
+                data: {"userId": userId},
+                type: "post",
+                success: function (msg) {
+                    if (msg.count == 1) {
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        showList(1);
+                        //location.replace(location.href);
+                    }
+                }
+            })
+
+
         });
     }
 
