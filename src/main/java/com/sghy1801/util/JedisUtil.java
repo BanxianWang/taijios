@@ -25,6 +25,8 @@ public class JedisUtil {
     }
 
     public static void main(String[] args) {
+        JedisUtil.setTemperature("22");
         System.out.println( JedisUtil.getTemperature());
     }
+
 }
