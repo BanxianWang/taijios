@@ -62,7 +62,6 @@ public class AnsUtil {
         answer.put("随机2",newsList.get(2).getMdftime()+"来自" + newsList.get(2).getAnthor() + "的" + newsList.get(2).getType() + "新闻：" + newsList.get(2).getContext() + "");
         answer.put("随机4",newsList.get(4).getMdftime()+"来自" + newsList.get(4).getAnthor() + "的" + newsList.get(4).getType() + "新闻：" + newsList.get(4).getContext() + "");
         answer.put("随机6",newsList.get(6).getMdftime()+"来自" + newsList.get(6).getAnthor() + "的" + newsList.get(6).getType() + "新闻：" + newsList.get(6).getContext() + "");
-        answer.put("随机16",newsList.get(16).getMdftime()+"来自" + newsList.get(16).getAnthor() + "的" + newsList.get(16).getType() + "新闻：" + newsList.get(16).getContext() + "");
         answer.put("随机10",newsList.get(10).getMdftime()+"来自" + newsList.get(10).getAnthor() + "的" + newsList.get(10).getType() + "新闻：" + newsList.get(10).getContext() + "");
         answer.put("随机14",newsList.get(14).getMdftime()+"来自" + newsList.get(14).getAnthor() + "的" + newsList.get(14).getType() + "新闻：" + newsList.get(14).getContext() + "");
 

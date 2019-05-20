@@ -77,7 +77,6 @@ public class ToolController {
         return "successCallback5(" + json + ")";
     }
 
-
     public String getans(String str) {
         String ans = "";
         //天气类语音
@@ -117,7 +116,95 @@ public class ToolController {
 
 
         //美团类语音
-        if(str.indexOf("来一个") >= 0||str.indexOf("饭") >= 0||str.indexOf("吃") >= 0){
+        if(str.indexOf("找") >= 0||str.indexOf("附近") >= 0||str.indexOf("给我") >= 0||str.indexOf("来一个") >= 0||str.indexOf("饭") >= 0||str.indexOf("吃") >= 0||str.indexOf("雨花台") >= 0||str.indexOf("小行") >= 0||str.indexOf("买") >= 0){
+            if(str.indexOf("雨花") >= 0){
+                if(str.indexOf("网") >= 0){
+                    dopython("雨花台区","网吧");
+                }else if (str.indexOf("吃") >= 0){
+                    dopython("雨花台区","美食");
+                }else if (str.indexOf("喝") >= 0){
+                    dopython("雨花台区","喝");
+                }else if (str.indexOf("奶茶") >= 0){
+                    dopython("雨花台区","奶茶");
+                }else if (str.indexOf("饭") >= 0){
+                    dopython("雨花台区","饭");
+                }else {
+                    dopython("雨花台区","随便");
+                }
+            }else if(str.indexOf("新街") >= 0){
+                if(str.indexOf("网") >= 0){
+                    dopython("新街口","网吧");
+                }else if (str.indexOf("吃") >= 0){
+                    dopython("新街口","美食");
+                }else if (str.indexOf("喝") >= 0){
+                    dopython("新街口","喝");
+                }else if (str.indexOf("奶茶") >= 0){
+                    dopython("雨花台区","奶茶");
+                }else if (str.indexOf("饭") >= 0){
+                    dopython("新街口","饭");
+                }else {
+                    dopython("新街口","随便");
+                }
+            }else if(str.indexOf("小行") >= 0||str.indexOf("安德门") >= 0||str.indexOf("安") >= 0){
+                if(str.indexOf("网") >= 0){
+                    dopython("安德门小行","网吧");
+                }else if (str.indexOf("吃") >= 0){
+                    dopython("安德门小行","美食");
+                }else if (str.indexOf("喝") >= 0){
+                    dopython("安德门小行","喝");
+                }else if (str.indexOf("奶茶") >= 0){
+                    dopython("安德门小行","奶茶");
+                }else if (str.indexOf("饭") >= 0){
+                    dopython("安德门小行","饭");
+                }else {
+                    dopython("安德门小行","随便");
+                }
+            }else if(str.indexOf("夫子庙") >= 0){
+                if(str.indexOf("网") >= 0){
+                    dopython("夫子庙","网吧");
+                }else if (str.indexOf("吃") >= 0){
+                    dopython("夫子庙","美食");
+                }else if (str.indexOf("喝") >= 0){
+                    dopython("夫子庙","喝");
+                }else if (str.indexOf("奶茶") >= 0){
+                    dopython("夫子庙","奶茶");
+                }else if (str.indexOf("饭") >= 0){
+                    dopython("夫子庙","饭");
+                }else {
+                    dopython("夫子庙","随便");
+                }
+            }else if(str.indexOf("虹悦城") >= 0||str.indexOf("城") >= 0||str.indexOf("红") >= 0){
+                if(str.indexOf("网") >= 0){
+                    dopython("虹悦城","网吧");
+                }else if (str.indexOf("吃") >= 0){
+                    dopython("虹悦城","美食");
+                }else if (str.indexOf("喝") >= 0){
+                    dopython("虹悦城","喝");
+                }else if (str.indexOf("奶茶") >= 0){
+                    dopython("虹悦城","奶茶");
+                }else if (str.indexOf("饭") >= 0){
+                    dopython("虹悦城","饭");
+                }else {
+                    dopython("虹悦城","随便");
+                }
+            }else if(str.indexOf("大学城") >= 0||str.indexOf("江宁") >= 0){
+                if(str.indexOf("网") >= 0){
+                    dopython("江宁大学城","网吧");
+                }else if (str.indexOf("吃") >= 0){
+                    dopython("江宁大学城","美食");
+                }else if (str.indexOf("喝") >= 0){
+                    dopython("江宁大学城","喝");
+                }else if (str.indexOf("奶茶") >= 0){
+                    dopython("江宁大学城","奶茶");
+                }else if (str.indexOf("饭") >= 0){
+                    dopython("江宁大学城","饭");
+                }else {
+                    dopython("江宁大学城","随便");
+                }
+            }
+
+
+
             ansUtil.putmapsdian();//重新获取商店
             if(str.indexOf("距离") >= 0||str.indexOf("近") >= 0){
                 ans= ansUtil .getanswer("距离近");
@@ -153,5 +240,42 @@ public class ToolController {
         }
         return ans;
     }
+
+    public void dopython(String address,String sp){
+        if (address.equals("安德门小行")){
+                address="14858";
+        }else if(address.equals("新街口")){
+            address="831";
+        }else if(address.equals("雨花台区")){
+            address="834";
+        }else if(address.equals("夫子庙")){
+            address="832";
+        }else if(address.equals("虹悦城")){
+            address="9308";
+        }else if(address.equals("江宁大学城")){
+            address="9463";
+        }
+        String pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?" +
+                "uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=20&offset=0&cateId=-1&" +
+                "q="+sp+"&areaId="+address+"";
+
+        Process res;//此类用于创建操作系统进程
+        try {
+            //数组第2位开始放入参数 0，1，》2，3.。。。。c
+            String[] pyargs = new String[] { "python", "F:\\PYthonIDE\\pachongTest\\venv\\Include\\pcTest2.py",pyurl};
+            Process proc = Runtime.getRuntime().exec(pyargs);// 执行python脚本文件
+            //通过输入流 获取python的返回值
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String line = null;
+            while ((line = in.readLine()) != null) {//读取python的返回值
+                System.out.println(line);
+            }
+            in.close();//关闭
+            proc.waitFor();//调用Process.waitfor等待子进程完成
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
