@@ -37,11 +37,13 @@ import java.nio.ByteBuffer;
             client= new NlsClient(token);
         }
         public static SpeechSynthesizerListener getSynthesizerListener() {
+
             SpeechSynthesizerListener listener = null;//语音合成监听类，监听返回结果。非线程安全
             try {
                 listener = new SpeechSynthesizerListener() {
                     String rom = (int)(Math.random()*1000)+"";
                     String path =AA.getPath()+File.separator+"tts"+rom+".wav";
+
                     AA aa =new AA(rom);
                     File f =new File(path);
                     FileOutputStream fout = new FileOutputStream(f);

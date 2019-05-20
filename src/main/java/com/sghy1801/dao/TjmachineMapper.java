@@ -11,7 +11,7 @@ public interface TjmachineMapper {
      * 查询所有机器信息(任意个条件都可查询)
      * @return
      */
-    List<Tjmachine> getAllMachines(Map<String,Object>map);
+    List<Tjmachine> getAllMachines(Map<String, Object> map);
 
 
 
