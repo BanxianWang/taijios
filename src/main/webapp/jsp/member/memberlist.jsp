@@ -127,7 +127,8 @@
         })
 
         $(".first").click(function () {
-            showList(1);
+            currentPage=1;
+            showList(currentPage);
         })
 
 

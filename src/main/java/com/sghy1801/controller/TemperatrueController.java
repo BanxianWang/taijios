@@ -131,7 +131,6 @@ public class TemperatrueController {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         Map temperatures = service.getSomeInfo(machineID);
-        System.out.println(temperatures.get("avg"));
         DecimalFormat df = new DecimalFormat("0.00");
         temperatures.put("avg",df.format(temperatures.get("avg")));
         //转换成json格式

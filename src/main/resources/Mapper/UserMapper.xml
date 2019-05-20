@@ -7,41 +7,48 @@
     <select id="login" resultType="User">
         select * from  `user` where phone=#{phone} and password=#{password}
     </select>
+
+
     <!--查询所有用户-->
-    <select id="listUser" resultType="User">
+    <select id="listUser" parameterType="map" resultType="User">
         select * from `user` where  userorMan =1
-        <where>
             <if test="username!=null">
                 and username like concat('%',#{username},'%')
             </if>
             <if test="phone!=null">
                 and phone= #{phone}
             </if>
-        </where>
         limit #{start},4
     </select>
+
+
+
     <!--查询数量-->
     <select id="countUser" parameterType="map" resultType="java.lang.Integer">
         select count(*) from `user` where  userorMan =1
-        <where>
             <if test="username!=null">
                 and username like concat('%',#{username},'%')
             </if>
             <if test="phone!=null">
                 and phone= #{phone}
             </if>
-        </where>
     </select>
+
+
 
     <!--添加用户-->
     <insert id="addUser" parameterType="User">
         insert into  `user` (username,password,gender,phone,email,address,userorman)
         values(#{username},#{password},#{gender},#{phone},#{email},#{address},#{userorman})
     </insert>
+
+
     <!--删除用户-->
     <delete id="deleteUser" parameterType="int">
         delete from  `user` where id=#{userId}
     </delete>
+
+
 
     <!--更新用户-->
     <update id="updateUser" parameterType="User">
@@ -55,14 +62,21 @@
         where id=#{id}
     </update>
 
+
+
     <select id="findById" parameterType="int" resultType="User">
         SELECT  * FROM  `user` WHERE id = #{id}
     </select>
 
+
+
     <select id="getDate" resultType="java.util.Map">
         select count(registerDate) num,DATE_FORMAT(registerDate,"%Y-%m") registerDate from user
+        where id != 1
         group by DATE_FORMAT(registerDate,"%Y-%m")
     </select>
+
+
 
 
     <update id="updateChanges" parameterType="int">

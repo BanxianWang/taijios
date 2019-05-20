@@ -8,6 +8,7 @@ import com.sghy1801.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -78,7 +79,6 @@ public class UserController {
     @RequestMapping("/jsp/user/userlist")
     @ResponseBody
     public String userList(Integer currentPage, String username, String phone) {
-
         //获取用户列表
         List<User> list = userService.listUser(currentPage, username, phone);
         //获取用户记录数
