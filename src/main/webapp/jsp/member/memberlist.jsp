@@ -24,6 +24,7 @@
         showList(currentPage);
         bindEvent();
 
+
         /*setInterval(getsevenDay(), 1000);*/
     })
 
@@ -78,10 +79,10 @@
                     str += "<td class='td-manage'>"
                     str += "<a onclick='member_stop(this,10001)' userId='" + b.id + "' id='changestate' href='javascript:void(0);'  title='" + state + "'>"
                     str += "<i class='layui-icon'>&#xe601;</i></a>"
-                    str += " <a title=\"编辑\"  onclick=\"x_admin_show('编辑','memberpassword.jsp',600,400)\" href=\"javascript:void(0);\">\n" +
+                    str += " <a title=\"编辑\"  onclick=\"x_admin_show('编辑','memberpassword.jsp',600,400,'"+b.id+"')\" href=\"javascript:void(0);\">\n" +
                         "<i class=\"layui-icon\">&#xe642;</i>\n" +
                         "</a>"
-                    str += "<a onclick=\"x_admin_show('修改密码','memberpassword.jsp',600,400)\" title=\"修改密码\"  userId='\" + b.id + \"' href=\"javascript:void(0);\">\n" +
+                    str += "<a onclick=\"x_admin_show('修改密码','memberpassword.jsp',600,400,'"+b.id+"')\" title=\"修改密码\"  userId='\" + b.id + \"' href=\"javascript:void(0);\">\n" +
                         "<i class=\"layui-icon\">&#xe631;</i>\n" +
                         " </a>"
                     str += "  <a    userId='" + b.id + "' title=\"删除\" onclick=\"member_del(this,'要删除的id')\"    href=\"javascript:void(0);\">\n" +
