@@ -38,7 +38,7 @@ public class AnsUtil {
     //获取当前天气情况
     public void putmapwendu(){
         Temperature temperature = TemperatureServiceImpl.getLastTemperature(1);
-        answer.put("温度","当前实时温度"+temperature.getTemperature()+"摄氏度");
+        answer.put("温度","当前实时温度"+JedisUtil.getTemperature()+"摄氏度");
     }
 
     //获取天气预报
@@ -90,9 +90,4 @@ public class AnsUtil {
         answer.put("评分低","评分最低的店家是"+shops.get(4).getsName()+"，人均评分"+shops.get(4).getAvgcomment()+"评论人数"+shops.get(4).getPcount());
 
     }
-
-
-
-
-
 }

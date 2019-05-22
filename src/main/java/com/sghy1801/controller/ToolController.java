@@ -114,116 +114,188 @@ public class ToolController {
             ans= ansUtil .getanswer("随机"+r);
         }
 
-
+//        if(str.indexOf("距离") >= 0||str.indexOf("近") >= 0){
+//            ans= ansUtil .getanswer("距离近");
+//        }else if(str.indexOf("距离") >= 0||str.indexOf("远") >= 0){
+//            ans= ansUtil .getanswer("距离远");
+//        }else if(str.indexOf("消费") >= 0||str.indexOf("高") >= 0){
+//            ans= ansUtil .getanswer("消费高");
+//        }else if(str.indexOf("消费") >= 0||str.indexOf("低") >= 0){
+//            ans= ansUtil .getanswer("消费低");
+//        }else if(str.indexOf("评分") >= 0||str.indexOf("高") >= 0){
+//            ans= ansUtil .getanswer("评分高");
+//        }else if(str.indexOf("评分") >= 0||str.indexOf("低") >= 0){
+//            ans= ansUtil .getanswer("评分低");
+//        }
         //美团类语音
         if(str.indexOf("找") >= 0||str.indexOf("附近") >= 0||str.indexOf("给我") >= 0||str.indexOf("来一个") >= 0||str.indexOf("饭") >= 0||str.indexOf("吃") >= 0||str.indexOf("雨花台") >= 0||str.indexOf("小行") >= 0||str.indexOf("买") >= 0){
+
             if(str.indexOf("雨花") >= 0){
                 if(str.indexOf("网") >= 0){
                     dopython("雨花台区","网吧");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("吃") >= 0){
                     dopython("雨花台区","美食");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("喝") >= 0){
                     dopython("雨花台区","喝");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("奶茶") >= 0){
                     dopython("雨花台区","奶茶");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("饭") >= 0){
                     dopython("雨花台区","饭");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else {
                     dopython("雨花台区","随便");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }
             }else if(str.indexOf("新街") >= 0){
                 if(str.indexOf("网") >= 0){
                     dopython("新街口","网吧");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("吃") >= 0){
                     dopython("新街口","美食");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("喝") >= 0){
                     dopython("新街口","喝");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("奶茶") >= 0){
                     dopython("雨花台区","奶茶");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("饭") >= 0){
-                    dopython("新街口","饭");
+                    dopython("新街口","饭");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else {
-                    dopython("新街口","随便");
+                    dopython("新街口","随便");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }
             }else if(str.indexOf("小行") >= 0||str.indexOf("安德门") >= 0||str.indexOf("安") >= 0){
                 if(str.indexOf("网") >= 0){
-                    dopython("安德门小行","网吧");
+                    dopython("安德门小行","网吧");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("吃") >= 0){
-                    dopython("安德门小行","美食");
+                    dopython("安德门小行","美食");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("喝") >= 0){
-                    dopython("安德门小行","喝");
+                    dopython("安德门小行","喝");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("奶茶") >= 0){
-                    dopython("安德门小行","奶茶");
+                    dopython("安德门小行","奶茶");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("饭") >= 0){
-                    dopython("安德门小行","饭");
+                    dopython("安德门小行","饭");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else {
-                    dopython("安德门小行","随便");
+                    dopython("安德门小行","随便");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }
             }else if(str.indexOf("夫子庙") >= 0){
                 if(str.indexOf("网") >= 0){
-                    dopython("夫子庙","网吧");
+                    dopython("夫子庙","网吧");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("吃") >= 0){
-                    dopython("夫子庙","美食");
+                    dopython("夫子庙","美食");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("喝") >= 0){
-                    dopython("夫子庙","喝");
+                    dopython("夫子庙","喝");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("奶茶") >= 0){
-                    dopython("夫子庙","奶茶");
+                    dopython("夫子庙","奶茶");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("饭") >= 0){
-                    dopython("夫子庙","饭");
+                    dopython("夫子庙","饭");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else {
                     dopython("夫子庙","随便");
                 }
             }else if(str.indexOf("虹悦城") >= 0||str.indexOf("城") >= 0||str.indexOf("红") >= 0){
                 if(str.indexOf("网") >= 0){
-                    dopython("虹悦城","网吧");
+                    dopython("虹悦城","网吧");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("吃") >= 0){
-                    dopython("虹悦城","美食");
+                    dopython("虹悦城","美食");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("喝") >= 0){
-                    dopython("虹悦城","喝");
+                    dopython("虹悦城","喝");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("评分高");
                 }else if (str.indexOf("奶茶") >= 0){
-                    dopython("虹悦城","奶茶");
+                    dopython("虹悦城","奶茶");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("饭") >= 0){
-                    dopython("虹悦城","饭");
+                    dopython("虹悦城","饭");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else {
-                    dopython("虹悦城","随便");
+                    dopython("虹悦城","随便");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }
             }else if(str.indexOf("大学城") >= 0||str.indexOf("江宁") >= 0){
                 if(str.indexOf("网") >= 0){
-                    dopython("江宁大学城","网吧");
+                    dopython("江宁大学城","网吧");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("吃") >= 0){
-                    dopython("江宁大学城","美食");
+                    dopython("江宁大学城","美食");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("喝") >= 0){
-                    dopython("江宁大学城","喝");
+                    dopython("江宁大学城","喝");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("奶茶") >= 0){
-                    dopython("江宁大学城","奶茶");
+                    dopython("江宁大学城","奶茶");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else if (str.indexOf("饭") >= 0){
-                    dopython("江宁大学城","饭");
+                    dopython("江宁大学城","饭");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }else {
-                    dopython("江宁大学城","随便");
+                    dopython("江宁大学城","随便");ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
+                }
+            }else {
+
+                if(str.indexOf("网") >= 0){
+                    dopython("雨花台区","网吧");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
+                }else if (str.indexOf("吃") >= 0){
+                    dopython("雨花台区","美食");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
+                }else if (str.indexOf("喝") >= 0){
+                    dopython("雨花台区","喝");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
+                }else if (str.indexOf("奶茶") >= 0){
+                    dopython("雨花台区","奶茶");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
+                }else if (str.indexOf("饭") >= 0){
+                    dopython("雨花台区","饭");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
+                }else {
+                    dopython("雨花台区","随便");
+                    ansUtil.putmapsdian();//获取店铺
+                    ans= ansUtil .getanswer("消费低");
                 }
             }
 
 
 
-            ansUtil.putmapsdian();//重新获取商店
-            if(str.indexOf("距离") >= 0||str.indexOf("近") >= 0){
-                ans= ansUtil .getanswer("距离近");
-            }else if(str.indexOf("距离") >= 0||str.indexOf("远") >= 0){
-                ans= ansUtil .getanswer("距离远");
-            }else if(str.indexOf("消费") >= 0||str.indexOf("高") >= 0){
-                ans= ansUtil .getanswer("消费高");
-            }else if(str.indexOf("消费") >= 0||str.indexOf("低") >= 0){
-                ans= ansUtil .getanswer("消费低");
-            }else if(str.indexOf("评分") >= 0||str.indexOf("高") >= 0){
-                ans= ansUtil .getanswer("评分高");
-            }else if(str.indexOf("评分") >= 0||str.indexOf("低") >= 0){
-                ans= ansUtil .getanswer("评分低");
-            }
+
         }
         if(str.indexOf("灯") >= 0){
             if(str.indexOf("蓝") >= 0){
-                    LedStr.getLedStr().setStr("0,0,255,1000");
-                    ans= "好的，没问题！蓝色";
+                LedStr.getLedStr().setStr("0,0,255,1000");
+                ans= "好的，没问题！蓝色";
             }else if(str.indexOf("红") >= 0){
                 LedStr.getLedStr().setStr("255,0,0,1000");
                 ans= "好的，没问题！调成红色了";
@@ -243,7 +315,7 @@ public class ToolController {
 
     public void dopython(String address,String sp){
         if (address.equals("安德门小行")){
-                address="14858";
+            address="14858";
         }else if(address.equals("新街口")){
             address="831";
         }else if(address.equals("雨花台区")){
@@ -262,7 +334,7 @@ public class ToolController {
         Process res;//此类用于创建操作系统进程
         try {
             //数组第2位开始放入参数 0，1，》2，3.。。。。c
-            String[] pyargs = new String[] { "python", "F:\\PYthonIDE\\pachongTest\\venv\\Include\\pcTest2.py",pyurl};
+            String[] pyargs = new String[] { "python", "/opt/food.py",pyurl};
             Process proc = Runtime.getRuntime().exec(pyargs);// 执行python脚本文件
             //通过输入流 获取python的返回值
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
