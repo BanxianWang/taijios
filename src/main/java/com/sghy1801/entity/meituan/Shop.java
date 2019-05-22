@@ -8,6 +8,36 @@ public class Shop {
     private int pcount;//评论人数
     private double avgcomment;//人均评分
 
+    private double latitude;//商店的地图坐标
+    private double longitude;
+
+    public Shop(int id, String sName, String saddress, double avgprice, int pcount, double avgcomment, double latitude, double longitude) {
+        this.id = id;
+        this.sName = sName;
+        this.saddress = saddress;
+        this.avgprice = avgprice;
+        this.pcount = pcount;
+        this.avgcomment = avgcomment;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     public Shop() {
     }
 
@@ -59,12 +89,4 @@ public class Shop {
         this.avgcomment = avgcomment;
     }
 
-    public Shop(int id, String sName, String saddress, double avgprice, int pcount, double avgcomment) {
-        this.id = id;
-        this.sName = sName;
-        this.saddress = saddress;
-        this.avgprice = avgprice;
-        this.pcount = pcount;
-        this.avgcomment = avgcomment;
-    }
 }
