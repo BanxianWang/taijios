@@ -32,6 +32,9 @@
             <if test="phone!=null">
                 and phone= #{phone}
             </if>
+            <if test="time!=null">
+                AND DATE_FORMAT(registerDate,"%Y") BETWEEN #{time} and #{time}
+            </if>
     </select>
 
 
@@ -85,4 +88,9 @@
         where id=#{userId}
     </update>
 
+    <select id="getLocalDistribution" resultType="java.util.Map">
+        select address city,count(address) num from user where id != 1
+        group by address
+        order by count(address) desc
+    </select>
 </mapper>

@@ -70,4 +70,11 @@ public interface UserMapper {
 
 
     public int updateChanges(@Param("userId") int userId, @Param("changestate") int changestate);
+
+
+    /**
+     * 拥有设备人数最多的前5个省份
+     * @return
+     */
+    public List<Map> getLocalDistribution();
 }

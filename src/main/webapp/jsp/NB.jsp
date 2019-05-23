@@ -32,7 +32,7 @@
     <div class="loadbox"> <img src="../statics/images/loading.gif"> 页面加载中... </div>
 </div>
 <div class="head">
-    <h1>全国tjos设备情况大数据统计</h1>
+    <h1>全国钛极OS设备情况大数据统计</h1>
     <div class="weather"><!--<img src="images/weather.png"><span>多云转小雨</span>--><span id="showTime"></span></div>
 
     <script>
@@ -51,6 +51,28 @@
             t = setTimeout(time, 1000);
         }
 
+        $(function(){
+            $.ajax({
+                url: "/jsp/getSumCount",
+                type: "post",
+                dataType: "json",
+                success: function(data) {
+                    $("#sumCount").html(data);
+                }
+            });
+            $.ajax({
+                url: "/jsp/getNowYearCount",
+                type: "post",
+                dataType: "json",
+
+                success: function(data) {
+                    $("#nowCount").html(data);
+
+                }
+            });
+
+        })
+
     </script>
 
 
@@ -58,33 +80,24 @@
 <div class="mainbox">
     <ul class="clearfix">
         <li>
-            <div class="boxall" style="height: 3.2rem">
-                <div class="alltitle">模块标题样式</div>
+            <div class="boxall" style="height: 5rem">
+                <div class="alltitle">每月新增用户信息</div>
                 <div class="allnav" id="echart1"></div>
                 <div class="boxfoot"></div>
             </div>
-            <div class="boxall" style="height: 3.2rem">
-                <div class="alltitle">模块标题样式</div>
+            <div class="boxall" style="height: 5rem">
+                <div class="alltitle">用户最多的前5个省份</div>
                 <div class="allnav" id="echart2"></div>
                 <div class="boxfoot"></div>
             </div>
-            <div class="boxall" style="height: 3.2rem">
-                <div style="height:100%; width: 100%;">
-                    <div class="sy" id="fb1"></div>
-                    <div class="sy" id="fb2"></div>
-                    <div class="sy" id="fb3"></div>
-                </div>
-                <div class="boxfoot">
 
-                </div>
-            </div>
         </li>
         <li>
             <div class="bar">
                 <div class="barbox">
                     <ul class="clearfix">
-                        <li class="pulll_left counter">12581189</li>
-                        <li class="pulll_left counter">3912410</li>
+                        <li class="pulll_left counter" id="sumCount"></li>
+                        <li class="pulll_left counter" id="nowCount"></li>
                     </ul>
                 </div>
                 <div class="barbox2">
@@ -102,21 +115,17 @@
             </div>
         </li>
         <li>
-            <div class="boxall" style="height:3.4rem">
-                <div class="alltitle">模块标题样式</div>
+            <div class="boxall" style="height:5rem">
+                <div class="alltitle">各设备售出情况</div>
                 <div class="allnav" id="echart4"></div>
                 <div class="boxfoot"></div>
             </div>
-            <div class="boxall" style="height: 3.2rem">
-                <div class="alltitle">模块标题样式</div>
+            <div class="boxall" style="height: 5rem">
+                <div class="alltitle">服务器请求走线图</div>
                 <div class="allnav" id="echart5"></div>
                 <div class="boxfoot"></div>
             </div>
-            <div class="boxall" style="height: 3rem">
-                <div class="alltitle">模块标题样式</div>
-                <div class="allnav" id="echart6"></div>
-                <div class="boxfoot"></div>
-            </div>
+
         </li>
     </ul>
 </div>

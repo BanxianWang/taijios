@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,5 +91,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateChanges(int userId, int changestate) {
         return userMapper.updateChanges(userId, changestate);
+    }
+
+    @Override
+    public List<Map> getLocalDistribution() {
+        return userMapper.getLocalDistribution();
+    }
+
+    @Override
+    public int getNowYearcount() {
+        Map<String,Object> map = new HashMap<String,Object>();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        map.put("time",sdf.format(date));
+        return userMapper.countUser(map);
     }
 }

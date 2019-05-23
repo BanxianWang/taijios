@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sghy1801.entity.User;
 import com.sghy1801.service.UserService;
+import org.codehaus.jackson.JsonToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.json.JsonObject;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -150,5 +152,45 @@ public class UserController {
         param.put("count", count);
         return JSONObject.toJSONString(param);
     }
+
+    @RequestMapping("jsp/getLocalDistribution")
+    @ResponseBody
+    public String getLocalDistribution() {
+        List<Map> list = userService.getLocalDistribution();
+        JSONObject jsonObject = new JSONObject();
+        Object[] cityarr = new Object[5];
+        Object[] numarr = new Object[5];
+        int i = 0;
+        for (Map map : list) {
+            cityarr[i]= map.get("city").toString();
+            numarr[i] = map.get("num");
+            i++;
+            if(i>4){
+                break;
+            }
+        }
+        jsonObject.put("city",cityarr);
+        jsonObject.put("num",numarr);
+        return jsonObject.toJSONString();
+    }
+
+
+    @RequestMapping("jsp/getSumCount")
+    @ResponseBody
+    public String getSumCount() {
+        int count = userService.countUser("","");
+        JSONObject jo = new JSONObject();
+        return jo.toJSONString(count);
+    }
+
+
+    @RequestMapping("jsp/getNowYearCount")
+    @ResponseBody
+    public String getNowYearCount() {
+        int count = userService.getNowYearcount();
+        JSONObject jo = new JSONObject();
+        return jo.toJSONString(count);
+    }
+
 
 }
