@@ -127,7 +127,7 @@
                 if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
                     return '用户名不能有特殊字符';
                 }
-                if (/(^\_)|(\__)|(\_+$)/.test(value)) { 
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
                     return '用户名首尾不能出现下划线\'_\'';
                 }
                 if (/^\d+\d+\d$/.test(value)) {

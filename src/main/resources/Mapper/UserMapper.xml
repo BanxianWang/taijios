@@ -24,6 +24,7 @@
 
     <!--查询数量-->
     <select id="countUser" parameterType="map" resultType="java.lang.Integer">
+
         select count(*) from `user` where userorMan =1
         <if test="username!=null">
             and username like concat('%',#{username},'%')
@@ -31,6 +32,18 @@
         <if test="phone!=null">
             and phone= #{phone}
         </if>
+
+        select count(*) from `user` where  userorMan =1
+            <if test="username!=null">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="phone!=null">
+                and phone= #{phone}
+            </if>
+            <if test="time!=null">
+                AND DATE_FORMAT(registerDate,"%Y") BETWEEN #{time} and #{time}
+            </if>
+
     </select>
 
 
@@ -81,6 +94,7 @@
     </update>
 
 
+
     <!--修改用户密码-->
     <update id="updatePass" parameterType="map">
         update  `user` set
@@ -91,5 +105,11 @@
         phone=#{phone}
         where id=#{id}
     </update>
+
+    <select id="getLocalDistribution" resultType="java.util.Map">
+        select address city,count(address) num from user where id != 1
+        group by address
+        order by count(address) desc
+    </select>
 
 </mapper>

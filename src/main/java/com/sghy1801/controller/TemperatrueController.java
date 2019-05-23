@@ -57,7 +57,6 @@ public class TemperatrueController {
             arr[hours] = temperature.get("hoursavg");
         }
         jsonObject.put("hoursavg", arr);
-        System.out.println(jsonObject.toJSONString());
         return "successCallback1(" + jsonObject.toJSONString() + ")";
 
     }

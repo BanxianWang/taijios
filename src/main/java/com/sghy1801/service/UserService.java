@@ -69,6 +69,7 @@ public interface UserService {
      */
     public int updateChanges(int userId,int changestate);
 
+
     /**
      * 修改密码
      * @param id
@@ -78,5 +79,16 @@ public interface UserService {
    public int updatePass(int id,String repwd,String username,String email,String address,String phone);
 
 
+
+
+
+    /**
+     * 拥有设备人数最多的前5个省份
+     * @return
+     */
+    public List<Map> getLocalDistribution();
+
+
+    public int getNowYearcount();
 
 }

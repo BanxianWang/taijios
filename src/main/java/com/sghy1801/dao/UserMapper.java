@@ -76,9 +76,18 @@ public interface UserMapper {
      */
     public int updateChanges(@Param("userId") int userId, @Param("changestate") int changestate);
 
+
     /**
      * 修改密码
      * @return
      */
     public int updatePass(Map<String, Object> param);
+
+
+    /**
+     * 拥有设备人数最多的前5个省份
+     * @return
+     */
+    public List<Map> getLocalDistribution();
+
 }
