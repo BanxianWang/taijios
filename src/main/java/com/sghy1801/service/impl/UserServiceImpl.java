@@ -23,11 +23,12 @@ public class UserServiceImpl implements UserService {
     public User login(String phone, String password) {
         User user = userMapper.login(phone, password);
         //匹配密码
-        if (null != phone) {
-            if (!user.getPassword().equals(password))
-                user = null;
+        if (user == null) {
+            throw new RuntimeException("用户名不存在！");
         }
-
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("密码错误！");
+        }
         return user;
     }
 
@@ -89,5 +90,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateChanges(int userId, int changestate) {
         return userMapper.updateChanges(userId, changestate);
+    }
+
+    @Override
+    public int updatePass(int id,String repwd,String username,String email,String address,String phone) {
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("id", id);
+        param.put("repwd", repwd);
+        param.put("username", username);
+        param.put("email", email);
+        param.put("address", address);
+        param.put("phone", phone);
+        return userMapper.updatePass(param);
     }
 }

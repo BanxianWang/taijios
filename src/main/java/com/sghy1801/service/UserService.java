@@ -61,5 +61,22 @@ public interface UserService {
     public List<Map> getDate();
 
 
+    /**
+     * 修改状态
+     * @param userId
+     * @param changestate
+     * @return
+     */
     public int updateChanges(int userId,int changestate);
+
+    /**
+     * 修改密码
+     * @param id
+     * @param repwd
+     * @return
+     */
+   public int updatePass(int id,String repwd,String username,String email,String address,String phone);
+
+
+
 }

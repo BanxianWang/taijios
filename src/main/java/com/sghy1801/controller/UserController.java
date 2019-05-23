@@ -37,6 +37,7 @@ public class UserController {
                         String password, Model model) {
         User loginUser = userService.login(phone, password);
         String result = "";
+        //判断是否为管理员1不是0是
         if (loginUser.getUserorman() == 1) {
             model.addAttribute("loginss", "no");
             result = "forward:index.jsp";
@@ -65,7 +66,7 @@ public class UserController {
     @RequestMapping("loginOut")
     public String loginOut(HttpSession session) {
         session.removeAttribute("loginUser");
-        return "redirect:index.jsp";
+        return "forward:index.jsp";
     }
 
     /**
@@ -119,6 +120,33 @@ public class UserController {
         return "user/updateuser";
     }
 
+    /**
+     * 查看单个用户信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/jsp/user/showUser")
+    @ResponseBody
+    public String showUser(int id) {
+        User u = userService.findById(id);
+        return JSONObject.toJSONString(u);
+    }
+
+    /**
+     * 修改密码
+     * @param id
+     * @param repwd
+     * @return
+     */
+    @RequestMapping("/jsp/user/updatePass")
+    @ResponseBody
+    public String updatePass(int id,String repwd,String username,String email,String address,String phone) {
+        int count =userService.updatePass(id,repwd,username,email,address,phone);
+        return JSONObject.toJSONString(count);
+    }
+
+
     @RequestMapping("jsp/getDate")
     @ResponseBody
     public String getDate() {
@@ -150,5 +178,6 @@ public class UserController {
         param.put("count", count);
         return JSONObject.toJSONString(param);
     }
+
 
 }

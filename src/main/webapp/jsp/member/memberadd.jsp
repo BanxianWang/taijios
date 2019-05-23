@@ -27,94 +27,114 @@
 <div class="x-body">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label for="L_email" class="layui-form-label">
-                <span class="x-red">*</span>邮箱
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                       autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为您唯一的登入名
-            </div>
-        </div>
-        <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
                 <span class="x-red">*</span>昵称
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                <input type="text" id="L_username" name="username" disabled="disabled" lay-verify="nikename"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="L_pass" class="layui-form-label">
+            <label for="L_password" class="layui-form-label">
                 <span class="x-red">*</span>密码
             </label>
             <div class="layui-input-inline">
-                <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                <input type="text" id="L_password" name="password" disabled="disabled" lay-verify="password"
                        autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">
-                6到16个字符
-            </div>
         </div>
+
         <div class="layui-form-item">
-            <label for="L_repass" class="layui-form-label">
-                <span class="x-red">*</span>确认密码
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>邮箱
             </label>
             <div class="layui-input-inline">
-                <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                <input type="text" id="L_email" name="email" disabled="disabled" lay-verify="email"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="L_repass" class="layui-form-label">
+            <label for="L_address" class="layui-form-label">
+                <span class="x-red">*</span>地址
             </label>
-            <button  class="layui-btn" lay-filter="add" lay-submit="">
-                增加
+            <div class="layui-input-inline">
+                <input type="text" id="L_address" name="address" disabled="disabled" lay-verify="address"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_phone" class="layui-form-label">
+                <span class="x-red">*</span>手机号
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_phone" name="phone" disabled="disabled" lay-verify="phone"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>状态
+            </label>
+            <div class="layui-input-inline">
+                <input type="radio" name="state" value="0" title="已启用"  id="ss" />
+                <input type="radio" name="state" value="1"  title="已停用" id="sss" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+            </label>
+            <button class="layui-btn" lay-filter="add" lay-submit="">
+                返回
             </button>
         </div>
     </form>
 </div>
 <script>
-    layui.use(['form','layer'], function(){
+
+    layui.use(['form', 'layer'], function () {
         $ = layui.jquery;
         var form = layui.form
-            ,layer = layui.layer;
+            , layer = layui.layer;
 
-        //自定义验证规则
-        form.verify({
-            nikename: function(value){
-                if(value.length < 5){
-                    return '昵称至少得5个字符啊';
+        var id = sessionStorage.getItem("id");
+        $.ajax({
+            url: "/taijios/jsp/user/showUser",
+            data: {"id": id},
+            type: "POST",
+            dataType: "json",
+            success: function (msg) {
+                $("#L_username").val(msg.username);
+                $("#L_password").val(msg.password);
+                $("#L_email").val(msg.email);
+                $("#L_address").val(msg.address);
+                $("#L_phone").val(msg.phone);
+
+                if (msg.state == 0) {
+                    $("#ss").attr("checked",true);
+                    // $("input:radio[value='0']").attr('checked',true);
+                } else {
+                    $("#sss").attr("checked",true);
+                    //$("input:radio[value='1']").attr('checked',true);
                 }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
+                form.render();
+
             }
         });
 
         //监听提交
-        form.on('submit(add)', function(data){
-            console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
-            return false;
+        form.on('submit(add)', function (data) {
+            var index = parent.layer.getFrameIndex(window.name);
+            //关闭当前frame
+            parent.layer.close(index);
         });
 
 
     });
 </script>
-<script>var _hmt = _hmt || []; (function() {
+<script>var _hmt = _hmt || [];
+(function () {
     var hm = document.createElement("script");
     hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
     var s = document.getElementsByTagName("script")[0];

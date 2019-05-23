@@ -34,7 +34,7 @@
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('个人信息','jsp/member/memberedit.jsp')">个人信息</a></dd>
                 <dd><a onclick="x_admin_show('切换帐号','index.jsp')">切换帐号</a></dd>
-                <dd><a href="/loginOut">退出</a></dd>
+                <dd><a href="/taijios/loginOut">退出</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>

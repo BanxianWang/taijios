@@ -11,29 +11,27 @@
 
     <!--查询所有用户-->
     <select id="listUser" parameterType="map" resultType="User">
-        select * from `user` where  userorMan =1
-            <if test="username!=null">
-                and username like concat('%',#{username},'%')
-            </if>
-            <if test="phone!=null">
-                and phone= #{phone}
-            </if>
+        select * from `user` where userorMan =1
+        <if test="username!=null">
+            and username like concat('%',#{username},'%')
+        </if>
+        <if test="phone!=null">
+            and phone= #{phone}
+        </if>
         limit #{start},4
     </select>
 
 
-
     <!--查询数量-->
     <select id="countUser" parameterType="map" resultType="java.lang.Integer">
-        select count(*) from `user` where  userorMan =1
-            <if test="username!=null">
-                and username like concat('%',#{username},'%')
-            </if>
-            <if test="phone!=null">
-                and phone= #{phone}
-            </if>
+        select count(*) from `user` where userorMan =1
+        <if test="username!=null">
+            and username like concat('%',#{username},'%')
+        </if>
+        <if test="phone!=null">
+            and phone= #{phone}
+        </if>
     </select>
-
 
 
     <!--添加用户-->
@@ -49,7 +47,6 @@
     </delete>
 
 
-
     <!--更新用户-->
     <update id="updateUser" parameterType="User">
         update  `user` set
@@ -63,11 +60,10 @@
     </update>
 
 
-
+    <!--查询单个用户-->
     <select id="findById" parameterType="int" resultType="User">
         SELECT  * FROM  `user` WHERE id = #{id}
     </select>
-
 
 
     <select id="getDate" resultType="java.util.Map">
@@ -77,12 +73,23 @@
     </select>
 
 
-
-
+    <!--修改用户状态-->
     <update id="updateChanges" parameterType="int">
       update  `user` set
         state=#{changestate}
         where id=#{userId}
+    </update>
+
+
+    <!--修改用户密码-->
+    <update id="updatePass" parameterType="map">
+        update  `user` set
+        password=#{repwd},
+        username=#{username},
+        email=#{email},
+        address=#{address},
+        phone=#{phone}
+        where id=#{id}
     </update>
 
 </mapper>

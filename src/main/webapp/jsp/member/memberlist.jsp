@@ -40,7 +40,7 @@
         var username = $("#username").val();
         var phone = $("#phone").val();
         $.ajax({
-            url: "/jsp/user/userlist",
+            url: "/taijios/jsp/user/userlist",
             data: {"currentPage": currentPage, "username": username, "phone": phone},
             type: "POST",
             dataType: "json",
@@ -79,10 +79,10 @@
                     str += "<td class='td-manage'>"
                     str += "<a onclick='member_stop(this,10001)' userId='" + b.id + "' id='changestate' href='javascript:void(0);'  title='" + state + "'>"
                     str += "<i class='layui-icon'>&#xe601;</i></a>"
-                    str += " <a title=\"编辑\"  onclick=\"x_admin_show('编辑','memberpassword.jsp',600,400,'"+b.id+"')\" href=\"javascript:void(0);\">\n" +
+                    str += " <a title=\"查看\"  onclick=\"x_admin_shows('查看','memberadd.jsp',650,465,'"+b.id+"')\" href=\"javascript:void(0);\">\n" +
                         "<i class=\"layui-icon\">&#xe642;</i>\n" +
                         "</a>"
-                    str += "<a onclick=\"x_admin_show('修改密码','memberpassword.jsp',600,400,'"+b.id+"')\" title=\"修改密码\"  userId='\" + b.id + \"' href=\"javascript:void(0);\">\n" +
+                    str += "<a onclick=\"x_admin_show('修改','memberpassword.jsp',650,518,'"+b.id+"')\" title=\"修改\"  userId='\" + b.id + \"' href=\"javascript:void(0);\">\n" +
                         "<i class=\"layui-icon\">&#xe631;</i>\n" +
                         " </a>"
                     str += "  <a    userId='" + b.id + "' title=\"删除\" onclick=\"member_del(this,'要删除的id')\"    href=\"javascript:void(0);\">\n" +
@@ -166,12 +166,13 @@
                 var changestate = $(obj).attr('title') == "已启用" ? 1 : 0;
                 var userId = $(obj).attr('userId');
                 $.ajax({
-                    url: "/jsp/user/changes",
+                    url: "/taijios/jsp/user/changes",
                     dataType: "json",
                     data: {"changestate": changestate, "userId": userId},
                     type: "post",
                     success: function (msg) {
                         if (msg.count == 1) {
+                            showList(currentPage);
                             $("#sss").html("已停用");
                             $(obj).attr('title', '已停用')
                             $(obj).find('i').html('&#xe62f;');
@@ -191,11 +192,12 @@
                 var changestate = $(obj).attr('title') == "已启用" ? 1 : 0;
                 var userId = $(obj).attr('userId');
                 $.ajax({
-                    url: "/jsp/user/changes",
+                    url: "/taijios/jsp/user/changes",
                     dataType: "json",
                     data: {"changestate": changestate, "userId": userId},
                     type: "post",
                     success: function (msg) {
+                        showList(currentPage);
                         if (msg.count == 1) {
                             $("#sss").html("已启用");
                             $(obj).attr('title', '已启用')
@@ -306,7 +308,7 @@
             //发异步删除数据
             var userId = $(obj).attr('userId');
             $.ajax({
-                url: "/jsp/user/deleteUser",
+                url: "/taijios/jsp/user/deleteUser",
                 dataType: "json",
                 data: {"userId": userId},
                 type: "post",
