@@ -2,7 +2,7 @@
 $(function () {
     getDaysTemperature();
     getLocalDistribution();
-    echarts_4();
+    getHoursTemperature();
     echarts_5();
 
 
@@ -14,18 +14,23 @@ $(function () {
 function getDaysTemperature(){
     var myChart =echarts.init(document.getElementById('echart1'));
     $.ajax({
-        url: "/jsp/getDaysTemperature",
+        url: "http://106.14.208.219:8080/taijios/jsp/getDaysTemperature",
         type: "post",
+        data: {
+            machineID: 1
+        },
         dataType: "jsonp",
-
+        jsonpCallback: "successCallback2",
         success: function(data) {
-            alert(data.daysavg)
-            echarts_1(myChart,data);
+            var date = new Date();
+            var day = date.getDate();
+            var days = [day-7+"日",day-6+"日",day-5+"日",day-4+"日",day-3+"日",day-2+"日",day-1+"日"];
+            echarts_1(myChart,data,days);
 
         }
     });
 }
-function echarts_1(myChart,data) {
+function echarts_1(myChart,data,days) {
 
     option = {
         //  backgroundColor: '#00265f',
@@ -36,12 +41,13 @@ function echarts_1(myChart,data) {
             }
         },
         grid: {
-            left: '0%',
-            top:'10px',
-            right: '0%',
-            bottom: '4%',
+            left: '10',
+            top: '30',
+            right: '10',
+            bottom: '10',
             containLabel: true
         },
+
         xAxis: [{
             type: 'category',
             boundaryGap: false,
@@ -58,7 +64,8 @@ function echarts_1(myChart,data) {
 
             },
 
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月'],
+
+            data:days,
 
         }, {
 
@@ -78,7 +85,7 @@ function echarts_1(myChart,data) {
                 show:true,
                 textStyle: {
                     color: "rgba(255,255,255,.6)",
-                    fontSize: '12',
+                    fontSize: '10',
                 },
             },
             axisTick: {
@@ -100,7 +107,7 @@ function echarts_1(myChart,data) {
         }],
         series: [
             {
-                name: '人数',
+                name: '摄氏度',
                 type: 'line',
                 smooth: true,
                 symbol: 'circle',
@@ -110,7 +117,7 @@ function echarts_1(myChart,data) {
 
                     normal: {
                         color: '#0184d5',
-                        width: 2
+                        width: 1
                     }
                 },
                 areaStyle: {
@@ -147,22 +154,30 @@ function echarts_1(myChart,data) {
 }
 
 
-//拥有设备人数最多的前5个省份，显示数量
+//未来7日温度
 function getLocalDistribution(){
     $.ajax({
-        url: "/jsp/getLocalDistribution",
+        url: "http://106.14.208.219:8080/taijios/jsp/getsevenday",
         type: "post",
-        dataType: "json",
-
+        dataType: "jsonp",
+        jsonpCallback: "successCallback6",
         success: function(data) {
-            echarts_2(data);
+            var max = [];
+            var min = [];
+            var day = [];
+            $.each(data,function (index,item) {
+                max[index] = item.wd.slice(0,2);
+                min[index] = item.wd.slice(3,5);
+                day[index] = item.date.slice(0,3);
+            })
+            echarts_2(data,max,min,day);
 
         }
     });
 }
 
 
-function echarts_2(data) {
+function echarts_2(data,max,min,day) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echart2'));
 
@@ -172,38 +187,49 @@ function echarts_2(data) {
             trigger: 'axis',
             axisPointer: { type: 'shadow'}
         },
+        legend: {
+            top:'0%',
+            data:['最高温度','最低温度'],
+            textStyle: {
+                color: 'rgba(255,255,255,.5)',
+                fontSize:'12',
+            }
+        },
         grid: {
-            left: '0%',
-            top:'10px',
-            right: '0%',
-            bottom: '4%',
+            left: '10',
+            top: '30',
+            right: '10',
+            bottom: '10',
             containLabel: true
         },
         xAxis: [{
             type: 'category',
-            data: data.city,
-            axisLine: {
-                show: true,
-                lineStyle: {
-                    color: "rgba(255,255,255,.1)",
-                    width: 1,
-                    type: "solid"
-                },
-            },
-
-            axisTick: {
-                show: false,
-            },
+            boundaryGap: false,
             axisLabel:  {
-                interval: 0,
-                // rotate:50,
-                show: true,
-                splitNumber: 15,
                 textStyle: {
                     color: "rgba(255,255,255,.6)",
-                    fontSize: '12',
+                    fontSize:12,
                 },
             },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(255,255,255,.2)'
+                }
+
+            },
+
+
+            data: day
+
+        }, {
+
+            axisPointer: {show: false},
+            axisLine: {  show: false},
+            position: 'bottom',
+            offset: 20,
+
+
+
         }],
         yAxis: [{
             type: 'value',
@@ -234,20 +260,77 @@ function echarts_2(data) {
         }],
         series: [
             {
-
+                name: '最高温度',
                 type: 'line',
-                data: data.num,
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+
+                    normal: {
+                        color: '#0184d5',
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(1, 132, 213, 0.4)'
+                        }, {
+                            offset: 0.8,
+                            color: 'rgba(1, 132, 213, 0.1)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    }
+                },
                 itemStyle: {
                     normal: {
-                        color:'#27d08a',
-                        opacity: 1,
-                        barBorderRadius: 5,
+                        color: '#0184d5',
+                        borderColor: 'rgba(221, 220, 107, .1)',
+                        borderWidth: 12
                     }
-                }
-            }
+                },
+                data: max
 
-        ]
-    };
+            },
+            {
+                name: '最低温度',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+
+                    normal: {
+                        color: '#00d887',
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(1, 132, 213, 0.4)'
+                        }, {
+                            offset: 0.8,
+                            color: 'rgba(1, 132, 213, 0.1)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#00d887',
+                        borderColor: 'rgba(221, 220, 107, .1)',
+                        borderWidth: 12
+                    }
+                },
+                data: min
+                }]
+            };
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
@@ -355,8 +438,26 @@ function echarts_5() {
 }
 
 
+
+
+function getHoursTemperature(){
+    $.ajax({
+        url: "http://106.14.208.219:8080/taijios/jsp/getHoursTemperature",
+        type: "post",
+        data: {
+            machineID: 1
+        },
+        dataType: "jsonp",
+        jsonpCallback: "successCallback1",
+        success: function(data) {
+           echarts_4(data.hoursavg);
+
+        }
+    });
+}
+
 //各个模块卖出数量，按月累增
-function echarts_4() {
+function echarts_4(data) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echart4'));
 
@@ -367,14 +468,6 @@ function echarts_4() {
                 lineStyle: {
                     color: '#dddc6b'
                 }
-            }
-        },
-        legend: {
-            top:'0%',
-            data:['温度模块','湿度模块'],
-            textStyle: {
-                color: 'rgba(255,255,255,.5)',
-                fontSize:'12',
             }
         },
         grid: {
@@ -401,7 +494,8 @@ function echarts_4() {
 
             },
 
-            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月'],
+            data: ['00点', '01点', '02点', '03点', '04点', '05点','06点','07点','08点','09点','10点','11点','12点','13点','14点',
+                '15点','16点','17点','18点','19点','20点','21点','22点','23点','24点'],
 
         }, {
 
@@ -437,42 +531,6 @@ function echarts_4() {
         }],
         series: [
             {
-                name: '温度模块',
-                type: 'line',
-                smooth: true,
-                symbol: 'circle',
-                symbolSize: 5,
-                showSymbol: false,
-                lineStyle: {
-
-                    normal: {
-                        color: '#0184d5',
-                        width: 2
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(1, 132, 213, 0.4)'
-                        }, {
-                            offset: 0.8,
-                            color: 'rgba(1, 132, 213, 0.1)'
-                        }], false),
-                        shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#0184d5',
-                        borderColor: 'rgba(221, 220, 107, .1)',
-                        borderWidth: 12
-                    }
-                },
-                data: [3, 4, 3, 4, 3, 4, 3, 6, 2, 4, 2, 4,3, 4, 3, 4, 3, 4, 3, 6, 2, 4, 2, 4]
-
-            },
-            {
                 name: '湿度模块',
                 type: 'line',
                 smooth: true,
@@ -505,7 +563,7 @@ function echarts_4() {
                         borderWidth: 12
                     }
                 },
-                data: [5, 3, 5, 6, 1, 5, 3, 5, 6, 4, 6, 4, 8, 3, 5, 6, 1, 5, 3, 7, 2, 5, 1, 4]
+                data: data
 
             },
 

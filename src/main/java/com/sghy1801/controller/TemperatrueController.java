@@ -54,6 +54,7 @@ public class TemperatrueController {
         for (Map temperature : temperatures) {
 
             int hours = Integer.parseInt(temperature.get("hours").toString().substring(11, 13));
+            DecimalFormat df = new DecimalFormat("0.00");
             arr[hours] = temperature.get("hoursavg");
         }
         jsonObject.put("hoursavg", arr);
@@ -79,8 +80,8 @@ public class TemperatrueController {
         for (Map temperature : temperatures) {
 
             int days = Integer.parseInt(temperature.get("days").toString().substring(8, 10));
-
-            arr[i] = temperature.get("daysavg");
+            DecimalFormat df = new DecimalFormat("0.00");
+            arr[i] = df.format(temperature.get("daysavg"));
             i++;
         }
         //转换成json格式

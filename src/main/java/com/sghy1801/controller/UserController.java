@@ -41,8 +41,8 @@ public class UserController {
         String result = "";
         //判断是否为管理员1不是0是
         if (loginUser.getUserorman() == 1) {
-            model.addAttribute("loginss", "no");
-            result = "forward:index.jsp";
+            model.addAttribute("loginss", loginUser);
+            result = "users/main";
 
         } else {
             if (loginUser.getState() == 1) {

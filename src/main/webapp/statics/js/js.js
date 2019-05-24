@@ -43,11 +43,11 @@ function echarts_1(myChart,data) {
         },
         xAxis: [{
             type: 'category',
-            boundaryGap: false,
+            //boundaryGap: false,
             axisLabel:  {
                 textStyle: {
                     color: "rgba(255,255,255,.6)",
-                    fontSize:12,
+                    fontSize:10,
                 },
             },
             axisLine: {

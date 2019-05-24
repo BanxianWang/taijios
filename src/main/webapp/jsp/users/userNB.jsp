@@ -50,7 +50,19 @@
             document.getElementById("showTime").innerHTML = y + "年" + mt + "月" + day + "-" + h + "时" + m + "分" + s + "秒";
             t = setTimeout(time, 1000);
         }
+        $.ajax({
+            url: "http://106.14.208.219:8080/taijios/jsp/getLastTemperature",
+            type: "post",
+            data: {
+                machineID: 1
+            },
+            dataType: "jsonp",
+            jsonpCallback: "successCallback",
+            success: function(data) {
+                $("#nowTemperature").html(data.temperature.temperature);
 
+            }
+        });
 
     </script>
 
@@ -60,7 +72,7 @@
     <ul class="clearfix">
         <li>
             <div class="boxall" style="height: 5rem">
-                <div class="alltitle">前七日温度信息</div>
+                <div class="alltitle">前七天每日平均温度</div>
                 <div class="allnav" id="echart1"></div>
                 <div class="boxfoot"></div>
             </div>
@@ -75,8 +87,8 @@
             <div class="bar">
                 <div class="barbox">
                     <ul class="clearfix">
-                        <li class="pulll_left counter" id="sumCount"></li>
-                        <li class="pulll_left counter" id="nowCount"></li>
+                        <li class="pulll_left counter" id="city"></li>
+                        <li class="pulll_left counter" id="nowTemperature"></li>
                     </ul>
                 </div>
                 <div class="barbox2">
@@ -95,7 +107,7 @@
         </li>
         <li>
             <div class="boxall" style="height:5rem">
-                <div class="alltitle">七日平均温度</div>
+                <div class="alltitle">今日每小时温度</div>
                 <div class="allnav" id="echart4"></div>
                 <div class="boxfoot"></div>
             </div>

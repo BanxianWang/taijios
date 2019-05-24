@@ -104,6 +104,9 @@ public class UserServiceImpl implements UserService {
         param.put("address", address);
         param.put("phone", phone);
         return userMapper.updatePass(param);
+    }
+
+    @Override
     public List<Map> getLocalDistribution() {
         return userMapper.getLocalDistribution();
     }
