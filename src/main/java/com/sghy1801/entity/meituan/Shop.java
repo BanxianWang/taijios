@@ -10,8 +10,17 @@ public class Shop {
 
     private double latitude;//商店的地图坐标
     private double longitude;
+    private String imgurl;//商店的图标
 
-    public Shop(int id, String sName, String saddress, double avgprice, int pcount, double avgcomment, double latitude, double longitude) {
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public Shop(int id, String sName, String saddress, double avgprice, int pcount, double avgcomment, double latitude, double longitude, String imgurl) {
         this.id = id;
         this.sName = sName;
         this.saddress = saddress;
@@ -20,6 +29,7 @@ public class Shop {
         this.avgcomment = avgcomment;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.imgurl = imgurl;
     }
 
     public double getLatitude() {

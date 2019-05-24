@@ -10,7 +10,7 @@ import java.util.List;
 public class  LedStr {
 
     private static  LedStr  ledStr = new LedStr();
-    private  String str = "255,255,255,1000";
+    private  String str = "0,0,0,1000";
 
     private LedStr() {
     }
