@@ -1,24 +1,25 @@
 ﻿
 $(function () {
-getDate();
-getLocalDistribution();
-echarts_4();
-echarts_5();
+    getDaysTemperature();
+    getLocalDistribution();
+    echarts_4();
+    echarts_5();
 
 
 })
 
-//每月新增用户情况
+//前七日温度信息
 
 
-function getDate(){
+function getDaysTemperature(){
     var myChart =echarts.init(document.getElementById('echart1'));
     $.ajax({
-        url: "/jsp/getDate",
+        url: "/jsp/getDaysTemperature",
         type: "post",
-        dataType: "json",
+        dataType: "jsonp",
 
         success: function(data) {
+            alert(data.daysavg)
             echarts_1(myChart,data);
 
         }
@@ -131,7 +132,7 @@ function echarts_1(myChart,data) {
                         borderWidth: 12
                     }
                 },
-                data:data
+                data:data.daysavg
 
             },
 

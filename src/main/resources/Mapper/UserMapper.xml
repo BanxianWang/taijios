@@ -25,13 +25,6 @@
     <!--查询数量-->
     <select id="countUser" parameterType="map" resultType="java.lang.Integer">
 
-        select count(*) from `user` where userorMan =1
-        <if test="username!=null">
-            and username like concat('%',#{username},'%')
-        </if>
-        <if test="phone!=null">
-            and phone= #{phone}
-        </if>
 
         select count(*) from `user` where  userorMan =1
             <if test="username!=null">
