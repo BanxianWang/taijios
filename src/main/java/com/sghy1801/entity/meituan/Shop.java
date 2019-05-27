@@ -12,6 +12,29 @@ public class Shop {
     private double longitude;
     private String imgurl;//商店的图标
 
+    private  String shoptype;
+
+    public String getShoptype() {
+        return shoptype;
+    }
+
+    public void setShoptype(String shoptype) {
+        this.shoptype = shoptype;
+    }
+
+    public Shop(int id, String sName, String saddress, double avgprice, int pcount, double avgcomment, double latitude, double longitude, String imgurl, String shoptype) {
+        this.id = id;
+        this.sName = sName;
+        this.saddress = saddress;
+        this.avgprice = avgprice;
+        this.pcount = pcount;
+        this.avgcomment = avgcomment;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.imgurl = imgurl;
+        this.shoptype = shoptype;
+    }
+
     public String getImgurl() {
         return imgurl;
     }
@@ -98,5 +121,7 @@ public class Shop {
     public void setAvgcomment(double avgcomment) {
         this.avgcomment = avgcomment;
     }
+
+
 
 }
