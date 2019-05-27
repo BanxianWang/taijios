@@ -211,8 +211,8 @@ public class ToolController {
         }
         if(str.indexOf("灯") >= 0){
             if(str.indexOf("蓝") >= 0){
-                LedStr.getLedStr().setStr("0,0,255,1000");
-                ans= "好的，没问题！蓝色";
+                    LedStr.getLedStr().setStr("0,0,255,1000");
+                    ans= "好的，没问题！蓝色";
             }else if(str.indexOf("红") >= 0){
                 LedStr.getLedStr().setStr("255,0,0,1000");
                 ans= "好的，没问题！调成红色了";
@@ -235,7 +235,7 @@ public class ToolController {
      * */
     public void dopython(String address,String sp,String sortby){
         if (address.equals("安德门小行")){
-            address="14858";
+                address="14858";
         }else if(address.equals("新街口")){
             address="831";
         }else if(address.equals("雨花台区")){
@@ -249,15 +249,15 @@ public class ToolController {
         }
         String pyurl="";
         if(sortby.equals("价格低到高")){// 价格低到高 价格高到低 人气 评价 default智能
-            pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=price&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=price&areaId="+address+"";;
         }else if(sortby.equals("价格高到低")){//priceDesc高到低
-            pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=priceDesc&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=priceDesc&areaId="+address+"";;
         }else if(sortby.equals("人气")){//solds人气
             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=solds&areaId="+address+"";;
         }else if(sortby.equals("评价")){//rating评价
-            pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=rating&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=rating&areaId="+address+"";;
         }else {//default智能
-            pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=default&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=default&areaId="+address+"";;
         }
 
         Process res;//此类用于创建操作系统进程
