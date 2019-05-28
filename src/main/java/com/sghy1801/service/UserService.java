@@ -14,20 +14,20 @@ public interface UserService {
      * @param password
      * @return
      */
-    public User login(String phone,String password);
+    public User login(String phone, String password);
 
     /**
      * 查询用户列表页
      * @param currentPage
      * @return
      */
-    public List<User> listUser(int currentPage,String username,String phone);
+    public List<User> listUser(int currentPage, String username, String phone);
 
     /**
      * 查询用户记录数
      * @return
      */
-    public int countUser(String username,String phone);
+    public int countUser(String username, String phone);
 
     /**
      * 添加用户
@@ -67,7 +67,7 @@ public interface UserService {
      * @param changestate
      * @return
      */
-    public int updateChanges(int userId,int changestate);
+    public int updateChanges(int userId, int changestate);
 
 
     /**
@@ -76,7 +76,7 @@ public interface UserService {
      * @param repwd
      * @return
      */
-   public int updatePass(int id,String repwd,String username,String email,String address,String phone);
+   public int updatePass(int id, String repwd, String username, String email, String address, String phone);
 
 
 

@@ -11,7 +11,7 @@ public interface TjmachineService {
      * 查询所有机器信息
      * @return
      */
-    List<Tjmachine> getAllMachines(Map<String,Object> map);
+    List<Tjmachine> getAllMachines(Map<String, Object> map);
 
     /**
      * 新增一个机器

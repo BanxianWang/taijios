@@ -22,10 +22,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @Controller
@@ -127,6 +126,40 @@ public class ToolController {
      * */
     public String getans(String str) {
         String ans = "";
+
+        if(str.indexOf("话费") >= 0||str.indexOf("充值") >= 0){
+            String api_key ="yW5c1zLe8wsrwfTWrcgv5WSCNzpmctcAf8C7vdarAsJXysJPvPaoASQdg6pjorJt";
+            Date d=new Date();
+            Long sp_order_id =d.getTime();
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("api_key", api_key);
+            map.put("card_worth",1);//充值金额
+            map.put("phone_number", "17615847228");//充值号码 user.phone
+            map.put("sp_order_id", sp_order_id);//唯一订单号
+            map.put("notify_url", "xxx");//回调地址
+            HashMap<String, Object> map2 = new HashMap<String, Object>();
+            map2.put("api_key", api_key);
+            map2.put("sp_order_id",sp_order_id);//唯一订单号
+           try {
+               URL realUrl = new URL(PhoneUtil.getUrl(map,"order.phone.submit"));
+               // 打开和URL之间的连接
+               URLConnection connection = realUrl.openConnection();
+               connection.setRequestProperty("accept", "*/*");
+               connection.setRequestProperty("connection", "Keep-Alive");
+               connection.setRequestProperty("user-agent",
+                       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+               // 建立实际的连接
+               connection.connect();
+               // 获取所有响应头字段
+               Map<String, List<String>> maps = connection.getHeaderFields();
+            System.out.println( PhoneUtil.getUrl(map,"order.phone.submit"));//提交订单
+            ans="好的，帮您提交订单了，请稍等！";
+            System.out.println( PhoneUtil.getUrl(map2,"order.phone.get"));//获取订单信息
+           }catch (Exception e){
+               ans="系统异常，请稍等！";
+           }
+        }
+
         //天气类语音
         if (str.indexOf("温度") >= 0||str.indexOf("天气") >= 0){
             ansUtil.putmapwendu();//获取到天气新数据
