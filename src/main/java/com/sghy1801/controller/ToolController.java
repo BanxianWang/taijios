@@ -163,7 +163,7 @@ public class ToolController {
         }
 
         //美团类语音
-        if(str.indexOf("找一家") >= 0){
+        if(str.indexOf("找一") >= 0){
             String sortby="";
             if(str.indexOf("价格") >= 0||str.indexOf("高到低") >= 0){
                 sortby="价格高到低";
@@ -176,38 +176,34 @@ public class ToolController {
             }
 
             if(str.indexOf("雨花") >= 0){
-                dopython("雨花台区",str.substring(str.indexOf("找一家")+3,str.indexOf("找一家")+5),sortby);
+                dopython("雨花台区",str.substring(str.indexOf("找一")+3,str.indexOf("找一")+5),sortby);
                 ansUtil.putmapsdian();//获取店铺
                 ans= ansUtil .getanswer("评分高");
             }else if(str.indexOf("新街") >= 0){
-                dopython("新街口",str.substring(str.indexOf("找一家")+3,str.indexOf("找一家")+5),sortby);
+                dopython("新街口",str.substring(str.indexOf("找一")+3,str.indexOf("找一")+5),sortby);
                 ansUtil.putmapsdian();//获取店铺
                 ans= ansUtil .getanswer("评分高");
             }else if(str.indexOf("小行") >= 0||str.indexOf("安德门") >= 0||str.indexOf("安") >= 0){
-                dopython("安德门小行",str.substring(str.indexOf("找一家")+3,str.indexOf("找一家")+5),sortby);
+                dopython("安德门小行",str.substring(str.indexOf("找一")+3,str.indexOf("找一")+5),sortby);
                 ansUtil.putmapsdian();//获取店铺
                 ans= ansUtil .getanswer("评分高");
             }else if(str.indexOf("夫子庙") >= 0){
-                dopython("夫子庙",str.substring(str.indexOf("找一家")+3,str.indexOf("找一家")+5),sortby);
+                dopython("夫子庙",str.substring(str.indexOf("找一")+3,str.indexOf("找一")+5),sortby);
                 ansUtil.putmapsdian();//获取店铺
                 ans= ansUtil .getanswer("评分高");
             }else if(str.indexOf("虹悦城") >= 0||str.indexOf("城") >= 0||str.indexOf("红") >= 0){
-                dopython("虹悦城",str.substring(str.indexOf("找一家")+3,str.indexOf("找一家")+5),sortby);
+                dopython("虹悦城",str.substring(str.indexOf("找一")+3,str.indexOf("找一")+5),sortby);
                 ansUtil.putmapsdian();//获取店铺
                 ans= ansUtil .getanswer("评分高");
             }else if(str.indexOf("大学城") >= 0||str.indexOf("江宁") >= 0){
-                dopython("江宁大学城",str.substring(str.indexOf("找一家")+3,str.indexOf("找一家")+5),sortby);
+                dopython("江宁大学城",str.substring(str.indexOf("找一")+3,str.indexOf("找一")+5),sortby);
                 ansUtil.putmapsdian();//获取店铺
                 ans= ansUtil .getanswer("评分高");
             }else {
-                dopython("雨花台区",str.substring(str.indexOf("找一家")+3,str.indexOf("找一家")+5),sortby);
+                dopython("雨花台区",str.substring(str.indexOf("找一")+3,str.indexOf("找一")+5),sortby);
                 ansUtil.putmapsdian();//获取店铺
                 ans= ansUtil .getanswer("评分高");
             }
-        }else {
-            dopython("雨花台区","随便","评价");
-            ansUtil.putmapsdian();//获取店铺
-            ans= ansUtil .getanswer("评分高");
         }
         if(str.indexOf("灯") >= 0){
             if(str.indexOf("蓝") >= 0){
@@ -249,15 +245,16 @@ public class ToolController {
         }
         String pyurl="";
         if(sortby.equals("价格低到高")){// 价格低到高 价格高到低 人气 评价 default智能
-             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=price&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=price&areaId="+address;
+            //      https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=275f183110c443948a11.1558780086.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q=%E7%BD%91%E5%90%A7&areaId=834
         }else if(sortby.equals("价格高到低")){//priceDesc高到低
-             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=priceDesc&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=priceDesc&areaId="+address;
         }else if(sortby.equals("人气")){//solds人气
-            pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=solds&areaId="+address+"";;
+            pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=solds&areaId="+address;
         }else if(sortby.equals("评价")){//rating评价
-             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=rating&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=rating&areaId="+address;
         }else {//default智能
-             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=default&areaId="+address+"";;
+             pyurl="https://apimobile.meituan.com/group/v4/poi/pcsearch/55?uuid=c4cfaa0b9406493b8f80.1558359069.1.0.0&userid=-1&limit=32&offset=0&cateId=-1&q="+sp+"&sort=default&areaId="+address;
         }
 
         Process res;//此类用于创建操作系统进程

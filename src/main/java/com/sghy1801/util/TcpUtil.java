@@ -74,6 +74,9 @@ public class TcpUtil {
                     System.out.println(temperature);
                     JedisUtil.setTemperature(temperature + "");
                     //放入数据库
+                    if(temperature<40&&temperature>10){
+
+                    }
                     Temperature temperature1 = new Temperature();
                     temperature1.setTemperature(temperature);
                     temperature1.setMachineid(1);

@@ -38,7 +38,7 @@ public class AnsUtil {
     //获取当前天气情况
     public void putmapwendu(){
         Temperature temperature = TemperatureServiceImpl.getLastTemperature(1);
-        answer.put("温度","当前实时温度"+temperature.getTemperature()+"摄氏度");
+        answer.put("温度","当前实时温度"+JedisUtil.getTemperature()+"摄氏度");
     }
 
     //获取天气预报
@@ -80,7 +80,7 @@ public class AnsUtil {
     //获取全部的店铺
     public void putmapsdian(){
         List<Shop> shops = shopService.getAlllist();
-        answer.put("评分高","评分最高的店家是"+shops.get(0).getsName()+"，人均评分"+shops.get(0).getAvgcomment()+"评论人数"+shops.get(0).getPcount()+"地址在"+shops.get(0).getSaddress()+"人均消费"+shops.get(0).getsName()+"元");
+        answer.put("评分高","评分最高的店家是"+shops.get(0).getsName()+"，人均评分"+shops.get(0).getAvgcomment()+"评论人数"+shops.get(0).getPcount()+"地址在"+shops.get(0).getSaddress()+"人均消费"+shops.get(0).getAvgprice()+"元");
     }
 
 
