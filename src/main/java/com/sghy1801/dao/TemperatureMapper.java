@@ -12,14 +12,14 @@ public interface TemperatureMapper {
      * @param map
      * @return
      */
-    List<Map> getHoursTemperature(Map<String,Object> map);
+    List<Map> getHoursTemperature(Map<String, Object> map);
 
     /**
      * 获取逐天温度信息 （根据map中的条件查询）
      * @param map
      * @return
      */
-    List<Map> getDaysTemperature(Map<String,Object> map);
+    List<Map> getDaysTemperature(Map<String, Object> map);
 
     /**
      * 新增温度信息
@@ -33,7 +33,7 @@ public interface TemperatureMapper {
       * @param map
      * @return
      */
-    int delTemperatureByTime(Map<String,Object> map);
+    int delTemperatureByTime(Map<String, Object> map);
 
     /**
      * 获取最新温度
@@ -46,5 +46,5 @@ public interface TemperatureMapper {
      * 获取当日最高，最低，平均温度
      * @return
      */
-    Map getSomeInfo(Map<String,Object> map);
+    Map getSomeInfo(Map<String, Object> map);
 }
