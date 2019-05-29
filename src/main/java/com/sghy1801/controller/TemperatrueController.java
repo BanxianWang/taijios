@@ -35,24 +35,14 @@ public class TemperatrueController {
     public @ResponseBody
     String getHoursTemperature(String machineID, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        Date date = new Date();
-        System.out.println(11111111);
-        //将获取的值放入map中
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        if (machineID == "") map.put("machineID", null);
-        else map.put("machineID", machineID);
-
-
         //获取温度列表
         List<Map> temperatures = service.getHoursTemperature(Integer.parseInt(machineID));
         String json = "";
         JSONObject jsonObject = new JSONObject();
         int count = temperatures.size();
         Object[] arr = new Object[24];
-
+        //用循环将数据放入长为24的数组
         for (Map temperature : temperatures) {
-
             int hours = Integer.parseInt(temperature.get("hours").toString().substring(11, 13));
             DecimalFormat df = new DecimalFormat("0.00");
             arr[hours] = temperature.get("hoursavg");
@@ -63,7 +53,7 @@ public class TemperatrueController {
     }
 
     /**
-     * 逐天的温度
+     * 7天的温度
      *
      * @param machineID
      * @throws Exception
@@ -77,8 +67,8 @@ public class TemperatrueController {
         List<Map> temperatures = service.getDaysTemperature(1);
         Object[] arr = new Object[7];
         int i = 0;
+        //利用循环，将所得到的7日天气放入数组
         for (Map temperature : temperatures) {
-
             int days = Integer.parseInt(temperature.get("days").toString().substring(8, 10));
             DecimalFormat df = new DecimalFormat("0.00");
             arr[i] = df.format(temperature.get("daysavg"));
@@ -87,13 +77,17 @@ public class TemperatrueController {
         //转换成json格式
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("daysavg", arr);
-
-
         return "successCallback2(" + jsonObject.toJSONString() + ")";
     }
 
 
-    //获取最新温度
+    /**
+     *
+     * 获取最新温度
+     * @param machineID
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getLastTemperature")
     @ResponseBody
     public String getLastTemperature(@RequestParam(value = "machineID", defaultValue = "1") String machineID,
@@ -102,7 +96,7 @@ public class TemperatrueController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, Object> map = new HashMap<String, Object>();
         String temperatureStr = JedisUtil.getTemperature();
-
+        //将最新温度放入缓存中
         if (temperatureStr == null || temperatureStr.equals("")) {
             Temperature temperature = service.getLastTemperature(Integer.parseInt(machineID));
             map.put("temperature", temperature);
@@ -129,7 +123,7 @@ public class TemperatrueController {
     @ResponseBody
     public String getSomeInfo(Integer machineID, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-
+        //获取信息
         Map temperatures = service.getSomeInfo(machineID);
         DecimalFormat df = new DecimalFormat("0.00");
         temperatures.put("avg",df.format(temperatures.get("avg")));

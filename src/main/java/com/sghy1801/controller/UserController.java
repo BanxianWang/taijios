@@ -181,7 +181,11 @@ public class UserController {
         return JSONObject.toJSONString(param);
     }
 
-    @RequestMapping("jsp/getLocalDistribution")
+    /**
+     * 获取设备数量前五的城市
+     * @return
+     */
+    @RequestMapping(value = "jsp/getLocalDistribution",produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public String getLocalDistribution() {
         List<Map> list = userService.getLocalDistribution();
@@ -197,12 +201,16 @@ public class UserController {
                 break;
             }
         }
+        jsonObject.put("all",list);
         jsonObject.put("city",cityarr);
         jsonObject.put("num",numarr);
         return jsonObject.toJSONString();
     }
 
-
+    /**
+     * 获取总用户数量
+     * @return
+     */
     @RequestMapping("jsp/getSumCount")
     @ResponseBody
     public String getSumCount() {
@@ -211,7 +219,10 @@ public class UserController {
         return jo.toJSONString(count);
     }
 
-
+    /**
+     * 获取当前年份注册的用户
+     * @return
+     */
     @RequestMapping("jsp/getNowYearCount")
     @ResponseBody
     public String getNowYearCount() {

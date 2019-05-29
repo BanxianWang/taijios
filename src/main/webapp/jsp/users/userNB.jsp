@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../../statics/css/comon0.css">
 </head>
-<script>
+<script charset="UTF-8">
 
     $(window).on('load',function () {
         $(".loading").fadeOut()
@@ -64,6 +64,19 @@
             }
         });
 
+        $.ajax({
+            url: "/jsp/getAllYuce",
+            type: "post",
+            dataType: "json",
+
+            success: function(data) {
+                $.each(data,function (index,item) {
+                    var li ="<li style='color: white;margin-left: 20px;font-size: 18px;'>"+item.exponentname+":&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size: 24px;color:white;'>"+item.exponentnum+"</span><br/> "+item.exponenttips+"</li><br/>";
+                    $("#yuce").append(li);
+                })
+            }
+        });
+
     </script>
 
 
@@ -112,9 +125,10 @@
                 <div class="boxfoot"></div>
             </div>
             <div class="boxall" style="height: 5rem">
-                <div class="alltitle">服务器请求走线图</div>
-                <div class="allnav" id="echart5"></div>
-                <div class="boxfoot"></div>
+                <ul id="yuce">
+
+
+                </ul>
             </div>
 
         </li>

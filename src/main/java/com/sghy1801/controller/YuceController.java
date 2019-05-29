@@ -24,10 +24,12 @@ public class YuceController {
      * @param response
      * @return
      */
-    @RequestMapping("/getAllYuce")
+    @RequestMapping(value = "/getAllYuce",produces = {"application/json;charset=utf-8"})
+    @ResponseBody
     public String getAllYuce(HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        //response.setHeader("Access-Control-Allow-Origin", "*");
         List<Yuce> list = service.getAllYuce();
-        return "successCallback1(" + JSONObject.toJSONString(list) + ")";
+        //return "successCallback1(" + JSONObject.toJSONString(list) + ")";
+        return  JSONObject.toJSONString(list);
     }
 }
