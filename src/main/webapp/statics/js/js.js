@@ -279,7 +279,7 @@ function echarts_5() {
         },
         xAxis: [{
             type: 'category',
-            data: ['浙江', '上海', '江苏', '广东', '北京', '深圳', '安徽', '四川'],
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月'],
             axisLine: {
                 show: true,
                 lineStyle: {

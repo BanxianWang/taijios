@@ -8,16 +8,18 @@ $(function () {
             type: "post",
             dataType: "json",
             success: function (msg) {
-                alert(1)
+                map(msg.all);
             }
         });
     }
 
 
     function map(city) {
+
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('map_1'));
         var data = city;
+
 
 
         var geoCoordMap = {
@@ -213,7 +215,6 @@ $(function () {
             '大庆': [125.03, 46.58]
         };
         var convertData = function (data) {
-            alert(data)
             var res = [];
             for (var i = 0; i < data.length; i++) {
                 var geoCoord = geoCoordMap[data[i].city];
@@ -224,7 +225,6 @@ $(function () {
                     });
                 }
             }
-            alert(res)
             return res;
         };
 
