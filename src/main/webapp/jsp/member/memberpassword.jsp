@@ -124,29 +124,28 @@
         //自定义验证规则
         form.verify({
             nikename: function (value, item) { //value：表单的值、item：表单的DOM对象
-                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test( $("#L_username").val())) {
                     return '用户名不能有特殊字符';
                 }
-                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                if (/(^\_)|(\__)|(\_+$)/.test( $("#L_username").val())) {
                     return '用户名首尾不能出现下划线\'_\'';
                 }
-                if (/^\d+\d+\d$/.test(value)) {
+                if (/^\d+\d+\d$/.test( $("#L_username").val())) {
                     return '用户名不能全为数字';
                 }
             },
-            newpass: [/^[\S]{6,12}$/
-                , '密码必须6到12位，且不能出现空格']
-            , repass: function (value) {
+            repass: function (value) {
                 if ($('#L_pass').val() != $('#L_repass').val()) {
                     return '两次密码不一致';
                 }
-            },newpass:function (value) {
                 if ($('#L_pass').val() == $('#L_password').val()) {
                     return '新密码和老密码相同请重新输入！';
                 }
             }
 
             ,phone:[/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/,'请输入正确的手机号']
+            ,newpass: [/^[\S]{6,12}$/,'密码必须6到12位,且不能出现空格']
+
         });
         //监听提交
         form.on('submit(save)', function () {
