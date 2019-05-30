@@ -53,7 +53,7 @@
 
         $(function(){
             $.ajax({
-                url: "/jsp/getSumCount",
+                url: "/taijios/jsp/getSumCount",
                 type: "post",
                 dataType: "json",
                 success: function(data) {
@@ -61,7 +61,7 @@
                 }
             });
             $.ajax({
-                url: "/jsp/getNowYearCount",
+                url: "/taijios/jsp/getNowYearCount",
                 type: "post",
                 dataType: "json",
 
