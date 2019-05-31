@@ -24,7 +24,8 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public User login(String phone, String password) {
         User user = userMapper.login(phone, password);
-        //匹配密码
+
+       //匹配密码
         if (user == null) {
             throw new RuntimeException("用户名不存在！");
         }
