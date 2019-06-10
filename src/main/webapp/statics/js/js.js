@@ -14,7 +14,7 @@ echarts_5();
 function getDate(){
     var myChart =echarts.init(document.getElementById('echart1'));
     $.ajax({
-        url: "/jsp/getDate",
+        url: "/taijios/jsp/getDate",
         type: "post",
         dataType: "json",
 
@@ -149,7 +149,7 @@ function echarts_1(myChart,data) {
 //拥有设备人数最多的前5个省份，显示数量
 function getLocalDistribution(){
     $.ajax({
-        url: "/jsp/getLocalDistribution",
+        url: "/taijios/jsp/getLocalDistribution",
         type: "post",
         dataType: "json",
 
