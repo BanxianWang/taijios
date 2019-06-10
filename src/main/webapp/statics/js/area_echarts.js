@@ -4,7 +4,7 @@ $(function () {
 
     function getLocalDistribution() {
         $.ajax({
-            url: "/jsp/getLocalDistribution",
+            url: "/taijios/jsp/getLocalDistribution",
             type: "post",
             dataType: "json",
             success: function (msg) {
