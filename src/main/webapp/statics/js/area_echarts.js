@@ -4,7 +4,7 @@ $(function () {
 
     function getLocalDistribution() {
         $.ajax({
-            url: "/taijios/jsp/getLocalDistribution",
+            url: "/jsp/getLocalDistribution",
             type: "post",
             dataType: "json",
             success: function (msg) {
@@ -267,9 +267,7 @@ $(function () {
                     type: 'scatter',
                     coordinateSystem: 'geo',
                     data: convertData(data),
-                    symbolSize: function (val) {
-                        return val[2] / 15;
-                    },
+                    symbolSize:10,
                     label: {
                         normal: {
                             formatter: '{b}',
