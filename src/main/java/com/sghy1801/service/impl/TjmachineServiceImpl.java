@@ -16,6 +16,7 @@ public class TjmachineServiceImpl implements TjmachineService {
     private TjmachineMapper tjmachineMapper;
 
 
+    //获取所有机器信息
     @Override
     public List<Tjmachine> getAllMachines(Map<String,Object> map) {
 
@@ -25,22 +26,26 @@ public class TjmachineServiceImpl implements TjmachineService {
 
 
 
+    //新增机器
     @Override
     public int addMachine(Tjmachine tjmachine) {
         return tjmachineMapper.addMachine(tjmachine);
     }
 
+    //更新机器信息
     @Override
     public int updateMachineInfo(Tjmachine tjmachine) {
         return tjmachineMapper.updateMachineInfo(tjmachine);
     }
 
+    //删除机器
     @Override
     public int delMachine(int id) {
 
         return tjmachineMapper.delMachine(id);
     }
 
+    //根据用户查找机器
     @Override
     public Tjmachine getOneByUserId(int userid) {
         return tjmachineMapper.getOneByUserId(userid);

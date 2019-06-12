@@ -104,19 +104,13 @@ public class UserController {
         public String deleteUser (Integer userId, Model model){
             System.out.println(userId);
             int count = userService.deleteUser(userId);
-       /* if (count > 0) {
-            model.addAttribute("deleteFlag", "ok");
-        } else {
-            model.addAttribute("deleteFlag", "error");
-        }
-        return "userlist";*/
+
             Map<String, Object> param = new HashMap<String, Object>();
             param.put("count", count);
-            System.out.println(count);
             return JSONObject.toJSONString(param);
         }
 
-
+        //更新用户信息
         @RequestMapping("/toupdateuser")
         public String toupdateuser ( int id, Model model){
             User u = userService.findById(id);
@@ -150,13 +144,14 @@ public class UserController {
             return JSONObject.toJSONString(count);
         }
 
-
+        //获取日期
         @RequestMapping("jsp/getDate")
         @ResponseBody
         public String getDate () {
             List<Map> list = userService.getDate();
             JSONObject jsonObject = new JSONObject();
             Object[] arr = new Object[12];
+            //根据日期，将数据循环放入数组
             for (Map map : list) {
                 int month = Integer.parseInt(map.get("registerDate").toString().substring(5, 7));
                 arr[month - 1] = map.get("num");
@@ -168,15 +163,6 @@ public class UserController {
         @RequestMapping("/jsp/user/changes")
         @ResponseBody
         public String changes ( int userId, int changestate, HttpSession session){
-       /* int count;
-        Map<String, Object> param = new HashMap<String, Object>();
-        if (((User) session.getAttribute("loginUser")).getUserorman() == 0) {
-             count = 0;
-        } else {
-             count = userService.updateChanges(userId, changestate);
-        }
-        param.put("count", count);
-        return JSONObject.toJSONString(param);*/
             int count = userService.updateChanges(userId, changestate);
             Map<String, Object> param = new HashMap<String, Object>();
             param.put("count", count);
@@ -195,6 +181,7 @@ public class UserController {
             Object[] cityarr = new Object[5];
             Object[] numarr = new Object[5];
             int i = 0;
+            //将数据循环放入数组中
             for (Map map : list) {
                 cityarr[i] = map.get("city").toString();
                 numarr[i] = map.get("num");
@@ -203,6 +190,7 @@ public class UserController {
                     break;
                 }
             }
+            //将所得数据放入jsonObject
             jsonObject.put("all", list);
             jsonObject.put("city", cityarr);
             jsonObject.put("num", numarr);

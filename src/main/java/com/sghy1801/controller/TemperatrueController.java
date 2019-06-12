@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.DecimalFormat;
 import java.util.*;
 
-
+/**
+ * 温度类控制器
+ */
 @Controller
 @RequestMapping("/jsp")
 public class TemperatrueController {
@@ -47,6 +49,7 @@ public class TemperatrueController {
             DecimalFormat df = new DecimalFormat("0.00");
             arr[hours] = temperature.get("hoursavg");
         }
+        //将数据放入jsonObject
         jsonObject.put("hoursavg", arr);
         return "successCallback1(" + jsonObject.toJSONString() + ")";
 
@@ -143,6 +146,7 @@ public class TemperatrueController {
         temperature1.setMachineid(1);
         temperature1.setTemperature(temperature);
         int count = service.addTemperature(temperature1);
+        //判断是否新增成功
         if (count == 1) {
             return "true";
         } else {

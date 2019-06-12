@@ -2,6 +2,7 @@ $(function () {
     getLocalDistribution();
 
 
+    //获取用户的地址
     function getLocalDistribution() {
         $.ajax({
             url: "/taijios/jsp/getLocalDistribution",
@@ -23,7 +24,7 @@ $(function () {
         var data = city;
 
 
-
+        //城市所在的坐标
         var geoCoordMap = {
             '海门': [121.15, 31.89],
             '鄂尔多斯': [109.781327, 39.608266],
@@ -284,41 +285,6 @@ $(function () {
                         }
                     }
                 }
-
-                /**
-                 ,
-                 {
-                     name: 'Top 5',
-                     type: 'effectScatter',
-                     coordinateSystem: 'geo',
-                     data: convertData(data.sort(function (a, b) {
-                         return b.value - a.value;
-                     }).slice(0, 6)),
-                     symbolSize: function (val) {
-                         return val[2] / 20;
-                     },
-                     showEffectOn: 'render',
-                     rippleEffect: {
-                         brushType: 'stroke'
-                     },
-                     hoverAnimation: true,
-                     label: {
-                         normal: {
-                             formatter: '{b}',
-                             position: 'right',
-                             show: true
-                         }
-                     },
-                     itemStyle: {
-                         normal: {
-                             color: '#ffd800',
-                             shadowBlur: 10,
-                             shadowColor: 'rgba(0,0,0,.3)'
-                         }
-                     },
-                     zlevel: 1
-                 }
-                 **/
             ]
         };
 

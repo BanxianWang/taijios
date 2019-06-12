@@ -36,6 +36,7 @@
     <div class="weather"><!--<img src="images/weather.png"><span>多云转小雨</span>--><span id="showTime"></span></div>
 
     <script>
+        //时钟
         var t = null;
         t = setTimeout(time, 1000);
         function time() {
@@ -52,6 +53,7 @@
         }
 
         $(function(){
+            //获取用户总数
             $.ajax({
                 url: "/taijios/jsp/getSumCount",
                 type: "post",
@@ -60,6 +62,8 @@
                     $("#sumCount").html(data);
                 }
             });
+
+            //获取当前年份新增用户数量
             $.ajax({
                 url: "/taijios/jsp/getNowYearCount",
                 type: "post",

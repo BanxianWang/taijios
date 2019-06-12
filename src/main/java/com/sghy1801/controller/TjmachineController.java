@@ -17,6 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 机器类控制器
+ */
+
+
 @Controller
 @RequestMapping("/jsp")
 public class TjmachineController {
@@ -25,6 +30,13 @@ public class TjmachineController {
 
     Tjmachine tjmachine = new Tjmachine();
 
+
+    /**
+     * 获取所有机器信息
+     * @param id
+     * @param city
+     * @return
+     */
     @RequestMapping(value = "/getAllMachines")
     public @ResponseBody String getAllMachines(String id,String city){
         //将获取的值放入map
@@ -48,6 +60,15 @@ public class TjmachineController {
         return j;
     }
 
+
+    /**
+     * 更新机器信息
+     * @param city
+     * @param temperature
+     * @param usetime
+     * @param runningstate
+     * @return
+     */
     @RequestMapping(value = "/updateMachineInfo")
     public @ResponseBody String updateMachineInfo(String city,int temperature,int usetime,int runningstate){
         //将获取的值放入tjmachine对象中
@@ -63,6 +84,12 @@ public class TjmachineController {
         return "false";
     }
 
+
+    /**
+     * 新增机器
+     * @param city
+     * @return
+     */
     @RequestMapping(value = "/addMachine")
     public @ResponseBody String addMachine(String city){
 
@@ -74,7 +101,11 @@ public class TjmachineController {
         return "false";
     }
 
-
+    /**
+     * 删除机器
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/delMachine")
     public @ResponseBody String delMachine(String id){
         //根据ID值进行删除操作
@@ -83,12 +114,19 @@ public class TjmachineController {
         return "false";
     }
 
+    /**
+     * 根据用户查找其拥有的机器
+     * @param userid
+     * @param response
+     * @return
+     */
 
     @RequestMapping(value = "/getOneByUserId")
     @ResponseBody
     public String getOneByUserId(Integer userid,HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Origin", "*");
         JSONObject jsonObject = new JSONObject();
+        //根据用户查找机器
         Tjmachine tj = service.getOneByUserId(userid);
         jsonObject.put("temperature",tj.getTemperature());
         return "successCallback1(" + jsonObject.toJSONString() + ")";
