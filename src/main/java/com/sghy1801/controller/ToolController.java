@@ -134,11 +134,11 @@ public class ToolController {
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("api_key", api_key);
             map.put("card_worth",1);//充值金额
-            map.put("phone_number", "17615847228");//充值号码 user.phone
+            map.put("phone_number", "15306198694");//充值号码 user.phone
             map.put("sp_order_id", sp_order_id);//唯一订单号
             map.put("notify_url", "xxx");//回调地址
             HashMap<String, Object> map2 = new HashMap<String, Object>();
-            map2.put("api_key", api_key);
+            map2.put("api_key",api_key);
             map2.put("sp_order_id",sp_order_id);//唯一订单号
            try {
                URL realUrl = new URL(PhoneUtil.getUrl(map,"order.phone.submit"));
