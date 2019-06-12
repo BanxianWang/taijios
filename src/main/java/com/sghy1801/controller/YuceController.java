@@ -28,6 +28,7 @@ public class YuceController {
     @ResponseBody
     public String getAllYuce(HttpServletResponse response){
         //response.setHeader("Access-Control-Allow-Origin", "*");
+        //获得预测的各个指数信息
         List<Yuce> list = service.getAllYuce();
         //return "successCallback1(" + JSONObject.toJSONString(list) + ")";
         return  JSONObject.toJSONString(list);

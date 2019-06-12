@@ -14,6 +14,7 @@ public class SevendayServiceImpl implements SevendayService {
     @Autowired
     private SevendayMapper mapper;
 
+    //获取未来七日天气信息
     @Override
     public List<Sevenday> getSevenDay() {
         return mapper.getSevenDay();

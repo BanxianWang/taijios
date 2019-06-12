@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+
+/**
+ * 未来7日温度信息类控制器
+ */
+
 @RequestMapping("/jsp")
 @Controller
 public class SevendayController {
@@ -18,6 +23,7 @@ public class SevendayController {
     @Autowired
     private SevendayService service;
 
+    //获取未来7日温度信息
     @RequestMapping(value = "/getsevenday",produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getSevenDay( HttpServletResponse response){

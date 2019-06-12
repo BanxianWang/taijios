@@ -9,8 +9,6 @@ echarts_5();
 })
 
 //每月新增用户情况
-
-
 function getDate(){
     var myChart =echarts.init(document.getElementById('echart1'));
     $.ajax({
@@ -24,6 +22,8 @@ function getDate(){
         }
     });
 }
+
+//将数据绑定入折线图
 function echarts_1(myChart,data) {
 
     option = {
@@ -160,7 +160,7 @@ function getLocalDistribution(){
     });
 }
 
-
+//将数据绑定入折线图
 function echarts_2(data) {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echart2'));
@@ -255,8 +255,8 @@ function echarts_2(data) {
     });
 }
 
-
-
+//服务器请求走向
+//将数据绑定入折线图
 function echarts_5() {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echart5'));
@@ -355,6 +355,7 @@ function echarts_5() {
 
 
 //各个模块卖出数量，按月累增
+//将数据绑定入折线图
 function echarts_4() {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('echart4'));

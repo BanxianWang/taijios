@@ -14,6 +14,7 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsMapper mapper;
 
+    //获取所有新闻
     @Override
     public List<News> getAllNews() {
         return mapper.getAllNews();
