@@ -23,13 +23,13 @@ import java.net.Socket;
 @RequestMapping("tcptcp")
 public class TcpController {
     @Autowired
-    private  TemperatureService service;
+    private TemperatureService service;
 
     @RequestMapping("tcp")
     public void Tcp() {
         try {
             test();
-        }catch (Exception e){
+        } catch (Exception e) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e1) {
@@ -40,7 +40,7 @@ public class TcpController {
 
     }
 
-    public  void test() {
+    public void test() {
         ServerSocket listener = null;
         try {
             listener = new ServerSocket(9000);
@@ -79,16 +79,22 @@ public class TcpController {
                 if (len > 0) {
                     str = new String(buff, 0, len);
                     //接到的温度
-                    double temperature = Double.valueOf(str);
-                    System.out.println(temperature);
-                    JedisUtil.setTemperature(temperature + "");
-                    //放入数据库
-                    Temperature temperature1 = new Temperature();
-                    temperature1.setTemperature(temperature);
-                    temperature1.setMachineid(1);
-                   if (service != null) {
-                       service.addTemperature(temperature1);
-                   }
+                    if (str != null) {
+                        double temperature = Double.valueOf(str);
+                        if (temperature > 0 && temperature < 45) {
+                            System.out.println(temperature);
+                            JedisUtil.setTemperature(temperature + "");
+                            //放入数据库
+                            Temperature temperature1 = new Temperature();
+                            temperature1.setTemperature(temperature);
+                            temperature1.setMachineid(1);
+                            if (service != null) {
+                                service.addTemperature(temperature1);
+                            }
+                        }
+
+                    }
+
                 } else {
                     Thread.sleep(1000);
                     test();
