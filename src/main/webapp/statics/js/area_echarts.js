@@ -17,9 +17,9 @@ function aa(msg) {
     var max = 0;
     //包含23个城市的数组
     var data =  [{
-        name: '江苏',
-        value: 0
-    },
+            name: '江苏',
+            value: 0
+        },
         {
             name: '天津',
             value: 0
@@ -110,13 +110,10 @@ function aa(msg) {
             name: '黑龙江',
             value: 0
         },
-
-
         {
             name: '新疆',
             value: 0
         },
-
         {
             name: '广西',
             value: 0

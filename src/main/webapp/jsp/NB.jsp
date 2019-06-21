@@ -32,7 +32,7 @@
     <div class="loadbox"> <img src="../statics/images/loading.gif"> 页面加载中... </div>
 </div>
 <div class="head">
-    <h1>全国钛极OS设备情况大数据统计</h1>
+    <h1>T-life智慧生活大数据统计</h1>
     <div class="weather"><!--<img src="images/weather.png"><span>多云转小雨</span>--><span id="showTime"></span></div>
 
     <script>
