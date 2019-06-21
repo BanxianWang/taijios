@@ -2,7 +2,7 @@
 
 //ajax获取各城市用户数量
 $.ajax({
-        url: "/jsp/getLocalDistribution",
+        url: "/taijios/jsp/getLocalDistribution",
         type: "post",
         dataType: "json",
         success: function (msg) {
