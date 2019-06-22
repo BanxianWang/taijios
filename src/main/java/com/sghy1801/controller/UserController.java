@@ -42,10 +42,6 @@ public class UserController {
             User loginUser = userService.login(phone, password);
             //判断是否为管理员1不是0是
             if (loginUser.getUserorman() == 1) {
-                model.addAttribute("loginss", loginUser);
-                result = "users/main";
-
-            } else {
                 if (loginUser.getState() == 1) {
                     model.addAttribute("loginNo", "no");
                     result = "forward:index.jsp";
@@ -53,10 +49,13 @@ public class UserController {
                     if (loginUser != null) {
                         // 登录成功
                         model.addAttribute("loginUser", loginUser);
-                        result = "main";
-                    } 
-
+                        result = "users/main";
+                    }
                 }
+            } else {
+                model.addAttribute("loginss", loginUser);
+                result = "main";
+
             }
 
         } catch (Exception e) {

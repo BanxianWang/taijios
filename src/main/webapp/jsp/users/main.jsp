@@ -3,13 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>后台系统管理</title>
-    <link rel="stylesheet" href="../../../statics/css/font.css">
-    <link rel="stylesheet" href="../../../statics/css/xadmin.css">
+    <link rel="stylesheet" href="statics/css/font.css">
+    <link rel="stylesheet" href="statics/css/xadmin.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="../../../statics/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../../../statics/js/xadmin.js"></script>
-
+    <script src="statics/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="statics/js/xadmin.js"></script>
 </head>
 <body>
 <!-- 顶部开始 -->

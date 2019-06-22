@@ -10,22 +10,6 @@
     <link rel="stylesheet" href="statics/css/xadmin.css">
 
 </head>
-<c:if test="${requestScope.loginFlag != null }">
-    <script>
-        alert("登录名或密码不正确")
-    </script>
-</c:if>
-<c:if test="${requestScope.loginNo == 'no' }">
-    <script>
-        alert("该用户被禁用，请联系客服")
-    </script>
-</c:if>
-<c:if test="${requestScope.loginss == 'no' }">
-    <script>
-        alert("请用管理员账户登录")
-    </script>
-</c:if>
-
 
 <body class="login-bg">
 
@@ -41,27 +25,46 @@
         <hr class="hr20">
     </form>
 </div>
-
-
-<!-- 底部结束 <script> $(function  () {
-        layui.use('form', function(){
-            var form = layui.form;
-            // layer.msg('玩命卖萌中', function(){
-            //   //关闭后的操作
-            //   });
-            //监听提交
-            form.on('submit(login)', function(data){
-                // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='main.jsp'
-                });
-                return false;
-            });
-        });
-    })</script> -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="statics/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="statics/js/xadmin.js"></script>
-<script type="text/javascript" src="statics/js/tooljs.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        layui.use('form', function () {
+            $ = layui.jquery;
+            var form = layui.form
+                , layer = layui.layer;
+
+            <c:if test="${requestScope.loginFlag != null }">
+            layer.alert('手机号或密码不正确', {
+                skin: 'layui-layer-molv' //样式类名  自定义样式
+                , icon: 5   // icon
+            });
+            </c:if>
+            <c:if test="${requestScope.loginNo == 'no' }">
+            layer.alert('该用户被禁用，请联系客服', {
+                skin: 'layui-layer-molv' //样式类名  自定义样式
+                , icon: 5    // icon
+            });
+            </c:if>
+
+            <%--<c:if test="${requestScope.loginss == 'no' }">--%>
+            <%--layer.alert('请用管理员账户登录', {--%>
+                <%--skin: 'layui-layer-molv' //样式类名  自定义样式--%>
+                <%--, icon: 6    // icon--%>
+            <%--});--%>
+            <%--</c:if>--%>
+            //监听提交
+            form.on('submit(login)', function () {
+
+
+                }
+            );
+            return false;
+        });
+    })
+</script>
+
 </body>
 </html>
