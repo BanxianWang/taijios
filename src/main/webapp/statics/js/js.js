@@ -469,7 +469,7 @@ function echarts_4() {
                         borderWidth: 12
                     }
                 },
-                data: [3, 7, 19,49, 125, 1472]
+                data: [3, 7, 19,49, 25, 14]
 
             },
             {
@@ -505,7 +505,7 @@ function echarts_4() {
                         borderWidth: 12
                     }
                 },
-                data: [5, 8, 13, 22, 94, 1325]
+                data: [5, 8, 13, 22, 94, 25]
 
             },
 
