@@ -14,7 +14,7 @@
 <body>
 <!-- 顶部开始 -->
 <div class="container">
-    <div class="logo"><a href="./index.html">后台管理系统</a></div>
+    <div class="logo"><a href="javascript:void(0)">后台管理系统</a></div>
     <div class="left_open">
         <i title="展开左侧栏" class="iconfont">&#xe699;</i>
     </div>
@@ -29,15 +29,15 @@
         </li>
     </ul>--%>
     <ul class="layui-nav right" lay-filter="">
-        <li class="layui-nav-item">
-            <a href="javascript:;">${loginUser.username}</a>
+        <li class="layui-nav-item" id="layui-nav-item">
+            <a href="javascript:;">${loginss.username}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('个人信息','jsp/member/memberedit.jsp')">个人信息</a></dd>
-                <dd><a onclick="x_admin_show('切换帐号','index.jsp')">切换帐号</a></dd>
+                <dd><a href="javascript:void(0)">个人信息</a></dd>
+                <dd><a href="javascript:void(0)">切换帐号</a></dd>
                 <dd><a href="/taijios/loginOut">退出</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
+        <li class="layui-nav-item to-index"><a href="javascript:void(0)">前台首页</a></li>
     </ul>
 
 </div>
