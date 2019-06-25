@@ -2,12 +2,12 @@
 
 //ajax获取各城市用户数量
 $.ajax({
-        url: "/taijios/jsp/getLocalDistribution",
-        type: "post",
-        dataType: "json",
-        success: function (msg) {
-            aa(msg.all);
-        }
+    url: "/taijios/jsp/getLocalDistribution",
+    type: "post",
+    dataType: "json",
+    success: function (msg) {
+        aa(msg.all);
+    }
 
 })
 
@@ -17,9 +17,9 @@ function aa(msg) {
     var max = 0;
     //包含23个城市的数组
     var data =  [{
-            name: '江苏',
-            value: 0
-        },
+        name: '江苏',
+        value: 0
+    },
         {
             name: '天津',
             value: 0
@@ -211,8 +211,8 @@ function aa(msg) {
         geo: {
             //roam: true,
             map: 'china',
-            left: '270',
-            right:'270'
+            left: '300',
+            right:'300'
             // label: {
             //     emphasis: {
             //         show: false

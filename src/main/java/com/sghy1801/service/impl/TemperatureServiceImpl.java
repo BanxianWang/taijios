@@ -43,12 +43,14 @@ public class TemperatureServiceImpl implements TemperatureService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        //当前日期前一天
-        //calendar.add(Calendar.DATE, -1);
+        //当前日期
         String newtime = sdf.format(date);
+        int time = date.getDay();
+        if (time==0)time=7;
         //当前日期前七天
-        calendar.add(Calendar.DATE, -7);
+        calendar.add(Calendar.DATE, -time+1);
         String oldtime = sdf.format(calendar.getTime());
+        System.out.println(oldtime);
         //获取所有需要的数据
         map.put("machineID", machineID);
         map.put("oldtime",oldtime+" 00:00:00");
