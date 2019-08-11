@@ -206,13 +206,13 @@ function aa(msg) {
                 color: '#7B93A7'
             },
             left: '300',
-            bottom: 30
+            bottom: 15
         },
         geo: {
             //roam: true,
             map: 'china',
-            left: '300',
-            right:'300'
+            left: '322',
+            right:'322'
             // label: {
             //     emphasis: {
             //         show: false

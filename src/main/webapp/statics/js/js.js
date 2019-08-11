@@ -332,7 +332,7 @@ function echarts_5() {
         }],
         series: [{
             type: 'line',
-            data: [5, 23, 109, 440, 13064, 51724],
+            data: [5, 23, 109, 440, 13064, 24340, 34025, 1024],
             barWidth:'35%', //柱子宽度
             // barGap: 1, //柱子之间间距
             itemStyle: {
@@ -469,7 +469,7 @@ function echarts_4() {
                         borderWidth: 12
                     }
                 },
-                data: [3, 7, 19,49, 25, 14]
+                data: [3, 7, 19, 49, 25, 14, 50, 6]
 
             },
             {
@@ -505,7 +505,7 @@ function echarts_4() {
                         borderWidth: 12
                     }
                 },
-                data: [5, 8, 13, 22, 94, 25]
+                data: [5, 8, 13, 22, 94, 25, 48, 12]
 
             },
 
